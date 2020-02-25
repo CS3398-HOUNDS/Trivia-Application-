@@ -1,17 +1,19 @@
 from django.shortcuts import render
 from rest_framework.exceptions import APIException
 from django.contrib.auth.models import User, Group
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions
 from . import models
 from . import serializers
+# from trivia.permissions import IsOwnerOrReadOnly
+# from trivia.permissions import IsStaffOrTargetUser
 
 
 class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
-    queryset = User.objects.all().order_by('-date_joined')
-    serializer_class = serializers.UserSerializer
+    queryset = User.objects.all().order_by('-id')
+    serializer_class = serializers.User
 
 class TriviaViewSet(viewsets.ModelViewSet):
     """
@@ -23,8 +25,6 @@ class TriviaViewSet(viewsets.ModelViewSet):
     queryset = models.Trivia.objects.all()
     serializer_class = serializers.TriviaSerializer
 
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
 
 class QuestionViewSet(viewsets.ModelViewSet):
     """
@@ -32,7 +32,3 @@ class QuestionViewSet(viewsets.ModelViewSet):
     """
     queryset = models.Question.objects.all()
     serializer_class = serializers.QuestionSerializer
-
-class ForbiddenAccess(APIException):
-    status_code = 403
-    default_detail = 'Action Forbidden'

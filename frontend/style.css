@@ -4,32 +4,38 @@
 }
 
 .content {
-   background: #b2b2b2;
+   background: #000000;
 }
 
 .letterhead { 
-	max-width:60%;
-	height: auto;  
-	padding:20px;
+	max-width:75%;
+	height: auto;
+  opacity: 1;  
+	padding:5px;
 	text-align: center;
 }
 
 .row {
   display: flex;
+  min-width: 100%;
 }
 
-/* Create three equal columns that sits next to each other */
 .column {
-  flex: 7%;
-  padding: 5px;
+  flex: 20%;
+
 }
 
 footer {
-  background: #b2b2b2;
+  background: #000;
 }
 
 img {
-    max-width:100%;
+    opacity: 0.6;
+    max-width:70%;
     height:auto;
     object-fit: contain;
+}
+
+html, body {
+  min-width: 100%;
 }

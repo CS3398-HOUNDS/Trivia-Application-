@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <title>Trivia Knights</title>
+  <title>Trivia Knights</title>  
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
@@ -13,7 +13,7 @@
   <body>
     <!--Navbar-->
     <div class="w3-top">
-      <div class="w3-bar w3-black w3-card">
+      <div class="w3-bar w3-black w3-card row">
         <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
         <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hover-white w3-hide-small">About</a>
         <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hover-white w3-hide-small">Contact</a>
@@ -29,11 +29,30 @@
     </div>
 
     <!-- Page content -->
-    <div class="w3-content" style="max-width:2000px;margin-top:46px">
+    <div class="w3-content" style="max-width:2000px;margin-top:15px">
       <!--Main -->
-      <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="band">
-        <h1 class="w3-wide">TRIVIA KNIGHTS</h1>
-        <img src="https://images.all-free-download.com/images/graphicthumb/knight_helmets_icons_flat_black_design_6831019.jpg">
+      <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px;" id="band">
+
+        <div class="row">
+          <div class="column">
+            <img src="imgs\2.png">
+          </div>          
+          <div class="column">
+            <img src="imgs\3.png">
+          </div>
+          <div class="column">
+            <img src="imgs\4.png">
+          </div>         
+          <div class="column">
+            <img src="imgs\5.png">
+          </div>
+          <div class="column">
+            <img src="imgs\6.png">
+          </div>      
+        </div>
+
+          <img src="imgs\LH.png" class="letterhead">
+
         <div class="w3-row w3-padding-32">
           <button id="clickCounter" class="w3-button w3-xlarge w3-theme w3-hover-teal">Click Me!: 0</button>
           <button id="resetCounter" class="w3-button w3-xlarge w3-theme w3-hover-teal">Reset</button>

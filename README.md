@@ -1,7 +1,7 @@
 # CS3398-Klingons-S2020
-First repo
+Texas State University cs3398 Software Engineering course project.
 
-# Trivia
+# Trivia Knights
 [comment]: <> (Here goes your awesome project description!)
 ![icon](https://images.all-free-download.com/images/graphicthumb/knight_helmets_icons_flat_black_design_6831019.jpg)
 

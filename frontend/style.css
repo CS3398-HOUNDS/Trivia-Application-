@@ -7,12 +7,12 @@
    background: #000000;
 }
 
-.letterhead { 
-	max-width:75%;
-	height: auto;
-  opacity: 1;  
-	padding:5px;
-	text-align: center;
+.letterhead {
+  max-width:75%;
+  height: auto;
+  opacity: 1;
+  padding:5px;
+  text-align: center;
 }
 
 .row {

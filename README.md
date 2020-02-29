@@ -23,10 +23,9 @@ Add more general information about project. What the purpose of the project is? 
 ![Example screenshot]()
 
 ## Technologies
-* Python - version ?
-* HTML - version ?
-* CSS - version ?
-* Django - version ?
+* Python - 3.8.2
+* React - 16.13.0
+* Django REST framework - 3.11.0
 
 ## Setup
 Describe how to install / setup your local environement / add link to demo version.
@@ -51,4 +50,4 @@ To-do list:
 Project is in progress.
 
 ## Contact
-Created by Texas State University Students contact us at jwa58@txstate.edu
+Created by Texas State University Students contact us at jwa58@txstate.edu, adc129@txstate.edu, t_c296@txstate.edu, dlg143@txstate.edu

@@ -17,15 +17,16 @@ First repo
 * [Contact](#contact)
 
 ## General info
-Add more general information about project. What the purpose of the project is? Motivation?
+This project is to create a production ready Trivia application. 
 
 ## Screenshots
 ![Example screenshot]()
 
 ## Technologies
-* Python - 3.8.2
+* Python - 3.7.1
 * React - 16.13.0
 * Django REST framework - 3.11.0
+* Django - 2.2.1
 
 ## Setup
 Describe how to install / setup your local environement / add link to demo version.
@@ -36,8 +37,8 @@ Show examples of usage:
 
 ## Features
 List of features ready and TODOs for future development
-* Awesome feature 1
-* Awesome feature 2
+* User login / register in backend
+* Tokenized access to backend 
 * Awesome feature 3
 
 To-do list:

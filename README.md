@@ -54,7 +54,7 @@ To-do list:
 Trivia Knights is currently a work in progress and will remain in progress for the time being.
   * Donevan's Next Step: TriviaGame component will be able to handle multiple questions and provide a score to the player.
   * Aaron's Next Step: Create and handling game session. 
-  * Jackson's Next Step: Enable leaderboard API functionality. 
+  * Jackson's Next Step: Enable leaderboard API functionality. - in progress -
 ## Contact
 Created by Texas State University Students contact us at: 
 * jwa58@txstate.edu  | Jackson Ayers

@@ -27,6 +27,7 @@ This project is to create a production ready Trivia application.
 * React - 16.13.0
 * Django REST framework - 3.11.0
 * Django - 2.2.1
+* Djoser - 2.0.3
 
 ## Setup
 Describe how to install / setup your local environement / add link to demo version.

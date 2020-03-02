@@ -27,15 +27,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 100,
-    # 'DEFAULT_PERMISSION_CLASSES': (
-    #     'rest_framework.authentication.TokenAuthentication',
-    #     'rest_framework.authentication.SessionAuthentication',
-    #     'rest_framework.permissions.IsAuthenticatedOrReadOnly',
-    # ),
+    'PAGE_SIZE': 50,
 }
 
 
@@ -49,9 +47,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'trivia',
     'djoser',
-    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -114,6 +112,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+DJOSER = {
+    'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
+    'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uid}/{token}',
+    'ACTIVATION_URL': '#/activate/{uid}/{token}',
+    'SEND_ACTIVATION_EMAIL': True,
+    'SERIALIZERS': {},
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/

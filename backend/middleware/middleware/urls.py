@@ -29,5 +29,6 @@ router.register(r'trivia', views.TriviaViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/1/', include(router.urls)),
-    path('api/auth/', include('djoser.urls.authtoken'))
+    path('api/auth/', include('djoser.urls')),
+    path('api/auth/', include('djoser.urls.authtoken')),
     ]

@@ -1,7 +1,7 @@
 # CS3398-Klingons-S2020
-First repo
+Texas State University cs3398 Software Engineering course project.
 
-# Trivia
+# Trivia Knights
 [comment]: <> (Here goes your awesome project description!)
 ![icon](https://images.all-free-download.com/images/graphicthumb/knight_helmets_icons_flat_black_design_6831019.jpg)
 
@@ -17,16 +17,17 @@ First repo
 * [Contact](#contact)
 
 ## General info
-Add more general information about project. What the purpose of the project is? Motivation?
+This project is to create a production ready Trivia application. 
 
 ## Screenshots
 ![Example screenshot]()
 
 ## Technologies
-* Python - version ?
-* HTML - version ?
-* CSS - version ?
-* Django - version ?
+* Python - 3.7.1
+* React - 16.13.0
+* Django REST framework - 3.11.0
+* Django - 2.2.1
+* Djoser - 2.0.3
 
 ## Setup
 Describe how to install / setup your local environement / add link to demo version.
@@ -37,12 +38,12 @@ Show examples of usage:
 
 ## Features
 List of features ready and TODOs for future development
-* Awesome feature 1
-* Awesome feature 2
+* User login / register in backend (Jackson) [artifact](https://github.com/CS3398-HOUNDS/CS3398-Klingons-S2020/commit/39ec7b0e61160271c01e683388761f4752b43deb#diff-4b21eeec35e22352eae7f062dfacf313) opened backened url endpoints for users to access their personal information with REST API
+* Tokenized access to backend (Aaron)  [artifact](https://github.com/CS3398-HOUNDS/CS3398-Klingons-S2020/commit/39ec7b0e61160271c01e683388761f4752b43deb#diff-4b21eeec35e22352eae7f062dfacf313) djoser framework uses authorization token allowing access to url endpoints in our REST API  
 * Awesome feature 3
 
 To-do list:
-* User registration
+* Personalized page
 * Create Game Session
 * Leaderboard
 
@@ -51,4 +52,4 @@ To-do list:
 Project is in progress.
 
 ## Contact
-Created by Texas State University Students contact us at jwa58@txstate.edu
+Created by Texas State University Students contact us at jwa58@txstate.edu, adc129@txstate.edu, t_c296@txstate.edu, dlg143@txstate.edu

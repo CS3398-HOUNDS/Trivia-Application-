@@ -1,10 +1,21 @@
 * {
-  background: #d5f4e6;
   box-sizing: border-box;
 }
 
-.content {
-   background: #000000;
+#navBar {
+  background-color: #88e;
+}
+
+.w3-content {
+   background: #004;
+}
+
+#content {
+   background: #d5f4e6;
+   margin-top: 3.1em;
+   border-radius: 40px;
+   border: dashed;
+   border-color: green;
 }
 
 .letterhead {
@@ -26,7 +37,7 @@
 }
 
 footer {
-  background: #000;
+  background: black;
 }
 
 img {

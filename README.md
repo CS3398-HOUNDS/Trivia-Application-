@@ -52,4 +52,4 @@ To-do list:
 Project is in progress.
 
 ## Contact
-Created by Texas State University Students contact us at jwa58@txstate.edu, adc129@txstate.edu, t_c296@txstate.edu, dlg143@txstate.edu
+Created by Texas State University Students contact us at jwa58@txstate.edu, adc129@txstate.edu, t_c296@txstate.edu, dlg143@txstate.edu, sds158@txstate.edu

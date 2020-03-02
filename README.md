@@ -56,7 +56,7 @@ Trivia Knights is currently a work in progress and will remain in progress for t
   * Aaron's Next Step: Create and handling game session. 
 ## Contact
 Created by Texas State University Students contact us at: 
-* jwa58@txstate.edu
+* jwa58@txstate.edu  | Jackson Ayers
 * adc129@txstate.edu | Aaron Carrasco 
 * t_c296@txstate.edu
 * dlg143@txstate.edu

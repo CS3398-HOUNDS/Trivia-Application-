@@ -1,5 +1,5 @@
 # CS3398-Klingons-S2020
-Texas State University cs3398 Software Engineering course project.
+Texas State University CS3398 Software Engineering course project.
 
 # Trivia Knights
 [comment]: <> (Here goes your awesome project description!)
@@ -53,11 +53,12 @@ To-do list:
 [comment]: <> (Project is: _in progress_, _finished_, _no longer continue_ and why?)
 Trivia Knights is currently a work in progress and will remain in progress for the time being.
   * Donevan's Next Step: TriviaGame component will be able to handle multiple questions and provide a score to the player.
+  * Jackson's Next Step: Enable leaderboard API functionality. 
 
 ## Contact
 Created by Texas State University Students contact us at: 
-* jwa58@txstate.edu
-* adc129@txstate.edu
+* jwa58@txstate.edu | Jackson Ayers 
+* adc129@txstate.edu 
 * t_c296@txstate.edu
 * dlg143@txstate.edu
 * sds158@txstate.edu

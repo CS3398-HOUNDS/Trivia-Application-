@@ -5,7 +5,7 @@ This backend system is built with Django, Django-Rest-Framework, and Python
 ### Prerequisites
 
 To run this server on your machine you will need to activate the env in this directory.
-To do so you will need to install virtualenv.  See documentation to install pip and virtualenv
+To do so you will need to install virtualenv.  See documentation to install pip and virtualenv to run the requirements.txt file
 
 https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/
 

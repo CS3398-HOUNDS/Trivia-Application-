@@ -38,7 +38,7 @@ Show examples of usage:
 ## Features
 List of features ready and TODOs for future development
 * User login / register in backend (Jackson) [artifact](https://github.com/CS3398-HOUNDS/CS3398-Klingons-S2020/commit/39ec7b0e61160271c01e683388761f4752b43deb#diff-4b21eeec35e22352eae7f062dfacf313) opened backened url endpoints for users to access their personal information with REST API
-* Tokenized access to backend (Aaron)
+* Tokenized access to backend (Aaron)  [artifact](https://github.com/CS3398-HOUNDS/CS3398-Klingons-S2020/commit/39ec7b0e61160271c01e683388761f4752b43deb#diff-4b21eeec35e22352eae7f062dfacf313) djoser framework uses authorization token allowing access to url endpoints in our REST API  
 * Awesome feature 3
 
 To-do list:

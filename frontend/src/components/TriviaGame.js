@@ -18,16 +18,16 @@ class TriviaGame extends Component{
 
     async componentDidMount(){
         const url = "https://opentdb.com/api.php?amount=10&category=20&type=multiple";
-        //const url = "http://127.0.0.1:8000/";
+        //const url = "http://127.0.0.1:8000/api/1/";
         const response = await fetch(url);
         const data = await response.json();
-        this.setState({questionBank: data.results, loading: false});
         console.log(data);
+        this.setState({questionBank: data.results, loading: false});
     }
 
     render(){
         return(
-            <div className="container">
+            <Container>
                 <div className="title"></div>
                     <Button>Next Question -></Button>
                     <center>
@@ -49,7 +49,7 @@ class TriviaGame extends Component{
                         </div>
                     )}
                     </center>
-            </div>
+            </Container>
         )
     }
 }

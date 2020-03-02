@@ -51,7 +51,7 @@ To-do list:
 
 ## Status
 [comment]: <> (Project is: _in progress_, _finished_, _no longer continue_ and why?)
-Project is in progress
+Trivia Knigts is currently a work in progress and will remain in progress for the time being.
   * Donevan's Next Step: TriviaGame component will be able to handle multiple questions and provide a score to the player.
 
 ## Contact

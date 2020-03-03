@@ -55,10 +55,12 @@ Trivia Knights is currently a work in progress and will remain in progress for t
   * Donevan's Next Step: TriviaGame component will be able to handle multiple questions and provide a score to the player.
   * Aaron's Next Step: Create and handling game session.- in progress - 
   * Jackson's Next Step: Enable leaderboard API functionality. - in progress -
+  * Trevor's Next Step: Create User Page and Game components and render them with React.
+  
 ## Contact
 Created by Texas State University Students contact us at: 
-* jwa58@txstate.edu  | Jackson Ayers
-* adc129@txstate.edu | Aaron Carrasco 
-* t_c296@txstate.edu
+* Jackson Ayers: jwa58@txstate.edu
+* Aaron Carrasco: adc129@txstate.edu
+* Trevor Chaney: t_c296@txstate.edu
 * dlg143@txstate.edu
 * sds158@txstate.edu

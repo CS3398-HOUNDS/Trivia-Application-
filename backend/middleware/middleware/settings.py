@@ -36,18 +36,34 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 50,
 }
 
+AUTHENTICATION_BACKENDS = (
+    
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+
+)
 
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',
+
     'rest_framework',
+
     'rest_framework.authtoken',
+    'rest_auth',
     'trivia',
     'djoser',
 ]
@@ -63,6 +79,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'middleware.urls'
+SITE_ID = 1
 
 TEMPLATES = [
     {

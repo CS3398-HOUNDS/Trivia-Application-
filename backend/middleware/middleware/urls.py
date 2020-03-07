@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import include, path
 from rest_framework import routers
 from trivia import views
+from django.conf.urls import url
+
 
 router = routers.DefaultRouter()
 router.register(r'user', views.UserViewSet)
@@ -31,4 +33,6 @@ urlpatterns = [
     path('api/1/', include(router.urls)),
     path('api/auth/', include('djoser.urls')),
     path('api/auth/', include('djoser.urls.authtoken')),
-    ]
+    url(r'^', include('django.contrib.auth.urls')),
+    path('rest-auth/', include('rest_auth.urls')),
+    path('/api/auth/users/', include('rest_auth.registration.urls')),    ]

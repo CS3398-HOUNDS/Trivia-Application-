@@ -16,8 +16,11 @@ Texas State University cs3398 Software Engineering course project.
 * [Inspiration](#inspiration)
 * [Contact](#contact)
 
-## General info
-This project is to create a production ready Trivia application. 
+## Description
+1. This project is maintained by Jackson, Aaron, Donevan, Trevor, and Sohail
+2. We are creating a Trivia application in order to allow users to play against others or even on their own!
+3. We want to provide this application for any and all users that will enjoy it
+4. This project is a demonstration of the skills we have aquired and are honing during our college tenure.
 
 ## Screenshots
 ![Example screenshot]()

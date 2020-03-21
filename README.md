@@ -33,7 +33,6 @@ Texas State University cs3398 Software Engineering course project.
 * Djoser - 2.0.3
 
 ## Setup
-Describe how to install / setup your local environement / add link to demo version.
 To run the backend follow these [instructions](https://github.com/CS3398-HOUNDS/CS3398-Klingons-S2020/tree/master/backend)
 
 ## Code Examples

@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-//import App from './App';
+import App from './App';
 import Splash from './components/Splash';
-ReactDOM.render(<Splash />, document.getElementById('root'));
+import CreateGame from "./components/CreateGame";
+ReactDOM.render(<CreateGame />, document.getElementById('root'));

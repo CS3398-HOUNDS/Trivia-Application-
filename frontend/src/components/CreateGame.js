@@ -11,11 +11,17 @@ class CreateGame extends React.Component {
         return(
             <Container>
                 <Col></Col><Col>
+                <img className={"LetterHead"} src={require("../imgs/LH3.png")} style={{maxWidth:"25%",
+                    height: "auto",
+                    opacity: "1",
+                    padding:"2",
+                    textAlign: "center"
+                }}/>
                 <Form>
                     <br/>
                     <Form.Group controlID={"categoryChoice"}>
                         <Row>
-                            <Form.Label column={"lg"} lg={2}>
+                            <Form.Label column={"lg"} lg={3}>
                                 Trivia Category:
                             </Form.Label>
                             <Col sm={2}>
@@ -32,7 +38,7 @@ class CreateGame extends React.Component {
                     <br/>
                     <Form.Group controlID={"typeChoice"}>
                         <Row>
-                            <Form.Label  column="lg" lg={2}>Question Types:</Form.Label>
+                            <Form.Label  column="lg" lg={3}>Question Types:</Form.Label>
                             <Col>
                                 <Form.Check
                                     type={"checkbox"}
@@ -51,7 +57,7 @@ class CreateGame extends React.Component {
                     <br/>
                     <Form.Group controlID={"questionCount"}>
                         <Row>
-                            <Form.Label  column="lg" lg={2}>Number of Questions:</Form.Label>
+                            <Form.Label  column="lg" lg={3}>Number of Questions:</Form.Label>
                             <Col sm={1}>
                                 <Form.Control as={"select"}>
                                     <option>5</option>
@@ -64,7 +70,7 @@ class CreateGame extends React.Component {
                     <br/>
                     <Form.Group controlID={"timersChoice"}>
                         <Row>
-                            <Form.Label  column="lg" lg={2}>Questions Timers:</Form.Label>
+                            <Form.Label  column="lg" lg={3}>Questions Timers:</Form.Label>
                             <Col>
                                 <Form.Check
                                     inline
@@ -87,7 +93,7 @@ class CreateGame extends React.Component {
                     <br/>
                     <Form.Group controlID={"timerDifficulty"}>
                         <Row>
-                            <Form.Label  column="lg" lg={2}>Timer Length:</Form.Label>
+                            <Form.Label  column="lg" lg={3}>Timer Length:</Form.Label>
                             <Col sm={1}>
                                 <Form.Control as={"select"}>
                                     <option>10s</option>

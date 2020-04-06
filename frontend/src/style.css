@@ -3,19 +3,16 @@
 }
 
 #navBar {
-  background-color: #88e;
+  background-color: #d5f4e6;
 }
 
 .w3-content {
-   background: #004;
+   background: #d5f4e6;
 }
 
 #content {
    background: #d5f4e6;
-   margin-top: 3.1em;
-   border-radius: 40px;
-   border: dashed;
-   border-color: green;
+
 }
 
 .letterhead {

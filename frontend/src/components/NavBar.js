@@ -1,4 +1,5 @@
 import React from "react";
+import Login from "./Login";
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
@@ -8,11 +9,11 @@ class NavBar extends React.Component {
     return(
       <Container>
         <Navbar bg="dark" variant="dark">
-        <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-	  <Nav className="mr-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
+        <Navbar.Brand href="#home">TriviaKnights</Navbar.Brand>
+          <Nav className="mr-auto" onSelect={(selectedKey) => (console.log(`<${selectedKey} />`))}>
+            <Nav.Link eventKey="About">About</Nav.Link>
+            <Nav.Link eventKey="LeaderBoard">Leaderboard</Nav.Link>
+            <Nav.Link eventKey="Login">Login</Nav.Link>
           </Nav>
         </Navbar>
       </Container>

@@ -1,7 +1,9 @@
 #navBar {
   background-color: #d5f4e6;
 }
-
+.container-true{
+    background-color: coral;
+}
 .w3-content {
    background: #234436;
 }
@@ -43,8 +45,10 @@
 
 }
 
-.column {
-    flex: 0 1 calc(20%);
+.image-column {
+    flex: 1 1 12%;
+    height: auto;
+    max-height: 15%;
 
 }
 
@@ -54,14 +58,7 @@ footer {
 
 img {
     background: blue;
-    flex: 10%;
-    height: auto;
     opacity: 0.6;
-    max-height: 1%;
 
-}
-
-body {
-    background-color: black;
 }
 

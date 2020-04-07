@@ -9,11 +9,16 @@ import Button from 'react-bootstrap/Button';
 class App extends React.Component {
 	constructor(props) {
 		super(props);
+		//NOTE: The "logged in"/"logged out" names were from the tutorial this code was ripped from, all these do is
+		// switch between two states
 		this.handleLoginClick = this.handleLoginClick.bind(this);
 		this.handleLogoutClick = this.handleLogoutClick.bind(this);
 		this.state = {isLoggedIn: false};
 	}
 
+	//These state changes are being handled directly in the App component but for navbar to work we need to find a way
+	//for the Navbar states to update App, or have Navbar render the content as its own child.
+	//Either way, data handling should be kept in one place I think (like user login, game request, questions)
 	handleLoginClick() {
 		this.setState({isLoggedIn: true});
 	}
@@ -23,6 +28,8 @@ class App extends React.Component {
 	}
 		render()
 		{
+			//This is the main block of code that does the work. Button has to be updated in order to go back and forth
+			//but in Navbar they won't need to do any updating
 			const isLoggedIn = this.state.isLoggedIn;
 			let button;
 			let mainContent;
@@ -33,6 +40,8 @@ class App extends React.Component {
 				button = <Button onClick={this.handleLoginClick} />;
 				mainContent = <Splash />
 			}
+
+			//This just tells it to render whatever button or mainContent is set to
 			return (
 				<Container>
 					{button}
@@ -40,13 +49,12 @@ class App extends React.Component {
 					{mainContent}
 				</Container>
 
+				//Previous code, for reference
 				/*
-				<Container fluid='true'>
-					<Button onClick={this.handleClick()}>Change Content</Button>
-					<NavBar/>
-					<div id={"mainContent"}>
-					</div>
-				</Container>*/
+			<Container fluid='true'>
+				<NavBar/>
+				<Splash/>
+			</Container>*/
 			);
 		}
 }

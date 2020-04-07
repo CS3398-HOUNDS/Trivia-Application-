@@ -40,7 +40,7 @@ class TriviaGame extends Component{
                         {this.state.questionBank[0].question}
                         </h3>
                         </Jumbotron>
-                        <ButtonGroup toggle='true' vertical='true'>
+                        <ButtonGroup toggle='true' horizontal='true' size='lg'>
                             <Button >{this.state.questionBank[0].incorrect_answers[0]}</Button>
                             <Button >{this.state.questionBank[0].incorrect_answers[1]}</Button>
                             <Button >{this.state.questionBank[0].incorrect_answers[2]}</Button>

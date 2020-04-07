@@ -11,8 +11,8 @@ class CreateGame extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            category: null,
-            type: null,
+            triviaCategory: null,
+            qType: null,
             questionCount: null,
             timers: null,
             timerLength: null
@@ -21,7 +21,7 @@ class CreateGame extends React.Component {
         this.handleChange = this.handleChange.bind(this);
     };
     handleChange(event) {
-        this.setState({ category : event.target.value});
+       // this.setState({ category : event.target.value});
     }
     handleSubmit(event) {
         console.log(this.state);
@@ -40,8 +40,8 @@ class CreateGame extends React.Component {
                     textAlign: "center"
                 }}/>
                 <Formik initialValues={{
-                    category: "Sports",
-                    type: 1,
+                    tryiviaCategories: "Sports",
+                    qType: 1,
                     questionCount: 10,
                     timers: 1,
                     timerLength: 30}}>
@@ -53,7 +53,7 @@ class CreateGame extends React.Component {
                            handleBlur,
                            handleSubmit,
                            isSubmitting }) => (
-                    <Form onSubmit={this.handleSubmit}>
+                    <Form onSubmit={this.handleSubmit}>{console.log(values)}
                         <br/>
                         <Form.Group controlId={"categoryChoice"}>
                             <Row>
@@ -61,7 +61,11 @@ class CreateGame extends React.Component {
                                     Trivia Category:
                                 </Form.Label>
                                 <Col sm={2}>
-                                    <Form.Control as={"select"} onChange={this.handleChange}>
+                                    <Form.Control
+                                        as={"select"}
+                                        onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.triviaCategory}>
                                         <option>History</option>
                                         <option>Sports</option>
                                         <option>Politics</option>
@@ -76,17 +80,23 @@ class CreateGame extends React.Component {
                             <Row>
                                 <Form.Label  column="lg" lg={3}>Question Types:</Form.Label>
                                 <Col>
+                                    {/*<Form.Control
+                                        type={"checkbox"}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.qType}>
                                     <Form.Check
                                         type={"checkbox"}
                                         id={'TF'}
                                         label={`True/False`}
-                                    />
+                                    />*/}
                                     <Form.Check
                                         defaultChecked={"True"}
                                         type={"checkbox"}
                                         id={'MC'}
                                         label={`Multiple Choice`}
                                     />
+                                    {/*}</Form.Control>*/}
                                 </Col>
                             </Row>
                         </Form.Group>
@@ -95,7 +105,10 @@ class CreateGame extends React.Component {
                             <Row>
                                 <Form.Label  column="lg" lg={3}>Number of Questions:</Form.Label>
                                 <Col sm={1}>
-                                    <Form.Control as={"select"}>
+                                    <Form.Control as={"select"}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.questionCount}>
                                         <option>5</option>
                                         <option>10</option>
                                         <option>15</option>
@@ -108,6 +121,11 @@ class CreateGame extends React.Component {
                             <Row>
                                 <Form.Label  column="lg" lg={3}>Questions Timers:</Form.Label>
                                 <Col>
+                                    {/*<Form.Control
+                                        type={"checkbox"}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.timers}>*/}
                                     <Form.Check
                                         inline
                                         defaultChecked={"True"}
@@ -123,6 +141,7 @@ class CreateGame extends React.Component {
                                         id={'qTimerOff'}
                                         label={"Off"}
                                     />
+                                    {/*</Form.Control>*/}
                                 </Col>
                             </Row>
                         </Form.Group>
@@ -131,7 +150,11 @@ class CreateGame extends React.Component {
                             <Row>
                                 <Form.Label  column="lg" lg={3}>Timer Length:</Form.Label>
                                 <Col sm={1}>
-                                    <Form.Control as={"select"}>
+                                    <Form.Control
+                                        as={"select"}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.timerLength}>
                                         <option>10s</option>
                                         <option>15s</option>
                                         <option>20s</option>

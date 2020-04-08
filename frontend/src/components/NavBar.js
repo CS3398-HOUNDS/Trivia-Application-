@@ -5,6 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import Splash from './Splash';
 import TriviaGame from './TriviaGame';
 import Login from './Login';
+import CreateGame from "./CreateGame";
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -29,12 +30,16 @@ class NavBar extends React.Component {
             <Nav.Link onClick={() => this.handleClick("TriviaGame")}>Play</Nav.Link>
             <Nav.Link onClick={() => this.handleClick("Splash")}>Leaderboard</Nav.Link>
             <Nav.Link onClick={() => this.handleClick("Login")}>Login</Nav.Link>
+              <Nav.Link onClick={() => this.handleClick("NewGame")}>New Game</Nav.Link>
           </Nav>
         </Navbar>
-        {userSelection == "Splash" ? <Splash /> :
-         userSelection == "Login"  ? <Login />  :
-         userSelection == "TriviaGame"  ? <TriviaGame />  :
-         <p>The components failed to load</p>}
+          {
+              userSelection == "Splash" ? <Splash /> :
+              userSelection == "Login"  ? <Login />  :
+              userSelection == "TriviaGame"  ? <TriviaGame />  :
+              userSelection == "NewGame"  ? <CreateGame /> :
+              <p>The component failed to load</p>
+          }
       </Container>
     );
   }

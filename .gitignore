@@ -1,2 +1,4 @@
 # Ignoreing installed modules.
 ./frontend/node-modules/*
+# Ignoreing hidden indexing files.
+*.DS_Store

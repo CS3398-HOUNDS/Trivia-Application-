@@ -1,0 +1,47 @@
+/* *{ border: 1px solid red; padding: 0; margin: 0; }*/
+
+.container-true{
+    background-color: #d5f4e6;
+    height:100%;
+}
+
+
+.letterhead {
+    opacity: 100;
+    padding:5px;
+    align: center;
+    width:60%;
+    height: auto;
+}
+.rootView {
+    background-color: orange;
+    flex-grow: 1;
+    height: 100%;
+}
+
+.row {
+    text-align: center;
+    justify-content: center;
+
+
+}
+
+footer {
+  background: black;
+}
+
+img {
+    margin-left: 9px;
+    margin-right: 9px;
+    margin-top: 10px;
+    height: 11%;
+    width: 11%;
+    opacity: 0.6;
+
+}
+
+html, body, #app, #app>div {
+    height: 100%;
+   }
+
+

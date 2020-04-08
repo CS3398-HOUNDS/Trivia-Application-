@@ -1,0 +1,7 @@
+
+frontend/.idea/*
+frontend/node_modules/*
+frontend/public/.DS_Store
+frontend/src/.DS_Store
+frontend/src/components/.DS_Store
+frontend/src/imgs/.DS_Store

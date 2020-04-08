@@ -22,7 +22,7 @@ class NavBar extends React.Component {
       const userSelection = this.state.selectedComponent;
       console.log(userSelection);
     return(
-      <Container>
+      <Container className={"asd3"}>
         <Navbar bg="dark" variant="dark">
         <Navbar.Brand onClick={() => this.handleClick("Splash")}>TriviaKnights</Navbar.Brand>
           <Nav className="mr-auto">

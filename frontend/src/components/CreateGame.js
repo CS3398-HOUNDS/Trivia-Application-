@@ -51,27 +51,26 @@ class CreateGame extends React.Component {
         }else{
             timer = 0
         }
-        this.setState({
-            type: type,
-            timer: timer
-        });
-        console.log(this.state);
         //set the url
-        {{url = "https://opentdb.com/api.php?amount=" + amount + "&category=" + category + "&difficulty=medium&type=" + type}}
-        console.log(url);
-            fetch(url, {
-            method: "GET",
-            dataType: "JSON",
+        url = "https://opentdb.com/api.php?amount=" + amount + "&category=" + category + "&difficulty=medium&type=" + type
+        //console.log(url);
+        /*fetch(url, {
+        method: "GET",
+        dataType: "JSON",
+    })
+        .then((resp) => {
+            return resp.json()
         })
-            .then((resp) => {
-                return resp.json()
-            })
-            .then((data) => {
-                this.setState({ questionBank: data.results })
-            })
-            .catch((error) => {
-                console.log(error, "catch the hoop")
-            })
+        .then((data) => {this.props.callbackGameData(url,type,timer,amount)})
+        .catch((error) => {
+            console.log(error, "catch the hoop")
+        })*/
+        console.log(url)
+        console.log(type)
+        console.log(timer)
+        console.log(amount)
+        {this.props.callbackGameData(url,type,timer,amount)}
+        {this.props.switchToTrivia("TriviaGame")}
     };
 
     render() {
@@ -86,9 +85,9 @@ class CreateGame extends React.Component {
                 }}/>
 
                 <Formik initialValues={{
-                    triviaCategories: "Sports",
+                    triviaCategories: "Movies",
                     qType: "Multiple Choice",
-                    questionCount: 2,
+                    questionCount: 10,
                     timerLength: "15s"}}
                         onSubmit={(values, {setSubmitting, resetForm}) => {
                             // When button submits form and form is in the process of submitting, submit button is disabled
@@ -113,78 +112,78 @@ class CreateGame extends React.Component {
 
                            handleSubmit,
                            isSubmitting }) => (
-                    <Form onSubmit={handleSubmit}>
-                        <br/>
-                        <Form.Group controlId={"triviaCategories"}>
-                            <Row>
-                                <Form.Label column={"lg"} lg={3}>
-                                    Trivia Category:
-                                </Form.Label>
-                                <Col sm={2}>
-                                    <Form.Control
-                                        as={"select"}
-                                        onChange={handleChange}
-                                    value={values.triviaCategories}>
-                                        <option>History</option>
-                                        <option>Sports</option>
-                                        <option>Politics</option>
-                                        <option>Music</option>
-                                        <option>Movies</option>
-                                    </Form.Control>
-                                </Col>
-                            </Row>
-                        </Form.Group>
-                        <br/>
-                        <Form.Group controlId={"qType"}>
-                            <Row>
-                                <Form.Label  column="lg" lg={3}>Question Types:</Form.Label>
-                                <Col sm={2}>
-                                    <Form.Control
-                                        as={"select"}
-                                        onChange={handleChange}
-                                        value={values.qType}>
-                                        <option>Multiple Choice</option>
-                                        <option>True or False</option>
-                                    </Form.Control>
-                                </Col>
-                            </Row>
-                        </Form.Group>
-                        <br/>
-                        <Form.Group controlId={"questionCount"}>
-                            <Row>
-                                <Form.Label  column="lg" lg={3}>Number of Questions:</Form.Label>
-                                <Col sm={2}>
-                                    <Form.Control as={"select"}
-                                    onChange={handleChange}
-                                    value={values.questionCount}>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                    </Form.Control>
-                                </Col>
-                            </Row>
-                        </Form.Group>
-                        <br/>
-                        <Form.Group controlId={"timerLength"}>
-                            <Row>
-                                <Form.Label  column="lg" lg={3}>Question Timer:</Form.Label>
-                                <Col sm={2}>
-                                    <Form.Control
-                                        as={"select"}
-                                    onChange={handleChange}
-                                    value={values.timerLength}>
-                                        <option>15s</option>
-                                        <option>30s</option>
-                                        <option>60s</option>
-                                        <option>OFF</option>
-                                    </Form.Control>
-                                </Col>
-                            </Row>
-                        </Form.Group>
-                        <br/>
-                        <Button type={"submit"} disabled={isSubmitting}>Create New Game</Button>
-                        <br/>
-                    </Form>)}
+                        <Form onSubmit={handleSubmit}>
+                            <br/>
+                            <Form.Group controlId={"triviaCategories"}>
+                                <Row>
+                                    <Form.Label column={"lg"} lg={3}>
+                                        Trivia Category:
+                                    </Form.Label>
+                                    <Col sm={2}>
+                                        <Form.Control
+                                            as={"select"}
+                                            onChange={handleChange}
+                                            value={values.triviaCategories}>
+                                            <option>History</option>
+                                            <option>Sports</option>
+                                            <option>Politics</option>
+                                            <option>Music</option>
+                                            <option>Movies</option>
+                                        </Form.Control>
+                                    </Col>
+                                </Row>
+                            </Form.Group>
+                            <br/>
+                            <Form.Group controlId={"qType"}>
+                                <Row>
+                                    <Form.Label  column="lg" lg={3}>Question Types:</Form.Label>
+                                    <Col sm={2}>
+                                        <Form.Control
+                                            as={"select"}
+                                            onChange={handleChange}
+                                            value={values.qType}>
+                                            <option>Multiple Choice</option>
+                                            <option>True or False</option>
+                                        </Form.Control>
+                                    </Col>
+                                </Row>
+                            </Form.Group>
+                            <br/>
+                            <Form.Group controlId={"questionCount"}>
+                                <Row>
+                                    <Form.Label  column="lg" lg={3}>Number of Questions:</Form.Label>
+                                    <Col sm={2}>
+                                        <Form.Control as={"select"}
+                                                      onChange={handleChange}
+                                                      value={values.questionCount}>
+                                            <option>10</option>
+                                            <option>15</option>
+                                            <option>20</option>
+                                        </Form.Control>
+                                    </Col>
+                                </Row>
+                            </Form.Group>
+                            <br/>
+                            <Form.Group controlId={"timerLength"}>
+                                <Row>
+                                    <Form.Label  column="lg" lg={3}>Question Timer:</Form.Label>
+                                    <Col sm={2}>
+                                        <Form.Control
+                                            as={"select"}
+                                            onChange={handleChange}
+                                            value={values.timerLength}>
+                                            <option>15s</option>
+                                            <option>30s</option>
+                                            <option>60s</option>
+                                            <option>OFF</option>
+                                        </Form.Control>
+                                    </Col>
+                                </Row>
+                            </Form.Group>
+                            <br/>
+                            <Button type={"submit"} disabled={isSubmitting}>Create New Game</Button>
+                            <br/>
+                        </Form>)}
                 </Formik>
             </Container>
 

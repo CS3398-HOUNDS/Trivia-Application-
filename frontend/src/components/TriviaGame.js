@@ -47,7 +47,7 @@ class TriviaGame extends Component{
         // type: null,
         questions: [],
         score: 0,
-        counter: -1,
+        counter: 0,
         answerChoice: "",
 
 
@@ -55,36 +55,27 @@ class TriviaGame extends Component{
 
     async componentDidMount(){
 
-        /*let response = await fetch(this.props.requestUrl); //put the selected option into here
-        let data = await response.json();
-        let results = data.results;
-        let qBank = results;
-        let questions = [];*/
+        var self = this;
         let response =  fetch(this.props.requestUrl, {
             method: "GET",
             dataType: "JSON",
-            }).then((resp) => {
+            })
+            .then((resp) => {
                 return resp.json();
-                //this.setState({questionBank: data.results});
+            })
+                .then((resp) => {
+                    this.setState({questionBank : resp.results});
             })
             .catch((error) => {
                 console.log(error, "catch the hoop")
             })
-        console.log(response)
-        console.log(response.results)
-
-        this.setState({questionBank: response.results})
-
-        /*this.setState({requestUrl: this.props.requestUrl,
-            type: this.props.type,
-            timer: this.props.timer,
-            maxQuestions: this.props.maxQuestions
-        });*/
     }
 
-    loadGame(){
-        this.setState({questions: shuffle(this.state.questionBank[this.state.counter+1].incorrect_answers,this.state.questionBank[this.state.counter+1].correct_answer)})
-        this.setState({loading : false})
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.questionBank !== this.state.questionBank) {
+            this.setState({questions: shuffle(this.state.questionBank[this.state.counter+1].incorrect_answers,this.state.questionBank[this.state.counter+1].correct_answer)})
+            this.setState({loading: false})
+        }
     }
 
 
@@ -105,15 +96,14 @@ class TriviaGame extends Component{
             <Container>
                 <div className="title"></div>
                 <center>
-                    {this.state.questionBank != [] ? (
-                        <p>loading game... {this.state.questionBank}</p>
+                    {this.state.loading || this.state.questionBank === [] ? (
+                        <p>loading game...</p>
                     ) : (
 
                         <div>
 
                             { this.state.counter < 10 ? (
                                 <div>
-                                    this.increment();
                                     <Jumbotron>
                                         <h3>
                                             {this.state.questionBank[this.state.counter].question}
@@ -125,7 +115,6 @@ class TriviaGame extends Component{
                                         <ToggleButton onChange={this.setAnswer.bind(this)} value={this.state.questions[2]}>{this.state.questions[2]}</ToggleButton>
                                         <ToggleButton onChange={this.setAnswer.bind(this)} value={this.state.questions[3]}>{this.state.questions[3]}</ToggleButton>
                                     </ToggleButtonGroup>
-                                    {console.log(this.state.score)}
                                     <Button onClick={this.increment}>Next</Button>
 
                                 </div>

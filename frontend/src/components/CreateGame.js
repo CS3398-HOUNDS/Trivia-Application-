@@ -52,7 +52,7 @@ class CreateGame extends React.Component {
             timer = 0
         }
         //set the url
-        url = "https://opentdb.com/api.php?amount=" + amount + "&category=" + category + "&difficulty=medium&type=" + type
+        url = "https://opentdb.com/api.php?amount=" + amount + 1 + "&category=" + category + "&difficulty=medium&type=" + type
         //console.log(url);
         /*fetch(url, {
         method: "GET",

@@ -50,7 +50,6 @@ class TriviaGame extends Component{
         counter: 0,
         answerChoice: "",
 
-
     };
 
     async componentDidMount(){
@@ -73,16 +72,14 @@ class TriviaGame extends Component{
 
     componentDidUpdate(prevProps, prevState) {
         if (prevState.questionBank !== this.state.questionBank) {
-            this.setState({questions: shuffle(this.state.questionBank[this.state.counter+1].incorrect_answers,this.state.questionBank[this.state.counter+1].correct_answer)})
+            this.setState({questions: shuffle(this.state.questionBank[this.state.counter].incorrect_answers,this.state.questionBank[this.state.counter].correct_answer)})
             this.setState({loading: false})
         }
     }
 
-
-
     increment = () =>{
-        this.setState({counter: this.state.counter + 1});
-        this.setState({questions: shuffle(this.state.questionBank[this.state.counter+1].incorrect_answers,this.state.questionBank[this.state.counter+1].correct_answer)})
+        this.setState({counter: this.state.counter + 1})
+        this.setState({questions: shuffle(this.state.questionBank[this.state.counter + 1].incorrect_answers,this.state.questionBank[this.state.counter + 1].correct_answer)})
         this.setState({score: this.state.score + calcScore(this.state.answerChoice,this.state.questionBank[this.state.counter].correct_answer)})
     }
 
@@ -99,9 +96,7 @@ class TriviaGame extends Component{
                     {this.state.loading || this.state.questionBank === [] ? (
                         <p>loading game...</p>
                     ) : (
-
                         <div>
-
                             { this.state.counter < 10 ? (
                                 <div>
                                     <Jumbotron>
@@ -116,7 +111,6 @@ class TriviaGame extends Component{
                                         <ToggleButton onChange={this.setAnswer.bind(this)} value={this.state.questions[3]}>{this.state.questions[3]}</ToggleButton>
                                     </ToggleButtonGroup>
                                     <Button onClick={this.increment}>Next</Button>
-
                                 </div>
                             ) : (
                                 <div>

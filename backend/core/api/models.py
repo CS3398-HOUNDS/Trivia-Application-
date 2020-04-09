@@ -5,6 +5,7 @@ from django.dispatch import receiver
 
 
 
+
 CATEGORY_CHOICES = (
     ('1', 'Sports'),
     ('2', 'Music'),
@@ -44,7 +45,7 @@ class Question(models.Model):
     content = models.CharField(blank=True, max_length=200, default='empty')
     # incorrect need to be changed into an array that can hold multiple values
     correct = models.CharField(default="correct", max_length=200)
-    incorrect = models.CharField(default="incorrect", max_length=200)
+    incorrect = models.CharField(default="incorrect", max_length=100)
     category = models.CharField(default="Pick one", max_length=50, choices=CATEGORY_CHOICES)
     type = models.CharField(default="Pick one", max_length=50, choices=TYPE_CHOICES)
 

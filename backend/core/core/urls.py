@@ -42,5 +42,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/', include(v1_router.urls)),
     path('api/auth/', include('djoser.urls')),
-    path('api/auth/', include('djoser.urls.authtoken')),
+    path('api/auth/', include('djoser.urls.authtoken'))
     ] +  static(settings.STATIC_URL)

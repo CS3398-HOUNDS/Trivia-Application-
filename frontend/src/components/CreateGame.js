@@ -26,33 +26,33 @@ class CreateGame extends React.Component {
         let timer = values.timerLength;
 
         //This block builds the URL for the api call to make questions
-        if (values.qType == "Multiple Choice") {
+        if (values.qType === "Multiple Choice") {
             type = "multiple"
         }else{
             type = "boolean"
         }
-        if (values.triviaCategories == "Sports"){
+        if (values.triviaCategories === "Sports"){
             category = 21
-        } else if (values.triviaCategories == "Music"){
+        } else if (values.triviaCategories === "Music"){
             category = 21
-        } else if (values.triviaCategories == "Politics"){
+        } else if (values.triviaCategories === "Politics"){
             category = 21
-        } else if (values.triviaCategories == "History") {
+        } else if (values.triviaCategories === "History") {
             category = 21
         }else{
             category = 11
         }
-        if (values.timerLength == "15s"){
+        if (values.timerLength === "15s"){
             timer = 15
-        } else if (values.timerLength == "30s"){
+        } else if (values.timerLength === "30s"){
             timer = 30
-        } else if (values.timerLength == "60s"){
+        } else if (values.timerLength === "60s"){
             timer = 60
         }else{
             timer = 0
         }
         //set the url
-        url = "https://opentdb.com/api.php?amount=" + amount + 1 + "&category=" + category + "&difficulty=medium&type=" + type
+        url = "https://opentdb.com/api.php?amount=" + amount + "&category=" + category + "&difficulty=medium&type=" + type
         //console.log(url);
         /*fetch(url, {
         method: "GET",

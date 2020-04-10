@@ -4,6 +4,7 @@ import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Container from 'react-bootstrap/Container';
+import { Row, Col } from 'react-bootstrap';
 
 function shuffle(incorrect, correct){
     // stores all answer  choices into one array
@@ -49,7 +50,7 @@ class TriviaGame extends Component{
         score: 0,
         counter: 0,
         answerChoice: "",
-
+        gameOver: false
 
     };
 
@@ -59,6 +60,7 @@ class TriviaGame extends Component{
         let response =  fetch(this.props.requestUrl, {
             method: "GET",
             dataType: "JSON",
+            ContentType: 'application/json; charset=utf-16'
             })
             .then((resp) => {
                 return resp.json();
@@ -73,18 +75,23 @@ class TriviaGame extends Component{
 
     componentDidUpdate(prevProps, prevState) {
         if (prevState.questionBank !== this.state.questionBank) {
-            this.setState({questions: shuffle(this.state.questionBank[this.state.counter+1].incorrect_answers,this.state.questionBank[this.state.counter+1].correct_answer)})
+            this.setState({questions: shuffle(this.state.questionBank[this.state.counter].incorrect_answers,this.state.questionBank[this.state.counter].correct_answer)})
             this.setState({loading: false})
         }
     }
 
-
-
     increment = () =>{
-        this.setState({counter: this.state.counter + 1});
-        this.setState({questions: shuffle(this.state.questionBank[this.state.counter+1].incorrect_answers,this.state.questionBank[this.state.counter+1].correct_answer)})
-        this.setState({score: this.state.score + calcScore(this.state.answerChoice,this.state.questionBank[this.state.counter].correct_answer)})
-    }
+        let currentQuestion = this.state.counter;
+        let currentScore = this.state.score;
+        currentScore += calcScore(this.state.answerChoice,this.state.questionBank[currentQuestion].correct_answer);
+        if(this.state.counter < 9) {
+            currentQuestion += 1;
+        }else{
+            this.setState({gameOver: true})
+        }
+        let answers =shuffle(this.state.questionBank[currentQuestion].incorrect_answers,this.state.questionBank[currentQuestion].correct_answer);
+        this.setState({counter : currentQuestion, score : currentScore, questions: answers,})
+    };
 
     setAnswer = (event) =>{
         this.setState({answerChoice: event.target.value});
@@ -94,29 +101,34 @@ class TriviaGame extends Component{
 
         return(
             <Container>
+                <br/><br/>
                 <div className="title"></div>
                 <center>
                     {this.state.loading || this.state.questionBank === [] ? (
                         <p>loading game...</p>
                     ) : (
-
                         <div>
-
-                            { this.state.counter < 10 ? (
+                            { !this.state.gameOver ? (
                                 <div>
-                                    <Jumbotron>
+                                    <Jumbotron className="question" style={{backgroundColor: "FloralWhite"}}>
                                         <h3>
                                             {this.state.questionBank[this.state.counter].question}
                                         </h3>
                                     </Jumbotron>
-                                    <ToggleButtonGroup type="radio" name="options">
-                                        <ToggleButton onChange={this.setAnswer.bind(this)} value={this.state.questions[0]}>{this.state.questions[0]}</ToggleButton>
-                                        <ToggleButton onChange={this.setAnswer.bind(this)} value={this.state.questions[1]}>{this.state.questions[1]}</ToggleButton>
-                                        <ToggleButton onChange={this.setAnswer.bind(this)} value={this.state.questions[2]}>{this.state.questions[2]}</ToggleButton>
-                                        <ToggleButton onChange={this.setAnswer.bind(this)} value={this.state.questions[3]}>{this.state.questions[3]}</ToggleButton>
-                                    </ToggleButtonGroup>
-                                    <Button onClick={this.increment}>Next</Button>
 
+                                    <ToggleButtonGroup type="radio" name="options">
+
+                                        <ToggleButton variant="success" onChange={this.setAnswer.bind(this)} value={this.state.questions[0]}>{this.state.questions[0]}</ToggleButton>
+
+                                            <ToggleButton variant="success" onChange={this.setAnswer.bind(this)} value={this.state.questions[1]}>{this.state.questions[1]}</ToggleButton>
+
+                                            <ToggleButton variant="success" onChange={this.setAnswer.bind(this)} value={this.state.questions[2]}>{this.state.questions[2]}</ToggleButton>
+
+                                            <ToggleButton variant="success" onChange={this.setAnswer.bind(this)} value={this.state.questions[3]}>{this.state.questions[3]}</ToggleButton>
+
+                                        </ToggleButtonGroup>
+
+                                    <br/><br/><Button onClick={this.increment} variant="secondary">Next</Button>
                                 </div>
                             ) : (
                                 <div>

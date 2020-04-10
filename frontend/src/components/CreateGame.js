@@ -65,8 +65,8 @@ class CreateGame extends React.Component {
         .catch((error) => {
             console.log(error, "catch the hoop")
         })*/
-        {this.props.callbackGameData(url,type,timer,amount)}
-        {this.props.switchToTrivia("TriviaGame")}
+        this.props.callbackGameData(url,type,timer,amount)
+        this.props.switchToTrivia("TriviaGame")
     };
 
     render() {
@@ -78,7 +78,7 @@ class CreateGame extends React.Component {
                     opacity: "1",
                     padding:"2",
                     textAlign: "center"
-                }}/>
+                }} alt={require("../imgs/5.png")}/>
 
                 <Formik initialValues={{
                     triviaCategories: "Movies",

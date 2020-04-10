@@ -4,7 +4,6 @@ import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Container from 'react-bootstrap/Container';
-import { Row, Col } from 'react-bootstrap';
 
 function shuffle(incorrect, correct){
     // stores all answer  choices into one array
@@ -56,8 +55,7 @@ class TriviaGame extends Component{
 
     async componentDidMount(){
 
-        var self = this;
-        let response =  fetch(this.props.requestUrl, {
+        fetch(this.props.requestUrl, {
             method: "GET",
             dataType: "JSON",
             ContentType: 'application/json; charset=utf-16'
@@ -70,7 +68,7 @@ class TriviaGame extends Component{
             })
             .catch((error) => {
                 console.log(error, "catch the hoop")
-            })
+            });
     }
 
     componentDidUpdate(prevProps, prevState) {

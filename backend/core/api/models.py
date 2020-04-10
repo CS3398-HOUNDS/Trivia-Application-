@@ -6,6 +6,7 @@ from django.dispatch import receiver
 
 
 
+
 CATEGORY_CHOICES = (
     ('1', 'Sports'),
     ('2', 'Music'),
@@ -44,11 +45,15 @@ This model declares the Question's for the trivia game
 class Question(models.Model):
     content = models.CharField(blank=True, max_length=200, default='empty')
     correct = models.CharField(default="correct", max_length=200)
+<<<<<<< HEAD
     incorrect = models.CharField(default="incorrect", max_length=200)
 #    incorrect = ListTextField(
 #        base_field=TextField(),
 #        size=3,  # Maximum of 100 ids in list
 #    )
+=======
+    incorrect = models.CharField(default="incorrect", max_length=100)
+>>>>>>> c522264578bfc29c840be3774604774113e63a1e
     category = models.CharField(default="Pick one", max_length=50, choices=CATEGORY_CHOICES)
     type = models.CharField(default="Pick one", max_length=50, choices=TYPE_CHOICES)
 

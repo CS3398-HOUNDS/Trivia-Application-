@@ -3,7 +3,7 @@ Texas State University cs3398 Software Engineering course project.
 
 # Trivia Knights
 [comment]: <> (Here goes your awesome project description!)
-![icon](https://images.all-free-download.com/images/graphicthumb/knight_helmets_icons_flat_black_design_6831019.jpg)
+![icon](https://i.imgur.com/Z4GvIx6.png)
 
 
 ## Table of contents
@@ -23,7 +23,7 @@ Texas State University cs3398 Software Engineering course project.
 4. This project is a demonstration of the skills we have acquired and are honing during our college tenure.
 
 ## Screenshots
-![Example screenshot]()
+![Example screenshot](https://i.imgur.com/HSziwxS.png)
 
 ## Technologies
 * Python - 3.7.1

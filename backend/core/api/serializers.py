@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from . import models
-from . import serializers as serializer
 
 
 """

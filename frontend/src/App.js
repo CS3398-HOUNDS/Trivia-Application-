@@ -7,7 +7,7 @@ import Splash from './components/Splash';
 import TriviaGame from './components/TriviaGame';
 import Login from './components/Login';
 import CreateGame from './components/CreateGame';
-import UserProfile from './components/UserProfile';
+//import UserProfile from './components/UserProfile';
 import Leaderboard from './components/Leaderboard';
 
 class App extends React.Component {

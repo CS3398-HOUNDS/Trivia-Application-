@@ -32,14 +32,14 @@ class MCBlock extends Component {
                                 <Button
                                     className={this.state.selected === "A"? "qButton-active": "qButton-default"}
                                     variant="success"
-                                    onClick={()=>this.set(0,"A")}> {this.props.questions[0]}</Button>
+                                    onClick={()=>this.set(0,"A")}> {decodeURIComponent(this.props.questions[0])}</Button>
                             </td>
                             <td height="75">
                                 <Button
                                     className={this.state.selected === "B"? "qButton-active": "qButton-default"}
                                     variant="success"
                                     value={1}
-                                    onClick={()=>this.set(1,"B")}> {this.props.questions[1]}</Button>
+                                    onClick={()=>this.set(1,"B")}> {decodeURIComponent(this.props.questions[1])}</Button>
                             </td>
 
                         </tr>
@@ -49,14 +49,14 @@ class MCBlock extends Component {
                                     className={this.state.selected === "C"? "qButton-active": "qButton-default"}
                                     variant="success"
                                     value={2}
-                                    onClick={()=>this.set(2,"C")}> {this.props.questions[2]}</Button>
+                                    onClick={()=>this.set(2,"C")}> {decodeURIComponent(this.props.questions[2])}</Button>
                             </td>
                             <td height="75">
                                 <Button
                                     className={this.state.selected === "D"? "qButton-active": "qButton-default"}
                                     variant="success"
                                     value={3}
-                                    onClick={()=>this.set(3,"D")}> {this.props.questions[3]}</Button>
+                                    onClick={()=>this.set(3,"D")}> {decodeURIComponent(this.props.questions[3])}</Button>
                             </td>
                         </tr>
 

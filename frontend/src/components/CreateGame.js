@@ -35,24 +35,24 @@ class CreateGame extends React.Component {
             category = 21
         } else if (values.triviaCategories === "Music"){
             category = 12
-        } else if (values.triviaCategories === "Politics"){
-            category = 24
+        } else if (values.triviaCategories === "General Knowledge"){
+            category = 9
         } else if (values.triviaCategories === "History") {
             category = 23
         }else{
-            category = 11
+            category = 11 //movies
         }
         if (values.timerLength === "15s"){
-            timer = 15
+            timer = 10
         } else if (values.timerLength === "30s"){
-            timer = 30
+            timer = 20
         } else if (values.timerLength === "60s"){
             timer = 60
         }else{
             timer = 0
         }
         //set the url
-        url = "https://opentdb.com/api.php?amount=" + amount + "&category=" + category + "&type=" + type
+        url = "https://opentdb.com/api.php?amount=" + amount + "&category=" + category + "&type=" + type +"&encode=url3986"
         console.log(url);
         /*fetch(url, {
         method: "GET",
@@ -81,7 +81,7 @@ class CreateGame extends React.Component {
                 }}/>
 
                 <Formik initialValues={{
-                    triviaCategories: "Movies",
+                    triviaCategories: "General Knowledge",
                     qType: "Multiple Choice",
                     questionCount: 10,
                     timerLength: "15s"}}
@@ -105,7 +105,6 @@ class CreateGame extends React.Component {
                     {/* Callback function containing Formik state and helpers that handle common form actions */}
                     {( {values,
                            handleChange,
-
                            handleSubmit,
                            isSubmitting }) => (
                         <Form onSubmit={handleSubmit}>
@@ -120,9 +119,9 @@ class CreateGame extends React.Component {
                                             as={"select"}
                                             onChange={handleChange}
                                             value={values.triviaCategories}>
+                                            <option>General Knowledge</option>
                                             <option>History</option>
                                             <option>Sports</option>
-                                            <option>Politics</option>
                                             <option>Music</option>
                                             <option>Movies</option>
                                         </Form.Control>

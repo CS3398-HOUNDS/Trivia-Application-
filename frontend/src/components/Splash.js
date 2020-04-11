@@ -1,9 +1,11 @@
 import React from "react";
 import Container from 'react-bootstrap/Container';
 import '../style.css'
-import { Row, Col } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
+import Timer from './Timer.js'
 
 class Splash extends React.Component {
+
     render() {
         return(
             <Container style={{backgroundColor: "#d5f4e6", maxHeight: "100%", textAlign:"center"}} className={"asd"}>

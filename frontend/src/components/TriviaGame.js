@@ -4,6 +4,9 @@ import Jumbotron from 'react-bootstrap/Jumbotron';
 import Container from 'react-bootstrap/Container';
 import MCBlock from './MCBlock'
 import TFBlock from './TFBlock'
+import Col from "react-bootstrap/Col";
+import Timer from "./Timer";
+import Row from "react-bootstrap/Row";
 
 function shuffle(incorrect, correct){
     // stores all answer  choices into one array
@@ -56,6 +59,7 @@ class TriviaGame extends Component{
         }
         this.setA = this.setA.bind(this)
         this.setTF = this.setTF.bind(this)
+        this.increment = this.increment.bind(this)
     }
 
     async componentDidMount(){
@@ -64,7 +68,7 @@ class TriviaGame extends Component{
         let response =  fetch(this.props.requestUrl, {
             method: "GET",
             dataType: "JSON",
-            ContentType: 'application/json; charset=utf-16'
+            ContentType: "charset=url3986"
             })
             .then((resp) => {
                 return resp.json();
@@ -118,6 +122,10 @@ class TriviaGame extends Component{
         this.setState({answerChoice: this.state.questions[value]});
     };
 
+    displayJumbo(obj, type){
+        return obj;
+    }
+
     render(){
 
         return(
@@ -132,21 +140,31 @@ class TriviaGame extends Component{
                             { !this.state.gameOver ? (
                                 <div>
                                     <div align={"left"}>
+                                        <Row>
+                                        <Col>
                                         <h1>Question <b>{this.state.counter + 1}</b> out of <b>{this.props.maxQuestions}</b></h1>
                                         {this.state.score >= 0 ? (<h4> score:  {this.state.score * 100} </h4>) : <h4>score:</h4>}
+                                        </Col>
+                                        <Col>
+                                            {this.state.timer > 0 ? <h4>time left</h4> : null}
+                                            {this.state.timer > 0 ? <Timer tValue={this.props.timer} display={true} reset={this.state.counter} timeEndCallback={this.increment}/>: null}
+
+                                            </Col>
+                                        </Row>
                                     </div>
 
                                     <Jumbotron className="question align-items-center" style={{backgroundColor: "FloralWhite"}}>
-                                        <h3>
-                                            {this.state.questionBank[this.state.counter].question}
-                                        </h3>
+                                        <h2>
+                                            {decodeURIComponent(this.state.questionBank[this.state.counter].question)}
+                                        </h2>
                                     </Jumbotron>
                                     {this.state.type==="multiple" ?
                                         <MCBlock questions={this.state.questions} answerCallback={this.setA}/>
                                     :
                                         <TFBlock  counter={this.state.counter} answerCallback={this.setTF}/>}
                                     {/*counter must be passed to TF even though it does not use then, because it resets the selection*/}
-                                    <br/><Button onClick={this.increment} variant="secondary">Next</Button>
+                                    <br/>
+                                    {this.state.timer === 0? <Button onClick={this.increment} variant="secondary">Next</Button> : null}
 
                                 </div>
 

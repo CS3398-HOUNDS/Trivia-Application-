@@ -34,11 +34,11 @@ class CreateGame extends React.Component {
         if (values.triviaCategories === "Sports"){
             category = 21
         } else if (values.triviaCategories === "Music"){
-            category = 21
+            category = 12
         } else if (values.triviaCategories === "Politics"){
-            category = 21
+            category = 24
         } else if (values.triviaCategories === "History") {
-            category = 21
+            category = 23
         }else{
             category = 11
         }
@@ -52,8 +52,8 @@ class CreateGame extends React.Component {
             timer = 0
         }
         //set the url
-        url = "https://opentdb.com/api.php?amount=" + amount + "&category=" + category + "&difficulty=medium&type=" + type
-        //console.log(url);
+        url = "https://opentdb.com/api.php?amount=" + amount + "&category=" + category + "&type=" + type
+        console.log(url);
         /*fetch(url, {
         method: "GET",
         dataType: "JSON",

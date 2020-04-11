@@ -44,7 +44,18 @@ class App extends React.Component {
             <Nav className="mr-auto">
               <Nav.Link onClick={() => this.handleClick("Leaderboard")}>Leaderboard</Nav.Link>
               <Nav.Link onClick={() => this.handleClick("Login")}>Login</Nav.Link>
-              <Nav.Link style ={{backgroundColor: "#0D9469", color: "white", marginLeft: "10px", letterSpacing: "3px" }} onClick={() => this.handleClick("Create")}><b>Play</b></Nav.Link>
+
+              {/*Changes Play to Quit button if in game*/}
+              {this.state.selectedComponent !== "TriviaGame" ?
+              <Nav.Link
+                  className="superButton"
+                  style={{backgroundColor: "#0D9469"}}
+                  onClick={() => this.handleClick("Create")}><b>Play</b></Nav.Link>
+                  :
+                  <Nav.Link
+                      className="superButton"
+                      style={{backgroundColor: "#000000"}}
+                      onClick={() => this.handleClick("Quit")}><b>Quit</b></Nav.Link>}
             </Nav>
           </Navbar>
 

@@ -42,9 +42,11 @@ class CreateGame extends React.Component {
         }else{
             category = 11 //movies
         }
-        if (values.timerLength === "15s"){
+        if (values.timerLength === "10s"){
             timer = 10
-        } else if (values.timerLength === "30s"){
+        } else if (values.timerLength === "7s"){
+            timer = 7
+        } else if (values.timerLength === "20s"){
             timer = 20
         } else if (values.timerLength === "60s"){
             timer = 60
@@ -84,7 +86,7 @@ class CreateGame extends React.Component {
                     triviaCategories: "General Knowledge",
                     qType: "Multiple Choice",
                     questionCount: 10,
-                    timerLength: "15s"}}
+                    timerLength: "10s"}}
                         onSubmit={(values, {setSubmitting, resetForm}) => {
                             // When button submits form and form is in the process of submitting, submit button is disabled
                             setSubmitting(true);
@@ -153,7 +155,7 @@ class CreateGame extends React.Component {
                                                       value={values.questionCount}>
                                             <option>10</option>
                                             <option>15</option>
-                                            <option>20</option>
+                                            <option>30</option>
                                         </Form.Control>
                                     </Col>
                                 </Row>
@@ -167,8 +169,9 @@ class CreateGame extends React.Component {
                                             as={"select"}
                                             onChange={handleChange}
                                             value={values.timerLength}>
-                                            <option>15s</option>
-                                            <option>30s</option>
+                                            <option>7s</option>
+                                            <option>10s</option>
+                                            <option>20s</option>
                                             <option>60s</option>
                                             <option>OFF</option>
                                         </Form.Control>

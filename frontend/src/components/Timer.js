@@ -61,7 +61,7 @@ class Timer extends React.Component {
         return(
             <div>
                 {this.props.display ?
-                this.state.seconds > 5 ? <h1>{this.state.seconds}</h1> : <h1 style={{color: "red"}}><b>{this.state.seconds}</b></h1> :''}
+                this.state.seconds > 5 ? <h2>{this.state.seconds}</h2> : <h2 style={{color: "red"}}>{this.state.seconds}</h2> :''}
             </div>
         );
     }

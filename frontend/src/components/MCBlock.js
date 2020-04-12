@@ -16,28 +16,78 @@ class MCBlock extends Component {
         }}
 
     set(value, choice){
-        this.props.answerCallback(value);
-        this.setState({selected: choice})
+        //sets selection but only if not displaying the answers already
+        if(!this.props.answerDisplay){
+            this.props.answerCallback(value);
+            this.setState({selected: choice})
+        }
     }
 
+    getVariant(id,letter){
+        //buttons tracked by text(correct answer) and letter (selected)
+        const correctA = this.props.correctAnswer;
+        const buttonText = this.props.questions[id];
+        const selected = this.state.selected;
+        console.log(id, letter, correctA, buttonText, selected)
+
+        //default
+        if (this.props.answerDisplay === 0)
+           return "success";
+        //if neither selected nor correct
+        if (buttonText !== correctA && letter !== selected)
+            return "success-outline";
+        //selected but not correct
+        if (buttonText !== correctA && letter === selected)
+            return "secondary";
+        //correct but not selected
+        if  (buttonText === correctA && letter !== selected)
+            return "warning";
+        //correct and selected
+        return "primary"
+    }
+
+    getStyle(id,letter){
+        //buttons tracked by text(correct answer) and letter (selected)
+        const correctA = this.props.correctAnswer;
+        const buttonText = this.props.questions[id];
+        const selected = this.state.selected;
+        console.log(id, letter, correctA, buttonText, selected)
+
+        //default
+        if (this.props.answerDisplay === 0){
+            if(letter === selected){
+                return "qButton-active"
+            }
+            return "qButton-default";
+        }
+        //if neither selected nor correct
+        if (buttonText !== correctA && letter !== selected)
+            return "qButton-default";
+        //selected but not correct
+        if (buttonText !== correctA && letter === selected)
+            return "qButton-incorrect";
+        //correct but not selected
+        if  (buttonText === correctA && letter !== selected)
+            return "qButton-correct-unselected";
+        //correct and selected
+        return "qButton-correct"
+    }
 
         render(){
             return(
-
                     <table className={"buttons"}>
                     <tbody>
-
                         <tr>
                             <td height="75">
                                 <Button
-                                    className={this.state.selected === "A"? "qButton-active": "qButton-default"}
-                                    variant="success"
+                                    className={this.getStyle(0,"A")}
+                                    variant={this.getVariant(0,"A")}
                                     onClick={()=>this.set(0,"A")}> {decodeURIComponent(this.props.questions[0])}</Button>
                             </td>
                             <td height="75">
                                 <Button
-                                    className={this.state.selected === "B"? "qButton-active": "qButton-default"}
-                                    variant="success"
+                                    className={this.getStyle(1,"B")}
+                                    variant={this.getVariant(1,"B")}
                                     value={1}
                                     onClick={()=>this.set(1,"B")}> {decodeURIComponent(this.props.questions[1])}</Button>
                             </td>
@@ -46,16 +96,14 @@ class MCBlock extends Component {
                         <tr>
                             <td height="75">
                                 <Button
-                                    className={this.state.selected === "C"? "qButton-active": "qButton-default"}
-                                    variant="success"
-                                    value={2}
+                                    className={this.getStyle(2,"C")}
+                                    variant={this.getVariant(2,"C")}
                                     onClick={()=>this.set(2,"C")}> {decodeURIComponent(this.props.questions[2])}</Button>
                             </td>
                             <td height="75">
                                 <Button
-                                    className={this.state.selected === "D"? "qButton-active": "qButton-default"}
-                                    variant="success"
-                                    value={3}
+                                    className={this.getStyle(3,"D")}
+                                    variant={this.getVariant(3,"D")}
                                     onClick={()=>this.set(3,"D")}> {decodeURIComponent(this.props.questions[3])}</Button>
                             </td>
                         </tr>

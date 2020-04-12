@@ -40,13 +40,13 @@ class DisplayAnswer extends React.Component{
         return(
             <div>
                 {correct ? <h3> Nice!<b> You earned +{points} </b> points!</h3>: <h3>Sorry!</h3>}
-            <h4>Next Question in
+            <h4>
                 <Timer
-                    display={true}
-                    tValue={10}
+                    display={false}
+                    tValue={12}
                     timeEndCallback = {this.nextQuestion}
                 /></h4>
-                {questionsLeft >= 0 ?
+                {questionsLeft > 0 ?
                     <Button
                         variant={"secondary"}
                         onClick={() => {
@@ -265,10 +265,17 @@ class TriviaGame extends Component{
                                                     startNextQuestion = {this.displayQuestion}/>}
                                         </h2>
                                     </Jumbotron>
-                                    {this.state.type==="multiple" && this.state.displaying === 0 ?
-                                        <MCBlock questions={this.state.questions} answerCallback={this.setA}/>
-                                    : this.state.displaying === 0  &&
-                                        <TFBlock  counter={this.state.counter} answerCallback={this.setTF}/>}
+                                    {/* This block renders the appropriate answer selection*/ }
+                                    {this.state.type==="multiple" ?
+                                        <MCBlock
+                                            questions={this.state.questions}
+                                            answerCallback={this.setA}
+                                            answerDisplay = {this.state.displaying}
+                                            correctAnswer = {this.getCorrect(this.state.counter)}/>
+                                    :
+                                        <TFBlock
+                                            counter={this.state.counter}
+                                            answerCallback={this.setTF}/>}
                                     {/*counter must be passed to TF even though it does not use then, because it resets the selection*/}
                                     <br/>
                                     {this.state.timer === 0 && this.state.displaying === 0? <Button onClick={()=>{this.toggleQA()}} variant="secondary">Next</Button> : null}

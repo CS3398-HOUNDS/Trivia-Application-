@@ -75,7 +75,7 @@ class CreateGame extends React.Component {
         return(
             <Container style={{textAlign: "center"}}>
 
-                <img className={"LetterHead"} src={require("../imgs/LH4.png")} style={{width:"350px",
+                <img className={"LetterHead"} src={require("../imgs/LH4.png")} alt={require("../imgs/3.png")} style={{width:"350px",
                     height: "auto",
                     opacity: "1",
                     padding:"2",

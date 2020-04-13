@@ -20,7 +20,7 @@ class Login extends Component {
     }
     render() {
         return (
-            <div>
+            <div style={{width: "200px"}}>
                 {/*This span just shows the result of the button click, initially set to ""*/}
                 <span>Hello {this.state.username}</span>
 

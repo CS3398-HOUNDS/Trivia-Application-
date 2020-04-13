@@ -31,7 +31,7 @@ class Leaderboard extends React.Component {
               <th>10215</th>
               <th>1514</th>
               {/*<th>Win/Lose Ratio</th>*/}
-              <th>159753</th>
+              <th>159700</th>
             </tr>
             <tr>
               <th>2</th>
@@ -39,7 +39,7 @@ class Leaderboard extends React.Component {
               <th>9715</th>
               <th>2032</th>
               {/*<th>Win/Lose Ratio</th>*/}
-              <th>123051</th>
+              <th>123000</th>
             </tr>
             <tr>
               <th>3</th>
@@ -47,7 +47,7 @@ class Leaderboard extends React.Component {
               <th>6215</th>
               <th>1445</th>
               {/*<th>Win/Lose Ratio</th>*/}
-              <th>101247</th>
+              <th>101200</th>
             </tr>
             <tr>
               <th>4</th>
@@ -55,7 +55,7 @@ class Leaderboard extends React.Component {
               <th>4925</th>
               <th>2540</th>
               {/*<th>Win/Lose Ratio</th>*/}
-              <th>98560</th>
+              <th>98500</th>
             </tr>
             <tr>
               <th>5</th>
@@ -63,7 +63,7 @@ class Leaderboard extends React.Component {
               <th>1215</th>
               <th>134</th>
               {/*<th>Win/Lose Ratio</th>*/}
-              <th>92560</th>
+              <th>92500</th>
             </tr>
           </tbody>
         </Table>

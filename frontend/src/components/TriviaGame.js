@@ -12,7 +12,6 @@ import Row from "react-bootstrap/Row";
 
 function DisplayAnswer (props) {
     //(score, correct, points, questionsLeft, startNextQuestion)
-    const score = props.score;
     const usrWasCorrect = props.correct;
     const points = props.points;
     const questionsLeft = props.questionsLeft;
@@ -21,33 +20,17 @@ function DisplayAnswer (props) {
     const goodJob = shuffle(grats,"Wicked!");
     const scold = shuffle(shucks, "Dang...");
 
-
-    function nextQuestion(){
-        //determine what score to send back and send it to TriviaGame
-
-        props.returnScores();
-    }
-
     return(
         <div>
 
             {/*grats on correct answer, harsh scolding on incorrect answer*/}
             {usrWasCorrect ? <h3>{goodJob[0]} You earned <b>+{points}</b> points!</h3>: <h3>{scold[0]}</h3>}
-            <h4>
-                {/*No timer to go to the results page*/}
-                {questionsLeft !== 0 &&
-                <Timer
-                    display={true}
-                    tValue={10}
-                    timeEndCallback = {nextQuestion}
-                />}
-            </h4>
             {/*On the last page, make a button to go to results*/}
             {questionsLeft === 0 &&
             <Button
                 variant="primary"
                 onClick={() => {
-                    nextQuestion()
+                    props.initNextQuestion()
                 }}
             > Get Results!</Button>
             }
@@ -202,8 +185,9 @@ class TriviaGame extends Component{
             if (this.state.type === "multiple") {
                 answers = shuffle(this.state.questionBank[currentQuestion].incorrect_answers, this.state.questionBank[currentQuestion].correct_answer);
             }
-            this.setState({counter: currentQuestion, questions: answers, displaying: displaying, gameOver: gameover});
+            this.setState({displaying: displaying, gameOver: gameover, counter: currentQuestion, questions: answers });
             this.displayJumbo(decodeURIComponent(this.state.questionBank[currentQuestion].question))
+            this.forceUpdate();
         }
     }
 
@@ -219,6 +203,48 @@ class TriviaGame extends Component{
     displayJumbo(obj){
         this.display = obj;
     }
+
+    scoreMultiplier(max, timer){
+        let p = 0;
+        if (timer !== 0){
+            p = (timer*100);
+            p = 10000/p;
+            p = Math.round(p);
+            p=p*.2;
+            if (p < .03){
+                p = .28
+            }
+            p *= 100;
+            p = Math.round(p)
+        }   p /= 100;
+        return p
+    }
+
+    DisplayResults(total, max, timer) {
+        const s = this.scoreMultiplier(max, timer);
+        let d;
+        if (timer > 0){
+            d =
+                <div>
+                    <h1>You scored {total} out of {max}!</h1>
+                    <h3>Timer multiplier: <b>{s*10}0%</b></h3>
+                    <h1>Total: <b>{s*total} points!</b></h1>
+                    <br/>
+                    <h1>Shorter timers, bigger multipliers!</h1>
+                </div>
+        }else{
+            d =
+                <div>
+                    <h1>You scored {total} out of {max}!</h1>
+                    <h3>Timer multiplier: <b>0%</b></h3>
+                    <h1>Total: <b>{Math.round((s*total))} points!</b></h1>
+                    <h1>Play with timers on to collect points! Shorter timers, bigger multipliers!</h1>
+                </div>
+        }
+        return d
+    }
+
+
 
     render(){
 
@@ -240,12 +266,21 @@ class TriviaGame extends Component{
                                         </Col>
                                         <Col>
                                             {this.state.timer > 0 && this.state.displaying === 0 ? <h4>time left</h4> : null}
-                                            {this.state.timer > 0 && this.state.displaying === 0 ?
+                                            {this.state.timer > 0 && this.state.displaying === 0 &&
                                                 <Timer
-                                                tValue={this.props.timer}
-                                                display={true}
-                                                reset={this.state.counter}
-                                                timeEndCallback={this.toggleQA}/>: null}
+                                                    tValue={this.props.timer}
+                                                    display={true}
+                                                    reset={this.state.counter}
+                                                    timeEndCallback={this.toggleQA}/>
+                                            }
+                                            {this.state.displaying === 1 && this.state.counter < this.state.maxQuestions &&
+                                                <Timer
+                                                    display={true}
+                                                    tValue={10}
+                                                    reset={this.props.displaying}
+                                                    timeEndCallback = {this.setScore}/>
+                                            }
+
 
                                             </Col>
                                         </Row>
@@ -306,7 +341,7 @@ class TriviaGame extends Component{
 
                             ) : (
                                 <div>
-                                    {DisplayResults(this.state.score, this.state.maxScore, this.state.timer)}
+                                    {this.DisplayResults(this.state.score, this.state.maxScore, this.state.timer)}
                                 </div>
                             )}
                         </div>
@@ -317,42 +352,9 @@ class TriviaGame extends Component{
     }
 }
 
-function DisplayResults(total, max, timer) {
-    const s = ScoreMultiplier(max, timer);
-    let d;
-    if (timer > 0){
-        d =
-        <div>
-            <h1>You scored {total} out of {max}!</h1>
-            <h3>Timer multiplier: <b>{s}00%</b></h3>
-            <h1>Total: <b>{s*total} points!</b></h1>
-            <br/>
-            <h1>Shorter timers, bigger multipliers!</h1>
-        </div>
-    }else{
-        d =
-        <div>
-            <h1>You scored {total} out of {max}!</h1>
-            <h3>Timer multiplier: <b>0%</b></h3>
-            <h1>Total: <b>{s*total} points!</b></h1>
-        <h1>Play with timers on to collect points! Shorter timers, bigger multipliers!</h1>
-        </div>
-    }
-    return d
-}
 
 
 
 
-function ScoreMultiplier(max, timer){
-    let p = 0;
-    if (timer !== 0){
-        p = (timer*100);
-        p = 10000/p;
-        p = Math.round(p);
-        p=p*.2
-    }
-    return p
-}
 
 export default TriviaGame;

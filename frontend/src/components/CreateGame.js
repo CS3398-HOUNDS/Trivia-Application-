@@ -153,6 +153,7 @@ class CreateGame extends React.Component {
                                         <Form.Control as={"select"}
                                                       onChange={handleChange}
                                                       value={values.questionCount}>
+                                            <option>5</option>
                                             <option>10</option>
                                             <option>15</option>
                                             <option>30</option>

@@ -43,7 +43,7 @@ Show examples of usage:
 List of features ready and TODOs for future development
 * Unit testing / Create docs for API (Jackson) [artifact](https://github.com/CS3398-HOUNDS/CS3398-Klingons-S2020/commit/7b4d2e4fe0c6a3a0fed78617ace7313a5cd8ebac) 
 * Permissions for authenticated and anonymous users (Aaron)  [artifact](https://github.com/CS3398-HOUNDS/CS3398-Klingons-S2020/commit/1cf92a729f9a7350ddb423abf7de641d5da90ad2) djoser framework uses authorization token allowing access to url endpoints in our REST API and rest framework allows us to add permissions to our viewsets 
-* Splash page design (Sohail) [artifact](https://github.com/CS3398-HOUNDS/CS3398-Klingons-S2020/commit/a95cdf285ed762110f70a661eacd7a88a72c6256) features graphics and practical color/layout design considerations
+* Functional game creation page that generates a an API endpoint URL [artifact](https://github.com/CS3398-HOUNDS/CS3398-Klingons-S2020/commit/6f25fea2705d9183241f1856fdbfafba10e1aa2e) All options have been implemented and are now supported, including question timers that affect score total.
 * TriviaGame Component (Donevan) [artifact](https://github.com/CS3398-HOUNDS/CS3398-Klingons-S2020/commit/39f05cda8cd7a55fcf61a063af5a1fd0a0f81566#diff-516ceb2db23f3b682db416eeaed06d85react) Fetches an API, randomizes answer choices, and cycles through questions. 
 * Layout, style, and navigation (Trevor) [artifact](https://github.com/CS3398-HOUNDS/CS3398-Klingons-S2020/commit/15f72fba7d4296d8556c1f7de7d15e75bcfbbb3e) Polished, minimal, style for pages to facilitate user interface and experience.
 * 
@@ -57,7 +57,7 @@ To-do list:
 [comment]: <> (Project is: _in progress_, _finished_, _no longer continue_ and why?)
 Trivia Knights is currently a work in progress and will remain in progress for the time being.
   * Donevan's Next Step: Handle user profiles, edits to the TriviaGame component. 
-  * Aaron's Next Step: Create and handling game session.- in progress -
+  * Sohail's Next Step: Separate the game engine from the user experience so that multiple players can be in the same session.
   * Jackson's Next Step: Move towards deploying API on server. - in progress -
   * Aaron's Next Step: Convert database to MySQL in order to accept datatypes from our fixtures.- in progress -
   * Trevor's Next Step: Create User Page and Game components and render them with React.
@@ -68,4 +68,4 @@ Created by Texas State University Students contact us at:
 * Aaron Carrasco: adc129@txstate.edu
 * Trevor Chaney: t_c296@txstate.edu
 * Donevan Gonzales: dlg143@txstate.edu
-* sds158@txstate.edu
+* Sohail Selky: sds158@txstate.edu

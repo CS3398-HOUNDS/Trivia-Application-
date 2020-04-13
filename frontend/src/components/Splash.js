@@ -2,7 +2,6 @@ import React from "react";
 import Container from 'react-bootstrap/Container';
 import '../style.css'
 import { Row } from 'react-bootstrap';
-import Timer from './Timer.js'
 
 class Splash extends React.Component {
 
@@ -16,7 +15,7 @@ class Splash extends React.Component {
                         <img src={require("../imgs/5.png")} alt={require("../imgs/3.png")}/>
                         <img src={require("../imgs/6.png")} alt={require("../imgs/3.png")}/>
                     </Row>
-                    <img className={"letterhead"} src={require("../imgs/LH4.png")}/>
+                    <img className={"letterhead"} src={require("../imgs/LH4.png")} alt={require("../imgs/2.png")}/>
                     <Row>
                         <img src={require("../imgs/1.png")} alt={require("../imgs/3.png")}/>
                         <img src={require("../imgs/6.png")} alt={require("../imgs/3.png")}/>

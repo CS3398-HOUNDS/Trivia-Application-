@@ -67,8 +67,8 @@ class CreateGame extends React.Component {
         .catch((error) => {
             console.log(error, "catch the hoop")
         })*/
-        {this.props.callbackGameData(url,type,timer,amount)}
-        {this.props.switchToTrivia("TriviaGame")}
+        this.props.callbackGameData(url,type,timer,amount)
+        this.props.switchToTrivia("TriviaGame")
     };
 
     render() {

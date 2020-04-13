@@ -1,7 +1,6 @@
 import React from "react";
-import Container from 'react-bootstrap/Container';
 import '../style.css'
-import { Row, Col } from 'react-bootstrap';
+
 
 //USING A TIMER:
 //a Timer accepts these things passed to it as props:
@@ -61,7 +60,7 @@ class Timer extends React.Component {
         return(
             <div>
                 {this.props.display ?
-                this.state.seconds > 5 ? <h2>{this.state.seconds}</h2> : <h2 style={{color: "red"}}>{this.state.seconds}</h2> :''}
+                this.state.seconds > 3 ? <h2>{this.state.seconds}</h2> : <h2 style={{color: "red"}}>{this.state.seconds}</h2> :''}
             </div>
         );
     }

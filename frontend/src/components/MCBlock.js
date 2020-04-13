@@ -28,7 +28,6 @@ class MCBlock extends Component {
         const correctA = this.props.correctAnswer;
         const buttonText = this.props.questions[id];
         const selected = this.state.selected;
-        console.log(id, letter, correctA, buttonText, selected)
 
         //default
         if (this.props.answerDisplay === 0)
@@ -51,7 +50,6 @@ class MCBlock extends Component {
         const correctA = this.props.correctAnswer;
         const buttonText = this.props.questions[id];
         const selected = this.state.selected;
-        console.log(id, letter, correctA, buttonText, selected)
 
         //default
         if (this.props.answerDisplay === 0){

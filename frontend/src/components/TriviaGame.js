@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {Component, useEffect, useState} from "react";
 import Button from 'react-bootstrap/Button';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Container from 'react-bootstrap/Container';
@@ -8,75 +8,63 @@ import Col from "react-bootstrap/Col";
 import Timer from "./Timer";
 import Row from "react-bootstrap/Row";
 
-class DisplayAnswer extends React.Component{
 
-    constructor(props) {
-        super(props);
-        this.state=({
-                timerDone: false
-            }
-        )
-        //this.grats = ["Nice!", "Correct!", "Bingo!", "Excellent!", "Yahtzee!", "Grats!", "Good work!"]
-        console.log(this.props)
-        this.nextQuestion = this.nextQuestion.bind(this)
+
+function DisplayAnswer (props) {
+    //(score, correct, points, questionsLeft, startNextQuestion)
+    const score = props.score;
+    const usrWasCorrect = props.correct;
+    const points = props.points;
+    const questionsLeft = props.questionsLeft;
+    const grats = ["Nice!", "Correct!", "Bingo!", "Excellent!", "Yahtzee!", "Grats!"]
+    const shucks = ["Shucks...", "Darn...", "Breh...", "Bummer...", "Wiff...", "Bust..."]
+    const goodJob = shuffle(grats,"Wicked!");
+    const scold = shuffle(shucks, "Dang...");
+
+
+    function nextQuestion(){
+        //determine what score to send back and send it to TriviaGame
+
+        props.returnScores();
     }
-    nextQuestion(){
-        this.setState({timerDone: true})
-    }
-    render(){
-        let newScore = this.props.score;
-        let points = this.props.points;
-        let correct = this.props.correct;
-        let questionsLeft = this.props.questionsLeft
-        //let randomIndex = Math.floor(Math.random()*7);
-        //let goodJob = this.grats[randomIndex]
-        if(newScore < 0){newScore = 0}
-        if(correct){
-            newScore += points
-        }
-        if(this.state.timerDone){
-            this.props.startNextQuestion(newScore, points)
-        }
-        return(
-            <div>
-                {correct ? <h3> Nice!<b> You earned +{points} </b> points!</h3>: <h3>Sorry!</h3>}
+
+    return(
+        <div>
+
+            {/*grats on correct answer, harsh scolding on incorrect answer*/}
+            {usrWasCorrect ? <h3>{goodJob[0]} You earned <b>+{points}</b> points!</h3>: <h3>{scold[0]}</h3>}
             <h4>
+                {/*No timer to go to the results page*/}
+                {questionsLeft !== 0 &&
                 <Timer
-                    display={false}
-                    tValue={12}
-                    timeEndCallback = {this.nextQuestion}
-                /></h4>
-                {questionsLeft > 0 ?
-                    <Button
-                        variant={"secondary"}
-                        onClick={() => {
-                            this.props.startNextQuestion(newScore, points)
-                        }}
-                    > Next Question</Button>
-                    :
-                    <Button
-                        variant={"secondary"}
-                        onClick={() => {
-                            this.props.startNextQuestion(newScore, points)
-                        }}
-                    > Get Results!</Button>
-                }
-            </div>
-        )
-    }
-}
-
-
+                    display={true}
+                    tValue={10}
+                    timeEndCallback = {nextQuestion}
+                />}
+            </h4>
+            {/*On the last page, make a button to go to results*/}
+            {questionsLeft === 0 &&
+            <Button
+                variant="primary"
+                onClick={() => {
+                    nextQuestion()
+                }}
+            > Get Results!</Button>
+            }
+        </div>
+    )
+};
 
 function shuffle(incorrect, correct){
     // stores all answer  choices into one array
-    var array = incorrect;
+    let array = incorrect;
     array.push(correct);
 
     // for testing
-    console.log("correct answer is " + correct);
+    if(correct !== "Wicked!" && correct !== "Dang...")
+        console.log("correct answer is " + decodeURIComponent(correct));
 
-    var currentIndex = array.length,
+    let currentIndex = array.length,
         tempValue,
         randomIndex;
 
@@ -102,16 +90,16 @@ class TriviaGame extends Component{
             gameDifficulty: 0,
             questions: [],
             //Score set to -1 to differentiate between a score of 0 and not having a score yet without using null
-            score: -1,
+            score: 0,
             counter: 0,
             answerChoice: "",
             gameOver: false,
             displaying: 0 //switches between displaying the question (0) and the correct answer (1)
         };
-        this.setA = this.setA.bind(this)
-        this.setTF = this.setTF.bind(this)
-        this.displayQuestion = this.displayQuestion.bind(this)
-        this.toggleQA = this.toggleQA.bind(this)
+        this.setA = this.setA.bind(this);
+        this.setTF = this.setTF.bind(this);
+        this.toggleQA = this.toggleQA.bind(this);
+        this.setScore = this.setScore.bind(this)
     }
     display = null;
 
@@ -137,11 +125,26 @@ class TriviaGame extends Component{
             .catch((error) => {
                 console.log(error, "catch the hoop")
             });
+        console.log(response);
 
         //Sets the game difficulty multiplier for score (1: 10secs, 1/2: 20secs, 1/60:60secs)
-        if (this.state.timer !== 0){
-            this.setState({gameDifficulty : 1/(this.state.timer/10)})
+
+    }
+
+    setScore(){
+        //this.state.score,this.state.maxScore,this.determineCorrect(this.state.answerChoice, this.getCorrect([this.state.counter]))this.toggleQA()
+        console.log("max Score " + this.state.maxScore );
+        let crct = this.determineCorrect(this.state.answerChoice, this.getCorrect([this.state.counter]))
+        let maxScore = this.state.maxScore
+        let ptval = this.calcPointValue(this.state.counter)
+
+        console.log(crct, maxScore, ptval)
+        if(crct){
+            this.setState({score: this.state.score + ptval, maxScore: maxScore + ptval})
+        }else{
+            this.setState({score: this.state.score, maxScore: maxScore + ptval})
         }
+        this.toggleQA()
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -149,14 +152,11 @@ class TriviaGame extends Component{
             //TF questions don't have incorrect answers to shuffle
 
             if(this.state.type==="multiple"){
-                this.setState({questions: shuffle(this.state.questionBank[this.state.counter].incorrect_answers,this.state.questionBank[this.state.counter].correct_answer)})}
+                this.setState({questions: shuffle(this.state.questionBank[this.state.counter].incorrect_answers,this.state.questionBank[this.state.counter].correct_answer)})
+            }
             this.setState({loading: false});
             this.displayJumbo(decodeURIComponent(this.state.questionBank[0].question))
         }
-    }
-
-    getQuestion(num){
-        return this.state.questionBank[num].question
     }
 
     getCorrect(num){
@@ -181,31 +181,29 @@ class TriviaGame extends Component{
 
     }
 
-    displayQuestion(newScore, points){
-        let currentQuestion = this.state.counter;
-        let currentMax = this.state.maxScore  + points;
-        if(currentQuestion < this.state.maxQuestions) {
-            currentQuestion += 1;
-        }else{
-            this.setState({gameOver: true})
-        }
-        //TF questions do not have incorrect answers to shuffle
-        if(this.state.type==="multiple") {
-            let answers = shuffle(this.state.questionBank[currentQuestion].incorrect_answers, this.state.questionBank[currentQuestion].correct_answer);
-            this.setState({counter: currentQuestion, score: newScore, maxScore: currentMax, questions: answers})
-            this.toggleQA()
-        }else{
-            this.setState({counter: currentQuestion, score: newScore, maxScore: currentMax})
-            this.toggleQA()
-        }
-        this.displayJumbo(decodeURIComponent(this.state.questionBank[currentQuestion].question))
-    }
 
     toggleQA(){
-        if(this.state.displaying === 0){
-            this.setState({displaying: 1})
-        }else{
-            this.setState({displaying: 0})
+        //toggle the question and answer displays
+        let currentQuestion = this.state.counter, displaying = this.state.displaying, gameover = false, answers = [];
+
+        if(displaying === 0){
+            displaying =  1;
+            this.setState({displaying:displaying})
+        }else {
+            displaying = 0;
+
+            //prevent going over the number of questions
+            if (currentQuestion < this.state.maxQuestions) {
+                currentQuestion += 1;
+            } else {
+                gameover = true;
+            }
+            //
+            if (this.state.type === "multiple") {
+                answers = shuffle(this.state.questionBank[currentQuestion].incorrect_answers, this.state.questionBank[currentQuestion].correct_answer);
+            }
+            this.setState({counter: currentQuestion, questions: answers, displaying: displaying, gameOver: gameover});
+            this.displayJumbo(decodeURIComponent(this.state.questionBank[currentQuestion].question))
         }
     }
 
@@ -215,6 +213,7 @@ class TriviaGame extends Component{
 
     setA(value) {
         this.setState({answerChoice: this.state.questions[value]});
+
     };
 
     displayJumbo(obj){
@@ -225,8 +224,7 @@ class TriviaGame extends Component{
 
         return(
             <Container>
-                <br/><br/>
-                <div className="title"></div>
+                <br/>
                 <center>
                     {this.state.loading || this.state.questionBank === [] ? (
                         <p>loading game...</p>
@@ -241,12 +239,13 @@ class TriviaGame extends Component{
                                         {this.state.score > 0 ? (<h4> score:  {this.state.score} </h4>) : <h4>score:  ---</h4>}
                                         </Col>
                                         <Col>
-                                            {this.state.timer > 0 ? <h4>time left</h4> : null}
-                                            {this.state.timer > 0 ? <Timer
+                                            {this.state.timer > 0 && this.state.displaying === 0 ? <h4>time left</h4> : null}
+                                            {this.state.timer > 0 && this.state.displaying === 0 ?
+                                                <Timer
                                                 tValue={this.props.timer}
                                                 display={true}
                                                 reset={this.state.counter}
-                                                timeEndCallback={()=>this.toggleQA()}/>: null}
+                                                timeEndCallback={this.toggleQA}/>: null}
 
                                             </Col>
                                         </Row>
@@ -258,11 +257,12 @@ class TriviaGame extends Component{
                                                 this.display
                                                 : <DisplayAnswer
                                                     score = {this.state.score}
-                                                    questionsLeft = {this.state.maxQuestions - this.state.counter}
-                                                    points = {this.calcPointValue(this.state.counter)}
                                                     correct = {this.determineCorrect(this.state.answerChoice, this.getCorrect([this.state.counter]))}
-                                                    correctAnswer ={this.getCorrect(this.state.counter)}
-                                                    startNextQuestion = {this.displayQuestion}/>}
+                                                    points = {this.calcPointValue(this.state.counter)}
+                                                    questionsLeft = {this.state.maxQuestions - this.state.counter}
+                                                    initNextQuestion= {this.toggleQA}
+                                                    returnScores= {this.setScore}/>
+                                            }
                                         </h2>
                                     </Jumbotron>
                                     {/* This block renders the appropriate answer selection*/ }
@@ -278,13 +278,35 @@ class TriviaGame extends Component{
                                             answerCallback={this.setTF}/>}
                                     {/*counter must be passed to TF even though it does not use then, because it resets the selection*/}
                                     <br/>
-                                    {this.state.timer === 0 && this.state.displaying === 0? <Button onClick={()=>{this.toggleQA()}} variant="secondary">Next</Button> : null}
-
+                                    <Container>
+                                        <Row>
+                                            <Col>
+                                                <button style={{visibility:"hidden"}}/>
+                                                {this.state.displaying === 0 &&
+                                                <Button
+                                                    onClick={()=>this.toggleQA()}
+                                                    variant="secondary">
+                                                    Submit
+                                                    </Button>}
+                                            </Col>
+                                            <Col>
+                                                {this.state.displaying === 1 && this.state.counter < this.state.maxQuestions ?
+                                                    <Button
+                                                        onClick={()=>{
+                                                            this.setScore()
+                                                        }}
+                                                        variant="secondary">
+                                                        Next
+                                                    </Button>:""}
+                                                <button style={{visibility:"hidden"}}/>
+                                            </Col>
+                                        </Row>
+                                    </Container>
                                 </div>
 
                             ) : (
                                 <div>
-                                            <h1>You scored {this.state.score} out of {(this.state.maxScore)}!</h1>
+                                    {DisplayResults(this.state.score, this.state.maxScore, this.state.timer)}
                                 </div>
                             )}
                         </div>
@@ -293,6 +315,44 @@ class TriviaGame extends Component{
             </Container>
         )
     }
+}
+
+function DisplayResults(total, max, timer) {
+    const s = ScoreMultiplier(max, timer);
+    let d;
+    if (timer > 0){
+        d =
+        <div>
+            <h1>You scored {total} out of {max}!</h1>
+            <h3>Timer multiplier: <b>{s}00%</b></h3>
+            <h1>Total: <b>{s*total} points!</b></h1>
+            <br/>
+            <h1>Shorter timers, bigger multipliers!</h1>
+        </div>
+    }else{
+        d =
+        <div>
+            <h1>You scored {total} out of {max}!</h1>
+            <h3>Timer multiplier: <b>0%</b></h3>
+            <h1>Total: <b>{s*total} points!</b></h1>
+        <h1>Play with timers on to collect points! Shorter timers, bigger multipliers!</h1>
+        </div>
+    }
+    return d
+}
+
+
+
+
+function ScoreMultiplier(max, timer){
+    let p = 0;
+    if (timer !== 0){
+        p = (timer*100);
+        p = 10000/p;
+        p = Math.round(p);
+        p=p*.2
+    }
+    return p
 }
 
 export default TriviaGame;

@@ -265,7 +265,7 @@ class TriviaGame extends Component{
                                         {this.state.score > 0 ? (<h4> score:  {this.state.score} </h4>) : <h4>score:  ---</h4>}
                                         </Col>
                                         <Col>
-                                            {this.state.timer > 0 && this.state.displaying === 0 ? <h4>time left</h4> : null}
+                                            {this.state.timer > 0 && this.state.displaying === 0 ? <h4>Time left</h4> : <h4>Time till next question</h4>}
                                             {this.state.timer > 0 && this.state.displaying === 0 &&
                                                 <Timer
                                                     tValue={this.props.timer}
@@ -280,8 +280,6 @@ class TriviaGame extends Component{
                                                     reset={this.props.displaying}
                                                     timeEndCallback = {this.setScore}/>
                                             }
-
-
                                             </Col>
                                         </Row>
                                     </div>

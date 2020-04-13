@@ -1,4 +1,5 @@
 import React from "react";
+import ProgressBar from 'react-bootstrap/ProgressBar';
 import '../style.css'
 
 
@@ -17,6 +18,7 @@ class Timer extends React.Component {
     constructor(props) {
         super(props);
         this.state = { time: {}, seconds: this.props.tValue };
+        this.maxTime = this.props.tValue;
         this.timer = 0;  //the actual timer _component_
         this.startTimer = this.startTimer.bind(this);
         this.countDown = this.countDown.bind(this);
@@ -56,11 +58,20 @@ class Timer extends React.Component {
         }
     }
 
+    barColor(){
+        if(this.state.seconds > (this.maxTime/2) ){    //greater than 50% the time left is green
+            return "success";
+        } else if(this.state.seconds > (this.maxTime/4)){   //gretaer than 25% of the time and < 50% time is yellow
+            return "warning";
+        } else {    //less than 25% time is red
+            return "danger";
+        }
+    }
+
     render() {
         return(
             <div>
-                {this.props.display ?
-                this.state.seconds > 3 ? <h2>{this.state.seconds}</h2> : <h2 style={{color: "red"}}>{this.state.seconds}</h2> :''}
+                <ProgressBar animated variant={this.barColor()} label={this.state.seconds} now={this.state.seconds} max={this.maxTime} />
             </div>
         );
     }

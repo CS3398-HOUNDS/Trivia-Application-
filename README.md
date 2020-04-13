@@ -23,7 +23,7 @@ Texas State University cs3398 Software Engineering course project.
 4. This project is a demonstration of the skills we have acquired and are honing during our college tenure.
 
 ## Screenshots
-![Example screenshot](https://i.imgur.com/HSziwxS.png)
+![Example screenshot](https://i.imgur.com/u207NhB.png)
 
 ## Technologies
 * Python - 3.7.1

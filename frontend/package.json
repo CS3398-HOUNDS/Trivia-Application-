@@ -38,7 +38,16 @@
   },
   "main": "script.js",
   "keywords": [],
-  "author": "",
+  "author": "Team Klingons",
   "license": "ISC",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CS3398-HOUNDS/CS3398-Klingons-S2020.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CS3398-HOUNDS/CS3398-Klingons-S2020/issues"
+  },
+  "homepage": "https://github.com/CS3398-HOUNDS/CS3398-Klingons-S2020#readme",
   "description": ""
 }

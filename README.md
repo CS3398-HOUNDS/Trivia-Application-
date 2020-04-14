@@ -35,6 +35,13 @@ Texas State University cs3398 Software Engineering course project.
 ## Setup
 To run the backend follow these [instructions](https://github.com/CS3398-HOUNDS/CS3398-Klingons-S2020/tree/master/backend)
 
+For the frontend, from a terminal emulator, be sure that you first have npm installed. Please refer to your package manager of choice. Then, from the frontend directory, run the following:
+
+```
+$ npm install
+$ npm start
+```
+
 ## Code Examples
 Show examples of usage:
 `put-your-code-here`
@@ -46,12 +53,12 @@ List of features ready and TODOs for future development
 * Functional game creation page that generates a an API endpoint URL [artifact](https://github.com/CS3398-HOUNDS/CS3398-Klingons-S2020/commit/6f25fea2705d9183241f1856fdbfafba10e1aa2e) All options have been implemented and are now supported, including question timers that affect score total.
 * TriviaGame Component (Donevan) [artifact](https://github.com/CS3398-HOUNDS/CS3398-Klingons-S2020/commit/39f05cda8cd7a55fcf61a063af5a1fd0a0f81566#diff-516ceb2db23f3b682db416eeaed06d85react) Fetches an API, randomizes answer choices, and cycles through questions. 
 * Layout, style, and navigation (Trevor) [artifact](https://github.com/CS3398-HOUNDS/CS3398-Klingons-S2020/commit/15f72fba7d4296d8556c1f7de7d15e75bcfbbb3e) Polished, minimal, style for pages to facilitate user interface and experience.
-* 
+* React component dynamic rendering (Trevor) [artifact](https://github.com/CS3398-HOUNDS/CS3398-Klingons-S2020/commit/126cde9baa06c02171aaf56051155916b5649857#diff-48bb2e3e3e5708d8083b1cff1fff3949) Rendering of react components in place reduces the need to reload the DOM thus speeding up the application overal.
 
 To-do list:
 * Deploy API to server
-* Obtain as many questions for backend as possible
-* Leaderboard
+* Deploy react server
+* Intigrate front-end and back-end services.
 
 ## Status
 [comment]: <> (Project is: _in progress_, _finished_, _no longer continue_ and why?)
@@ -60,7 +67,7 @@ Trivia Knights is currently a work in progress and will remain in progress for t
   * Sohail's Next Step: Separate the game engine from the user experience so that multiple players can be in the same session.
   * Jackson's Next Step: Move towards deploying API on server. - in progress -
   * Aaron's Next Step: Convert database to MySQL in order to accept datatypes from our fixtures.- in progress -
-  * Trevor's Next Step: Create User Page and Game components and render them with React.
+  * Trevor's Next Step: Connect user login and profile components to backend.
 
 ## Contact
 Created by Texas State University Students contact us at:

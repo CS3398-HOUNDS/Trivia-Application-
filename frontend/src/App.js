@@ -57,7 +57,7 @@ class App extends React.Component {
     return(
       <Container fluid='true'>
         <Navbar bg="dark" variant="dark">
-          <Navbar.Brand onClick={() => this.handleClick("Splash")}>TriviaKnights</Navbar.Brand>
+          <Navbar.Brand onClick={() => this.handleClick("Splash")}>Splash Screen</Navbar.Brand>
             <Nav className="mr-auto">
               <Nav.Link onClick={() => this.handleClick("Leaderboard")}>Leaderboard</Nav.Link>
               <Nav.Link onClick={() => this.handleClick("Login")}>Login</Nav.Link>

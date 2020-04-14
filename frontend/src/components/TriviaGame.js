@@ -104,11 +104,11 @@ class TriviaGame extends Component{
                         maxQuestions : this.props.maxQuestions - 1,
                         timer: this.props.timer,
                         type: this.props.type});
+                    console.log(this.state.questionBank);
             })
             .catch((error) => {
                 console.log(error, "catch the hoop")
             });
-        console.log(response);
 
         //Sets the game difficulty multiplier for score (1: 10secs, 1/2: 20secs, 1/60:60secs)
 

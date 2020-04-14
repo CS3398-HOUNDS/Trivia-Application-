@@ -52,7 +52,6 @@ List of features ready and TODOs for future development
 * Permissions for authenticated and anonymous users (Aaron)  [artifact](https://github.com/CS3398-HOUNDS/CS3398-Klingons-S2020/commit/1cf92a729f9a7350ddb423abf7de641d5da90ad2) djoser framework uses authorization token allowing access to url endpoints in our REST API and rest framework allows us to add permissions to our viewsets 
 * Functional game creation page that generates a an API endpoint URL [artifact](https://github.com/CS3398-HOUNDS/CS3398-Klingons-S2020/commit/6f25fea2705d9183241f1856fdbfafba10e1aa2e) All options have been implemented and are now supported, including question timers that affect score total.
 * TriviaGame Component (Donevan) [artifact](https://github.com/CS3398-HOUNDS/CS3398-Klingons-S2020/commit/39f05cda8cd7a55fcf61a063af5a1fd0a0f81566#diff-516ceb2db23f3b682db416eeaed06d85react) Fetches an API, randomizes answer choices, and cycles through questions. 
-* Layout, style, and navigation (Trevor) [artifact](https://github.com/CS3398-HOUNDS/CS3398-Klingons-S2020/commit/15f72fba7d4296d8556c1f7de7d15e75bcfbbb3e) Polished, minimal, style for pages to facilitate user interface and experience.
 * React component dynamic rendering (Trevor) [artifact](https://github.com/CS3398-HOUNDS/CS3398-Klingons-S2020/commit/126cde9baa06c02171aaf56051155916b5649857#diff-48bb2e3e3e5708d8083b1cff1fff3949) Rendering of react components in place reduces the need to reload the DOM thus speeding up the application overal.
 
 To-do list:

@@ -14,7 +14,7 @@ import '../style.css'
 
 
 
-class Timer extends React.Component {
+class ReverseTimer extends React.Component {
     constructor(props) {
         super(props);
         this.state = { time: {}, seconds: this.props.tValue,
@@ -56,22 +56,12 @@ class Timer extends React.Component {
         }
     }
 
-    barColor(){
-        if(this.state.percentage > 50 ){    //greater than 50% the time left is green
-            return "success";
-        } else if(this.state.seconds > 25 ){   //gretaer than 25% of the time and < 50% time is yellow
-            return "warning";
-        } else {    //less than 25% time is red
-            return "danger";
-        }
-    }
-
     render() {
         return(
             <div>
                 {this.props.display &&
-                <ProgressBar variant={this.barColor()} srOnly
-                             now={this.state.percentage - 1} max={100}/>
+                    <ProgressBar variant={"success"} srOnly
+                                 now={100 - (this.state.percentage)} max={100}/>
                 }
             </div>
         );
@@ -79,4 +69,4 @@ class Timer extends React.Component {
 }
 
 
-export default Timer;
+export default ReverseTimer;

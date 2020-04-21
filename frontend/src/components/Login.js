@@ -10,20 +10,18 @@ class Login extends Component {
         super(props);
         this.state={
             username:'',
-            password:''
+            password:'',
+            email:''
         };
 
         //MUST BIND for function to work
+        this.updatePassword = this.updatePassword.bind(this)
         this.updateUsername = this.updateUsername.bind(this)
         this.postLogin = this.postLogin.bind(this)
     }
 
     postLogin(){
         const requestUrl = "http://klingons.pythonanywhere.com/api/auth/token/login/";
-        const bdy = {
-            "password": "middleFINGER123!@#",
-            "username": "soheezy"
-        };
 
         let response = fetch(requestUrl, {
             method: "POST",
@@ -32,7 +30,37 @@ class Login extends Component {
                 'Content-Type': 'application/json'
                 // 'Content-Type': 'application/x-www-form-urlencoded',
             },
-            body: JSON.stringify(bdy)
+            body: JSON.stringify({
+                "password": this.password,
+                "username": this.username
+            })
+        })
+            .then((resp) => {
+                return resp.json();
+            })
+            .then((resp) => {
+                    console.log(resp)
+            })
+            .catch((error) => {
+                console.log(error, "catch the hoop")
+            });
+    }
+
+    postCreateUser(){
+        const requestUrl = "http://klingons.pythonanywhere.com/api/auth/users/";
+
+        let response = fetch(requestUrl, {
+            method: "POST",
+            dataType: "JSON",
+            headers: {
+                'Content-Type': 'application/json'
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: JSON.stringify({
+                "email": this.email,
+                "username": this.username,
+                "password": this.password
+            })
         })
             .then((resp) => {
                 return resp.json();
@@ -49,26 +77,37 @@ class Login extends Component {
     updateUsername(usr){
         this.setState({username:usr})
     }
+
+    updatePassword(pwd){
+        this.setState({password:pwd})
+    }
+
     render() {
         return (
             <Container style={{width: "200px"}}>
-                {/*This span just shows the result of the button click, initially set to ""*/}
-                <span><Button onClick={this.postLogin}>post login</Button></span>
-
                 {/*Render the component and pass it the function used to update username as a prop*/}
                 <row>
-                    <Formik>
+                    <Formik initialValues={{username:"",password:"",email:""}}>
+                        {({values}) =>(
                         <Form>
-                            <Form.Group controlId="formGroupEmail">
-                                <Form.Label>Email address</Form.Label>
-                                <Form.Control type="email" placeholder="Enter email"/>
+                            <Form.Group controlId="formGroupUsername">
+                                <Form.Label>Username</Form.Label>
+                                <Form.Control name="username" placeholder="Enter Username" onChange={this.updateUsername} value=""/>
                             </Form.Group>
                             <Form.Group controlId="formGroupPassword">
                                 <Form.Label>Password</Form.Label>
-                                <Form.Control type="password" placeholder="Password"/>
+                                <Form.Control type="password" placeholder="Password" onChange={this.updatePassword}/>
                             </Form.Group>
-                        </Form>
+                            <Button onClick={this.postLogin}>Login</Button>
+                            <p>New to Trivia Knights? Just add your email and press Sign Up.</p>
+                            <Form.Group controlId="formGroupEmail">
+                                <Form.Label>Email</Form.Label>
+                                <Form.Control type="email" placeholder="Enter email"/>
+                            </Form.Group>
+                            <Button onClick={this.postCreateUser}>Sign Up</Button>
+                        </Form>)}
                     </Formik>
+
                 </row>
             </Container>
         );

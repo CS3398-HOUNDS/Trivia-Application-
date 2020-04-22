@@ -14,10 +14,53 @@ class App extends React.Component {
     super(props);
     this.handleClick = this.handleClick.bind(this);
     this.state = {
-      selectedComponent : "Splash"
+      selectedComponent : "Splash",
+      userToken : "",
+      userLoggedIn: false,
+      username: "",
+      userId: "",
+      userEmail: ""
     };
 
     this.updateGameData = this.updateGameData.bind(this);
+    this.setUserToken = this.setUserToken.bind(this)
+  }
+
+  setUserToken(token){
+    this.setState({userToken: token})
+}
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevState.userToken !== this.state.userToken && !this.state.userLoggedIn) {
+      this.setState({userLoggedIn: true})
+      this.getUserInfo()
+    }
+  }
+
+  getUserInfo(){
+    const requestUrl = "http://klingons.pythonanywhere.com/api/auth/users/me/";
+    let response = fetch(requestUrl, {
+      method: "GET",
+      dataType: "JSON",
+      headers: {
+        "Authorization": this.state.userToken
+      }})
+        .then((resp) => {
+          console.log(this.state.userToken)
+          return resp.json();
+        })
+        .then((resp) => {
+          console.log(resp)
+          this.setState({username: resp.username, userId:resp.id, userEmail: resp.email})
+        })
+        .then((resp) => {
+          console.log(this.state)
+          this.handleClick("Splash")
+        })
+        .catch((error) => {
+          console.log(error, "catch the hoop")
+        });
+
   }
 
   handleClick(selection) {
@@ -78,7 +121,9 @@ class App extends React.Component {
 
           {userSelection === "Splash" ? <Splash /> :
            userSelection === "Leaderboard" ? <Leaderboard /> :
-           userSelection === "Login"  ? <Login />  :
+           userSelection === "Login"  ? <Login
+               setToken={this.setUserToken}
+               />  :
            userSelection === "TriviaGame"  ? <TriviaGame
              requestUrl={this.state.requestUrl}
              type={this.state.type}

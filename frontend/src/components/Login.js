@@ -20,7 +20,7 @@ class Login extends Component {
         this.postLogin = this.postLogin.bind(this)
     }
 
-    postLogin(){
+    postLogin(values){
         const requestUrl = "http://klingons.pythonanywhere.com/api/auth/token/login/";
 
         let response = fetch(requestUrl, {
@@ -31,15 +31,18 @@ class Login extends Component {
                 // 'Content-Type': 'application/x-www-form-urlencoded',
             },
             body: JSON.stringify({
-                "password": this.password,
-                "username": this.username
+                "password": values.password,
+                "username": values.username
             })
         })
             .then((resp) => {
                 return resp.json();
             })
             .then((resp) => {
-                    console.log(resp)
+                return "Token " + resp.auth_token
+            })
+            .then((resp) => {
+                this.props.setToken(resp)
             })
             .catch((error) => {
                 console.log(error, "catch the hoop")
@@ -87,18 +90,52 @@ class Login extends Component {
             <Container style={{width: "200px"}}>
                 {/*Render the component and pass it the function used to update username as a prop*/}
                 <row>
-                    <Formik initialValues={{username:"",password:"",email:""}}>
-                        {({values}) =>(
-                        <Form>
-                            <Form.Group controlId="formGroupUsername">
+                    <Formik initialValues={{
+                        username:"",
+                        password:"",
+                        email:""}}
+
+                            onSubmit={(values, {setSubmitting, resetForm}) => {
+                                // When button submits form and form is in the process of submitting, submit button is disabled
+                                setSubmitting(true);
+                                this.postLogin(values)
+                                setTimeout(() => {
+
+                                    //alert(JSON.stringify(values, null, 2));
+                                    setSubmitting(false);
+                                }, 500);
+
+                                /* Resets form after submission is complete
+                                resetForm();
+
+                                // Sets setSubmitting to false after form is reset
+                                setSubmitting(false);*/
+                            }}
+                    >
+                        {({values, handleChange, handleSubmit, isSubmitting}) =>(
+                        <Form onSubmit={handleSubmit}>
+                            <Form.Group controlId="username">
                                 <Form.Label>Username</Form.Label>
-                                <Form.Control name="username" placeholder="Enter Username" onChange={this.updateUsername} value=""/>
+                                <Form.Control
+                                    name="username"
+                                    placeholder="username"
+                                    onChange={handleChange}
+                                    value={values.username}
+                                />
                             </Form.Group>
-                            <Form.Group controlId="formGroupPassword">
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control type="password" placeholder="Password" onChange={this.updatePassword}/>
+                            <Form.Group controlId="password">
+                                <Form.Label>password</Form.Label>
+                                <Form.Control
+                                    type="password"
+                                    placeholder="password"
+                                    onChange={handleChange}
+                                    value={values.password}
+                                />
                             </Form.Group>
-                            <Button onClick={this.postLogin}>Login</Button>
+                            <Button
+                                type={"submit"}
+                                disabled={isSubmitting}
+                                >Login</Button>
                             <p>New to Trivia Knights? Just add your email and press Sign Up.</p>
                             <Form.Group controlId="formGroupEmail">
                                 <Form.Label>Email</Form.Label>

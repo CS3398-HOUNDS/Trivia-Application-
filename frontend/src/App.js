@@ -6,7 +6,7 @@ import Splash from './components/Splash';
 import TriviaGame from './components/TriviaGame';
 import Login from './components/Login';
 import CreateGame from './components/CreateGame';
-//import UserProfile from './components/UserProfile';
+import UserProfile from './components/UserProfile';
 import Leaderboard from './components/Leaderboard';
 
 class App extends React.Component {
@@ -92,19 +92,19 @@ class App extends React.Component {
   }
 
 
-
-
   render() {
     const userSelection = this.state.selectedComponent;
 
     return(
       <Container fluid='true'>
         <Navbar bg="dark" variant="dark">
-          <Navbar.Brand onClick={() => this.handleClick("Splash")}>Splash Screen</Navbar.Brand>
+          <Navbar.Brand onClick={() => this.handleClick("Splash")}>Trivia Knights</Navbar.Brand>
             <Nav className="mr-auto">
               <Nav.Link onClick={() => this.handleClick("Leaderboard")}>Leaderboard</Nav.Link>
-              <Nav.Link onClick={() => this.handleClick("Login")}>Login</Nav.Link>
-
+              {this.state.userLoggedIn ?
+                <Nav.Link onClick={() => this.handleClick("Profile")}>Profile</Nav.Link> :
+                <Nav.Link onClick={() => this.handleClick("Login")}>Login</Nav.Link>
+              }
               {/*Changes Play to Quit button if in game*/}
               {this.state.selectedComponent !== "TriviaGame" ?
               <Nav.Link
@@ -122,16 +122,19 @@ class App extends React.Component {
           {userSelection === "Splash" ? <Splash /> :
            userSelection === "Leaderboard" ? <Leaderboard /> :
            userSelection === "Login"  ? <Login
-               setToken={this.setUserToken}
-               />  :
-           userSelection === "TriviaGame"  ? <TriviaGame
-             requestUrl={this.state.requestUrl}
-             type={this.state.type}
-             timer={this.state.timer}
-             maxQuestions={this.state.maxQuestions}/>  :
+               setToken={this.setUserToken}/> :
+           userSelection === "Profile" ? <UserProfile
+               token={this.state.userToken}
+               id={this.state.userId}
+               name={this.state.username} /> :
+           userSelection === "TriviaGame" ? <TriviaGame
+               requestUrl={this.state.requestUrl}
+               type={this.state.type}
+               timer={this.state.timer}
+               maxQuestions={this.state.maxQuestions}/>  :
            userSelection === "Create"  ? <CreateGame
-             callbackGameData ={this.updateGameData}
-             switchToTrivia = {this.handleClick}/>  :
+               callbackGameData ={this.updateGameData}
+               switchToTrivia = {this.handleClick}/>  :
           <p>The components failed to load</p>}
       </Container>
     );

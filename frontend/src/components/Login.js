@@ -11,7 +11,7 @@ class Login extends Component {
         this.state = {
             username: '',
             password: '',
-            email: '',
+            email: null,
             buttonAction: '',
             success: false,
             errorMessage: ''
@@ -66,9 +66,9 @@ class Login extends Component {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    "password": values.password,
+                    "email": values.email,
                     "username": values.username,
-                    "email": values.email
+                    "password": values.password
                 })
             })
                 .then((resp) => {
@@ -121,24 +121,19 @@ class Login extends Component {
                             <Formik initialValues={{
                                 username: "",
                                 password: "",
-                                email: ""
+                                email: null
                             }}
 
                                     onSubmit={(values, {setSubmitting, resetForm}) => {
                                         // When button submits form and form is in the process of submitting, submit button is disabled
                                         setSubmitting(true);
+                                        resetForm();
                                         this.postData(values);
                                         setTimeout(() => {
 
-                                            //alert(JSON.stringify(values, null, 2));
+                                            alert(JSON.stringify(values, null, 2));
                                             setSubmitting(false);
                                         }, 500);
-
-                                        /* Resets form after submission is complete
-                                        resetForm();
-
-                                        // Sets setSubmitting to false after form is reset
-                                        setSubmitting(false);*/
                                     }}
                             >
                                 {({values, handleChange, handleSubmit, isSubmitting}) => (
@@ -176,7 +171,14 @@ class Login extends Component {
                                         </div>
                                         <br/>
                                         <Form.Group controlId="email">
-                                            <Form.Control type="email" placeholder="email"/>
+                                            <Form.Control
+                                                type="email"
+                                                placeholder="email"
+                                                name="email"
+                                                onChange={handleChange}
+                                                value={values.email}
+                                                required={this.state.buttonAction === "Create"}
+                                            />
                                         </Form.Group>
                                         <Button
                                             type={"submit"}

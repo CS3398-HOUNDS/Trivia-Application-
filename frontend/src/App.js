@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {createElement} from 'react';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
@@ -8,6 +8,14 @@ import Login from './components/Login';
 import CreateGame from './components/CreateGame';
 import UserProfile from './components/UserProfile';
 import Leaderboard from './components/Leaderboard';
+import {Motion, spring} from "react-motion";
+
+
+
+/*        <Motion defaultStyle={{y:-200, opacity:0}} style={{y: spring(0), opacity: spring(1)}}>
+  {(style)=>(
+      <img
+          style={{transform: `translateY(${style.y}px)`, opacity: style.opacity, y: style.y}}*/
 
 class App extends React.Component {
   constructor(props) {
@@ -62,6 +70,31 @@ class App extends React.Component {
         });
 
   }
+  getComponent(choice){
+    const compArray = [Splash, Leaderboard, UserProfile, Login, CreateGame, TriviaGame];
+    const translator = {"Splash":0, "Leaderboard": 1, "Profile": 2, "Login": 3, "Create": 4, "TriviaGame": 5}
+    return compArray[translator[choice]]
+  }
+
+  componentSelector(selection){
+    let propss;
+    if (selection === "Profile"){
+      propss = {token: this.state.userToken, id:this.state.userId, name:this.state.username}
+    }else if (selection === "Login"){
+      propss = {setToken: this.setUserToken}
+    }else if (selection === "TriviaGame"){
+      propss = {requestUrl: this.state.requestUrl, type: this.state.type, timer: this.state.timer, maxQuestions: this.state.maxQuestions}
+    }else if (selection === "Create"){
+      propss = {callbackGameData: this.updateGameData, switchToTrivia : this.handleClick}
+    }else{
+      propss = null
+    }
+      let render = "Splash"
+      let derender = ""
+      let current = createElement(this.getComponent(selection),propss)
+
+    return true
+  }
 
   handleClick(selection) {
     //Prompts user to confirm quit in case game is active
@@ -89,6 +122,8 @@ class App extends React.Component {
       type: type,
       maxQuestions: maxQuestions,
     });
+
+
   }
 
 
@@ -118,24 +153,7 @@ class App extends React.Component {
                       onClick={() => this.handleClick("Quit")}><b>Quit</b></Nav.Link>}
             </Nav>
           </Navbar>
-
-          {userSelection === "Splash" ? <Splash /> :
-           userSelection === "Leaderboard" ? <Leaderboard /> :
-           userSelection === "Login"  ? <Login
-               setToken={this.setUserToken}/> :
-           userSelection === "Profile" ? <UserProfile
-               token={this.state.userToken}
-               id={this.state.userId}
-               name={this.state.username} /> :
-           userSelection === "TriviaGame" ? <TriviaGame
-               requestUrl={this.state.requestUrl}
-               type={this.state.type}
-               timer={this.state.timer}
-               maxQuestions={this.state.maxQuestions}/>  :
-           userSelection === "Create"  ? <CreateGame
-               callbackGameData ={this.updateGameData}
-               switchToTrivia = {this.handleClick}/>  :
-          <p>The components failed to load</p>}
+          {this.componentSelector(this.state.selectedComponent)}
       </Container>
     );
   }

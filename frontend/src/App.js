@@ -126,21 +126,7 @@ class App extends React.Component {
 
         });
 
-        /* <Motion defaultStyle={{y:-200, opacity:0}} style={{y: spring(0), opacity: spring(1)}}>
-                        {(style)=>(
-                            <img
-                                style={{transform: `translateY(${style.y}px)`, opacity: style.opacity, y: style.y}}
-                                className={"letterhead"}
-                                src={require("../imgs/LH4.png")}
-                                alt={require("../imgs/2.png")}/>
-                        )}
-                    </Motion>*/
-
-
-
-
         return <>
-          current: {current}  rendered:{rendered}  seconds:{seconds} switching:{switching}
             <Motion
                 defaultStyle={{x: -500, opacity: 0}}
                 style={{
@@ -214,9 +200,6 @@ class App extends React.Component {
                     </Nav>
                 </Navbar>
                 <this.DisplayComponent current={this.state.selectedComponent} select={this.componentSelector}/>
-                {/*
-          {this.componentSelector(this.state.selectedComponent)}
-*/}
             </Container>
         );
     }

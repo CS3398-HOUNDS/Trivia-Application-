@@ -1,4 +1,7 @@
-## Getting Started
+## Get started on our API
+http://klingons.pythonanywhere.com/docs/
+
+## Getting Started Locally 
 
 This backend system is built with Django, Django-Rest-Framework, and Python
 

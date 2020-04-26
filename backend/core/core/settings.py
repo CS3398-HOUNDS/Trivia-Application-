@@ -27,10 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-
 REST_FRAMEWORK = {
-# 'DEFAULT_FILTER_BACKENDS': ("django_filters.rest_framework.DjangoFilterBackend"),
+#    'DEFAULT_FILTER_BACKENDS': ("django_filters.rest_framework.DjangoFilterBackend"),
      'DEFAULT_AUTHENTICATION_CLASSES': (
          'rest_framework.authentication.TokenAuthentication',
          'rest_framework.authentication.SessionAuthentication'
@@ -89,18 +87,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
-# For Development SQLite database
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -111,6 +97,13 @@ DATABASES = {
     }
 }
 
+# For Development SQLite database
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -144,7 +137,7 @@ DJOSER = {
     'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
     'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uid}/{token}',
     'ACTIVATION_URL': '#/activate/{uid}/{token}',
-    'SEND_ACTIVATION_EMAIL': True,
+    'SEND_ACTIVATION_EMAIL': False,
     'SERIALIZERS': {},
 }
 
@@ -161,6 +154,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Cors-Headers
+# https://pypi.org/project/django-cors-headers/
 CORS_ORIGIN_ALLOW_ALL = True
 
 # Static files (CSS, JavaScript, Images)

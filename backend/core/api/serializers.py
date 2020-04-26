@@ -34,10 +34,10 @@ class ProfileSerializer(serializers.ModelSerializer):
 This serializer controls how the Question is returned when called.
 """
 class QuestionSerializer(serializers.ModelSerializer):
-    incorrect = serializers.ListField(serializers.CharField(max_length=32))
+
     class Meta:
         model = models.Question
-        fields = '__all__'
+
 
 """
 This serializer controls how the Trivia Game is returned when called

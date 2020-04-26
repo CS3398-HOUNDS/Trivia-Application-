@@ -1,4 +1,5 @@
 from django.db import models
+#from django_mysql.models import ListTextField
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 from django.dispatch import receiver
@@ -19,7 +20,7 @@ TYPE_CHOICES = (
 )
 
 """
-This model declares the Profile.
+This model declares the Profile's for users
 """
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -39,13 +40,11 @@ class Profile(models.Model):
         instance.profile.save()
 
 """
-This model declares the Question
+This model declares the Question's for the trivia game
 """
 class Question(models.Model):
     content = models.CharField(blank=True, max_length=200, default='empty')
-    # incorrect need to be changed into an array that can hold multiple values
     correct = models.CharField(default="correct", max_length=200)
-    incorrect = models.CharField(default="incorrect", max_length=100)
     category = models.CharField(default="Pick one", max_length=50, choices=CATEGORY_CHOICES)
     type = models.CharField(default="Pick one", max_length=50, choices=TYPE_CHOICES)
 

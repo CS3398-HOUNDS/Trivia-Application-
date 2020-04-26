@@ -10,7 +10,7 @@ import '../style.css'
 //  -reset: a prop from the parent that when updated in the parent will reset the countdown
 //  -display: accepts {true} or {false}, if turned on the component will actually render on screen, false is default
 //  -some callback you assign: will be called when the timer runs out, does not need to be passed but
-//      does -MUST BE PASSED- as timeEndCallback and have no parameters
+//      -MUST BE PASSED- as timeEndCallback and have no parameters
 
 
 

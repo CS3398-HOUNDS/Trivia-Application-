@@ -85,7 +85,7 @@ class App extends React.Component {
     componentSelector(selection) {
         let propss;
         if (selection === "Profile") {
-            propss = {token: this.state.userToken, id: this.state.userId, name: this.state.username}
+            propss = {token: this.state.userToken, id: this.state.userId, name: this.state.username, email:this.state.userEmail}
         } else if (selection === "Login") {
             propss = {setToken: this.setUserToken}
         } else if (selection === "TriviaGame") {

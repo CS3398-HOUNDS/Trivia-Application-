@@ -164,7 +164,7 @@ class Login extends Component {
                                         <br/>
                                         <br/>
                                         <br/>
-                                        <div style={{"box-shadow": "0px 0px 6px 9px rgba(255,255,255,.8)"}}>New to
+                                        <div style={{"boxShadow": "0px 0px 6px 9px rgba(255,255,255,.8)"}}>New to
                                             Trivia Knights? Just add your email and press Sign Up.
                                         </div>
                                         <br/>

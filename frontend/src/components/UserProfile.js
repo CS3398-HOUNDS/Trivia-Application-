@@ -3,12 +3,14 @@ import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import { Row, Col } from 'react-bootstrap';
 import Button from "react-bootstrap/Button";
+import md5 from "md5";
 
 class UserProfile extends React.Component {
 /* A GET request to /api/v1/profile/{id} will return this information about the user.
 {
   "user": 0,
   "bio": "string",
+  "image_url": "string",
   "location": "string",
   "birth_date": "2020-04-21",
   "score": 0,
@@ -20,8 +22,9 @@ class UserProfile extends React.Component {
 
     this.state = {
       username: this.props.name,
-      bio: "",
-      locale: "",
+      userIcon: "userIconGoesHere",
+      bio: "No biography supplied.",
+      locale: "No location supplied.",
       score: -1,
       rank: -1
     };
@@ -34,6 +37,8 @@ class UserProfile extends React.Component {
     let requestUrl = "http://klingons.pythonanywhere.com/api/v1/profile/" +
                       this.props.id;
 
+    console.log(token + ' ' + requestUrl);
+
     let response = fetch(requestUrl, {
       method: "GET",
       dataType: "JSON",
@@ -45,6 +50,7 @@ class UserProfile extends React.Component {
     }).then((resp) => {
       this.setState({
         bio: resp.bio,
+        userIcon: resp.image_url + md5(this.props.email),
         locale: resp["location"],
         score: resp.score,
         rank: resp.rank
@@ -58,16 +64,23 @@ class UserProfile extends React.Component {
     this.getUserInfo();
     return(
       <Container>
+        {console.log(this.props)}
         <Row>
           <Col>Username: {this.state.username}</Col>
           <Col>Score: {this.state.score}</Col>
           <Col>Rank: {this.state.rank}</Col>
         </Row>
-        <Row>
-          {/*<Col>{this.props.userIcon</Col>*/}
-          <Col>{this.state.bio}</Col>
-          <Col></Col>
-        </Row>
+        <Col>
+          <Row>
+            <img src={this.state.userIcon} />
+          </Row>
+          <Row>
+            <Col>Location: {this.state.local}</Col>
+          </Row>
+        </Col>
+        <Col>
+          <Row md={{ span: 6, offset: 3 }}>Bio: {this.state.bio}</Row>
+        </Col>
       </Container>
     );
   }

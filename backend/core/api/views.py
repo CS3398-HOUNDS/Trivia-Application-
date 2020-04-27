@@ -9,8 +9,8 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticate
 
 from . import models
 from . import serializers
-
-
+# from trivia.permissions import IsOwnerOrReadOnly
+# from trivia.permissions import IsStaffOrTargetUser
 
 """
 This viewset automatically provides `list`, `create`, `retrieve`,
@@ -22,6 +22,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
     filter_backends = [filters.SearchFilter]
     search_fields = ['=username']
+
 
 
 """

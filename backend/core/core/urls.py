@@ -34,7 +34,7 @@ v1_router.register(r'question', views.QuestionViewSet)
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path('docs/', TemplateView.as_view(template_name="index.html")),
-    path('inside/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('api/v1/', include(v1_router.urls)),
     path('api/auth/', include('djoser.urls')),
     path('api/auth/', include('djoser.urls.authtoken'))

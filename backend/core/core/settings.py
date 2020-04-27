@@ -51,9 +51,14 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'api',
+<<<<<<< HEAD
     'djoser'
     'django_mysql',
     'django_filters'
+=======
+    'djoser',
+    'django_mysql'
+>>>>>>> 2f1c2346263c6394c7791b009aa49ea0ba85e317
 ]
 
 MIDDLEWARE = [
@@ -158,6 +163,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Cors-Headers
+# https://pypi.org/project/django-cors-headers/
 CORS_ORIGIN_ALLOW_ALL = True
 
 # Static files (CSS, JavaScript, Images)

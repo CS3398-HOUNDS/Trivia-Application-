@@ -52,15 +52,15 @@ class App extends React.Component {
             }
         })
             .then((resp) => {
-                console.log(this.state.userToken)
+                console.log(this.state.userToken);
                 return resp.json();
             })
             .then((resp) => {
-                console.log(resp)
+                console.log(resp);
                 this.setState({username: resp.username, userId: resp.id, userEmail: resp.email})
             })
             .then((resp) => {
-                console.log(this.state)
+                console.log(this.state);
                 this.handleClick("Splash")
             })
             .catch((error) => {
@@ -78,7 +78,7 @@ class App extends React.Component {
             "Create": CreateGame,
             "TriviaGame": TriviaGame,
             "": null
-        }
+        };
         return compArray[choice]
     }
 
@@ -187,13 +187,14 @@ class App extends React.Component {
                             <Nav.Link onClick={() => this.handleClick("Login")}>Login</Nav.Link>
                         }
                         {/*Changes Play to Quit button if in game*/}
-                        {this.state.selectedComponent !== "TriviaGame" ?
-                            <Nav.Link
-                                className="superButton"
-                                style={{backgroundColor: "#0D9469"}}
-                                onClick={() => this.handleClick("Create")}><b>Play</b></Nav.Link>
-                            :
-                            <Nav.Link
+                      {this.state.selectedComponent !== "TriviaGame" && this.state.userLoggedIn &&
+                      <Nav.Link
+                          className="superButton"
+                          style={{backgroundColor: "#0D9469"}}
+                          onClick={() => this.handleClick("Create")}><b>Play</b></Nav.Link>
+                      }:
+                      {this.state.userLoggedIn && this.state.selectedComponent === "Triviagame" &&
+                      <Nav.Link
                                 className="superButton"
                                 style={{backgroundColor: "#000000"}}
                                 onClick={() => this.handleClick("Quit")}><b>Quit</b></Nav.Link>}

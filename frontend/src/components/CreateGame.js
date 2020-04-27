@@ -110,7 +110,7 @@ class CreateGame extends React.Component {
                            handleSubmit,
                            isSubmitting }) => (
                         <Form onSubmit={handleSubmit}>
-                            <br/>
+
                             <Form.Group controlId={"triviaCategories"}>
                                 <Row>
                                     <Form.Label column={"lg"} lg={3}>
@@ -130,7 +130,7 @@ class CreateGame extends React.Component {
                                     </Col>
                                 </Row>
                             </Form.Group>
-                            <br/>
+
                             <Form.Group controlId={"qType"}>
                                 <Row>
                                     <Form.Label  column="lg" lg={3}>Question Types:</Form.Label>
@@ -145,7 +145,7 @@ class CreateGame extends React.Component {
                                     </Col>
                                 </Row>
                             </Form.Group>
-                            <br/>
+
                             <Form.Group controlId={"questionCount"}>
                                 <Row>
                                     <Form.Label  column="lg" lg={3}>Number of Questions:</Form.Label>
@@ -161,7 +161,7 @@ class CreateGame extends React.Component {
                                     </Col>
                                 </Row>
                             </Form.Group>
-                            <br/>
+
                             <Form.Group controlId={"timerLength"}>
                                 <Row>
                                     <Form.Label  column="lg" lg={3}>Question Timer:</Form.Label>
@@ -179,9 +179,9 @@ class CreateGame extends React.Component {
                                     </Col>
                                 </Row>
                             </Form.Group>
-                            <br/>
+
                             <Button type={"submit"} disabled={isSubmitting}>Create New Game</Button>
-                            <br/>
+
                         </Form>)}
                 </Formik>
             </Container>

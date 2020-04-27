@@ -3,7 +3,6 @@ import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import { Row, Col } from 'react-bootstrap';
 import Button from "react-bootstrap/Button";
-import md5 from "md5";
 
 class UserProfile extends React.Component {
 /* A GET request to /api/v1/profile/{id} will return this information about the user.
@@ -37,8 +36,6 @@ class UserProfile extends React.Component {
     let requestUrl = "http://klingons.pythonanywhere.com/api/v1/profile/" +
                       this.props.id;
 
-    console.log(token + ' ' + requestUrl);
-
     let response = fetch(requestUrl, {
       method: "GET",
       dataType: "JSON",
@@ -50,8 +47,8 @@ class UserProfile extends React.Component {
     }).then((resp) => {
       this.setState({
         bio: resp.bio,
-        userIcon: resp.image_url + md5(this.props.email),
-        locale: resp["location"],
+        userIcon: "",
+        locale: resp.location,
         score: resp.score,
         rank: resp.rank
       });
@@ -63,7 +60,7 @@ class UserProfile extends React.Component {
   render() {
     this.getUserInfo();
     return(
-      <Container>
+      <Container style={{backgroundColor: "white"}}>
         {console.log(this.props)}
         <Row>
           <Col>Username: {this.state.username}</Col>

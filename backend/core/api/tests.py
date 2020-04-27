@@ -1,7 +1,9 @@
 from django.contrib.auth import get_user_model
+
 from rest_framework.test import APIClient, APITestCase
 from rest_framework.authtoken.models import Token
 from rest_framework import status
+
 from .models import Profile, Trivia, Question
 
 """ Test cases for API Endpoints"""
@@ -51,7 +53,7 @@ class TestCases(APITestCase):
 
 
     def test_create_questions(self):
-        url = '/api/v1/trivia/1/questions/'
+        url = '/api/v1/question/'
         data = {"content": "This is a test?", "correct": "yes it is", "inccorect": "no it isnt", "category": "1", "type": "2"}
         response = self.client.post(
             url,

@@ -1,5 +1,7 @@
 from django.contrib.auth.models import User
+
 from rest_framework import serializers
+
 from . import models
 
 
@@ -21,6 +23,7 @@ class UserSerializer(serializers.ModelSerializer):
         user.save()
         return user
 
+
 """
 This serializer controls how the Profile is returned when called.
 """
@@ -29,13 +32,22 @@ class ProfileSerializer(serializers.ModelSerializer):
         model = models.Profile
         fields = ['user', 'bio', 'location', 'birth_date', 'score', 'rank']
 
+
+class IncorrectSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Incorrect
+        fields = ['content']
+        
+
 """
 This serializer controls how the Question is returned when called.
 """
 class QuestionSerializer(serializers.ModelSerializer):
+    incorrect = IncorrectSerializer(source='incorrect_set', many=True)
     class Meta:
         model = models.Question
-        fields = '__all__'
+        fields = ['id', 'content', 'correct', 'incorrect', 'category', 'type']
+
 
 """
 This serializer controls how the Trivia Game is returned when called
@@ -43,4 +55,4 @@ This serializer controls how the Trivia Game is returned when called
 class TriviaSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Trivia
-        fields = ['url', 'id', 'created', 'title', 'type', 'category']
+        fields = ['url', 'id', 'created', 'joinable', 'title', 'type', 'category']

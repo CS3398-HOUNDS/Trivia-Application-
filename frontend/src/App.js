@@ -66,7 +66,6 @@ class App extends React.Component {
             .catch((error) => {
                 console.log(error, "catch the hoop")
             });
-
     }
 
     getComponent(choice) {
@@ -113,7 +112,18 @@ class App extends React.Component {
           setSwitching(true);
           console.log("3")
         }
-
+        let leaveY;
+        let leaveX;
+        if(current === "Profile" || current === "TriviaGame"){
+            leaveX = 0;
+            leaveY = 500;
+        }else if (current === "Create" || current === "Leaderboard"){
+            leaveX = 500;
+            leaveY = 0;
+        }else{
+            leaveX = -500;
+            leaveY = 0;
+        }
         useEffect(() => {
             if (seconds > 0 && switching) {
               setTimeout(() => setSeconds(seconds - 1), 100);
@@ -128,12 +138,16 @@ class App extends React.Component {
 
         return <>
             <Motion
-                defaultStyle={{x: -500, opacity: 0}}
+                defaultStyle={{x: leaveX, opacity: 0, y: leaveY}}
                 style={{
-                   x:spring(switching ? -500 : 0), opacity: spring(switching ? 0 : 1)
+                   y:spring(switching? leaveY : 0), x:spring(switching ? leaveX : 0), opacity: spring(switching ? 0 : 1)
                 }}>
                 {(style) => (
-                    <div style={{transform: `translateX(${style.x}px)`,opacity: style.opacity, x: style.x}}>
+                    <div style={{
+                        transform: (current !== "Profile" && current !== "TriviaGame"? `translateX(${style.x}px)` :`translateY(${style.y}px)` ),
+                        opacity: style.opacity,
+                        x: style.x,
+                        y: style.y}}>
                         {props.select(rendered)}
                     </div>
                 )}
@@ -192,12 +206,13 @@ class App extends React.Component {
                           className="superButton"
                           style={{backgroundColor: "#0D9469"}}
                           onClick={() => this.handleClick("Create")}><b>Play</b></Nav.Link>
-                      }:
-                      {this.state.userLoggedIn && this.state.selectedComponent === "Triviagame" &&
+                      }
+                      {this.state.selectedComponent === "TriviaGame" &&
                       <Nav.Link
                                 className="superButton"
                                 style={{backgroundColor: "#000000"}}
-                                onClick={() => this.handleClick("Quit")}><b>Quit</b></Nav.Link>}
+                                onClick={() => this.handleClick("Quit")}><b>Quit</b></Nav.Link>
+                      }
                     </Nav>
                 </Navbar>
                 <this.DisplayComponent current={this.state.selectedComponent} select={this.componentSelector}/>

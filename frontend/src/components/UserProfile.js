@@ -48,7 +48,7 @@ class UserProfile extends React.Component {
     getUserInfo() {
         let token = this.props.token;
         let requestUrl = "http://klingons.pythonanywhere.com/api/v1/profile/" +
-            this.props.id;
+            this.props.id + "/";
 
         let response = fetch(requestUrl, {
             method: "GET",
@@ -59,13 +59,7 @@ class UserProfile extends React.Component {
         }).then((resp) => {
             return resp.json();
         }).then((resp) => {
-            this.setState({
-                bio: resp.bio,
-                userIcon: resp.image_url,
-                locale: resp.location,
-                score: resp.score,
-                rank: resp.rank
-            });
+          this.doneEditing(resp)
         }).catch((error) => {
             console.log(error, "Error in getUserInfo()");
         })
@@ -86,7 +80,7 @@ class UserProfile extends React.Component {
                                 <img src={this.state.userIcon}/>
                             </Row>
                             <Row>
-                                <Col>Location: {this.state.local}</Col>
+                                <Col>Location: {this.state.locale}</Col>
                             </Row>
                         </Col>
                         <Col>

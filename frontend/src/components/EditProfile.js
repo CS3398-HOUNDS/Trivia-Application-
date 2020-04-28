@@ -27,7 +27,6 @@ class EditProfile extends Component {
             })
         })
             .then((resp) => {
-                console.log(resp.json)
                 return resp.json();
             })
             .then((resp) => {

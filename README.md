@@ -5,6 +5,8 @@ Texas State University cs3398 Software Engineering course project.
 [comment]: <> (Here goes your awesome project description!)
 ![icon](https://images.all-free-download.com/images/graphicthumb/knight_helmets_icons_flat_black_design_6831019.jpg)
 
+[Link to frontend hosted on netlify server](https://klingons-triviaknights.netlify.app)
+
 
 ## Table of contents
 * [General info](#general-info)
@@ -65,5 +67,5 @@ Created by Texas State University Students contact us at:
 * Jackson Ayers: jwa58@txstate.edu
 * Aaron Carrasco: adc129@txstate.edu
 * Trevor Chaney: t_c296@txstate.edu
-* dlg143@txstate.edu
+* Donevan Gonzales: dlg143@txstate.edu
 * sds158@txstate.edu

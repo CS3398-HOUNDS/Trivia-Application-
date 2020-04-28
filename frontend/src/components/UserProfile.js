@@ -47,7 +47,7 @@ class UserProfile extends React.Component {
 
     getUserInfo() {
         let token = this.props.token;
-        let requestUrl = "http://klingons.pythonanywhere.com/api/v1/profile/" +
+        let requestUrl = "https://klingons.pythonanywhere.com/api/v1/profile/" +
             this.props.id + "/";
 
         let response = fetch(requestUrl, {

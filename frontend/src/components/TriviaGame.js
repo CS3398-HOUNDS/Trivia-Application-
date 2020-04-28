@@ -9,6 +9,7 @@ import Timer from "./Timer";
 import Row from "react-bootstrap/Row";
 import ReverseTimer from "./ReverseTimer";
 import ProgressBar from "react-bootstrap/ProgressBar";
+import DateTimer from "./DateTimer";
 
 let QuestionCounterDisplay =(props)=>{
     return (
@@ -310,7 +311,9 @@ class TriviaGame extends Component {
 
                                             </Col>
                                             <Col>
-
+                                                <DateTimer
+                                                tValue = {this.props.timer}
+                                                resetValue = {this.state.displaying}/>
                                                 {/*spacer element*/}
                                                 <button style={{visibility: "hidden"}}/>
 

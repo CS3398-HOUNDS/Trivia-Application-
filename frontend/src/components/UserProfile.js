@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import EditProfile from './EditProfile';
 import Container from 'react-bootstrap/Container';
 import {Row, Col} from 'react-bootstrap';
+import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
 
 class UserProfile extends React.Component {
@@ -76,7 +77,7 @@ class UserProfile extends React.Component {
             </Row>
             <Col>
               <Row>
-                <img src={this.state.userIcon}/>
+                <Image src={this.state.userIcon}/>
               </Row>
               <Row>
                 <Col>Location: {this.state.location}</Col>

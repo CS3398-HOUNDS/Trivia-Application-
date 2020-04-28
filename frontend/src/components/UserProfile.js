@@ -47,7 +47,7 @@ class UserProfile extends React.Component {
     }).then((resp) => {
       this.setState({
         bio: resp.bio,
-        userIcon: "",
+        userIcon: resp.image_url,
         locale: resp.location,
         score: resp.score,
         rank: resp.rank

@@ -26,7 +26,7 @@ class Login extends Component {
 
     postData(values) {
         if (this.state.buttonAction === "Login") {
-            const requestUrl = "http://klingons.pythonanywhere.com/api/auth/token/login/";
+            const requestUrl = "https://klingons.pythonanywhere.com/api/auth/token/login/";
             let response = fetch(requestUrl, {
                 method: "POST",
                 dataType: "JSON",
@@ -58,7 +58,7 @@ class Login extends Component {
                     console.log(error, "catch the hoop")
                 });
         } else if (this.state.buttonAction === "Create") {
-            const requestUrl = "http://klingons.pythonanywhere.com/api/auth/users/";
+            const requestUrl = "https://klingons.pythonanywhere.com/api/auth/users/";
             let response = fetch(requestUrl, {
                 method: "POST",
                 dataType: "JSON",

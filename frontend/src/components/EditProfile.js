@@ -13,7 +13,7 @@ class EditProfile extends Component {
 
     postData(values) {
         let token = this.props.token;
-        const requestUrl = "http://klingons.pythonanywhere.com/api/v1/profile/" + this.props.id + "/";
+        const requestUrl = "https://klingons.pythonanywhere.com/api/v1/profile/" + this.props.id + "/";
         let response = fetch(requestUrl, {
             method: "PATCH",
             dataType: "JSON",

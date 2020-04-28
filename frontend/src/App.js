@@ -44,7 +44,7 @@ class App extends React.Component {
     }
 
     getUserInfo() {
-        const requestUrl = "http://klingons.pythonanywhere.com/api/auth/users/me/";
+        const requestUrl = "https://klingons.pythonanywhere.com/api/auth/users/me/";
         let response = fetch(requestUrl, {
             method: "GET",
             dataType: "JSON",

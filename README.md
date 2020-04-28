@@ -1,12 +1,11 @@
 # CS3398-Klingons-S2020
 Texas State University cs3398 Software Engineering course project.
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/01ec3479-dd15-4611-80c6-4daa7503be4e/deploy-status)](https://app.netlify.com/sites/klingons-triviaknights/deploys)
+
 # Trivia Knights
 [comment]: <> (Here goes your awesome project description!)
 ![icon](https://images.all-free-download.com/images/graphicthumb/knight_helmets_icons_flat_black_design_6831019.jpg)
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/01ec3479-dd15-4611-80c6-4daa7503be4e/deploy-status)](https://app.netlify.com/sites/klingons-triviaknights/deploys)
-
 
 ## Table of contents
 * [General info](#general-info)

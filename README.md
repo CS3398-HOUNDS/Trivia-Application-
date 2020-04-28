@@ -68,4 +68,4 @@ Created by Texas State University Students contact us at:
 * Aaron Carrasco: adc129@txstate.edu
 * Trevor Chaney: t_c296@txstate.edu
 * Donevan Gonzales: dlg143@txstate.edu
-* sds158@txstate.edu
+* Sohail Selky: 158@txstate.edu

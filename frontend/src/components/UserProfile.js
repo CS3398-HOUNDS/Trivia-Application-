@@ -72,7 +72,7 @@ class UserProfile extends React.Component {
             <img src={this.state.userIcon} />
           </Row>
           <Row>
-            <Col>Location: {this.state.local}</Col>
+            <Col>Location: {this.state.locale}</Col>
           </Row>
         </Col>
         <Col>

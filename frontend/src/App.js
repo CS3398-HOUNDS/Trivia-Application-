@@ -52,7 +52,6 @@ class App extends React.Component {
             }
         })
             .then((resp) => {
-                console.log(this.state.userToken);
                 return resp.json();
             })
             .then((resp) => {
@@ -110,7 +109,6 @@ class App extends React.Component {
         let current = props.current;
         if(current !== rendered && !switching) {
           setSwitching(true);
-          console.log("3")
         }
         let leaveY;
         let leaveX;
@@ -127,7 +125,6 @@ class App extends React.Component {
         useEffect(() => {
             if (seconds > 0 && switching) {
               setTimeout(() => setSeconds(seconds - 1), 100);
-              console.log("1")
             } else if (switching) {
               setSeconds(4)
               setSwitching(false)

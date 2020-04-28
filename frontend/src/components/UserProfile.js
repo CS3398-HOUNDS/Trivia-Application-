@@ -24,7 +24,7 @@ class UserProfile extends React.Component {
             username: this.props.name,
             userIcon: "userIconGoesHere",
             bio: "No biography supplied.",
-            locale: "No location supplied.",
+            location: "No location supplied.",
             score: -1,
             rank: -1,
             editing: false
@@ -38,10 +38,10 @@ class UserProfile extends React.Component {
       this.setState({
         bio: userData.bio,
         userIcon: userData.image_url,
-        locale: userData.location,
+        location: userData.location,
         score: userData.score,
         rank: userData.rank,
-        editing:false
+        editing: false
       })
     }
 
@@ -66,68 +66,42 @@ class UserProfile extends React.Component {
     }
 
     render() {
-
-<<<<<<< HEAD
-  render() {
-    this.getUserInfo();
-    return(
-      <Container style={{backgroundColor: "white"}}>
-        {console.log(this.props)}
-        <Row>
-          <Col>Username: {this.state.username}</Col>
-          <Col>Score: {this.state.score}</Col>
-          <Col>Rank: {this.state.rank}</Col>
-        </Row>
-        <Col>
-          <Row>
-            <img src={this.state.userIcon} />
-          </Row>
-          <Row>
-            <Col>Location: {this.state.locale}</Col>
-          </Row>
-        </Col>
-        <Col>
-          <Row md={{ span: 6, offset: 3 }}>Bio: {this.state.bio}</Row>
-        </Col>
-      </Container>
-    );
-  }
-=======
-        return (
-            (!this.state.editing ?
-                    <Container style={{backgroundColor: "white"}}>
-                        <Row>
-                            <Col>Username: {this.state.username}</Col>
-                            <Col>Score: {this.state.score}</Col>
-                            <Col>Rank: {this.state.rank}</Col>
-                        </Row>
-                        <Col>
-                            <Row>
-                                <img src={this.state.userIcon}/>
-                            </Row>
-                            <Row>
-                                <Col>Location: {this.state.locale}</Col>
-                            </Row>
-                        </Col>
-                        <Col>
-                            <Row md={{span: 6, offset: 3}}>Bio: {this.state.bio}</Row>
-                        </Col>
-                        <Button onClick={() => {
-                            this.setState({editing: true})
-                        }}>Edit</Button>
-                    </Container>
-                    :
-                    <EditProfile
-                        token={this.props.token}
-                        id={this.props.id}
-                        bio={this.state.bio}
-                        local={this.state.local}
-                        update={this.doneEditing}
-                    />
-            )
-        );
+      return (
+        (!this.state.editing ?
+          <Container style={{backgroundColor: "white"}}>
+            <Row>
+              <Col>Username: {this.state.username}</Col>
+              <Col>Score: {this.state.score}</Col>
+              <Col>Rank: {this.state.rank}</Col>
+            </Row>
+            <Col>
+              <Row>
+                <img src={this.state.userIcon}/>
+              </Row>
+              <Row>
+                <Col>Location: {this.state.location}</Col>
+              </Row>
+            </Col>
+            <Col>
+              <Row md={{span: 6, offset: 3}}>
+                Bio: {this.state.bio}
+              </Row>
+            </Col>
+              <Button onClick={() => {
+                this.setState({editing: true})
+              }}>Edit</Button>
+          </Container>
+          :
+          <EditProfile
+            token={this.props.token}
+            id={this.props.id}
+            bio={this.state.bio}
+            location={this.state.location}
+            update={this.doneEditing}
+          />
+        )
+      );
     }
->>>>>>> 4a5dab88cb5a7662477e06c2018965a47a4d0155
 }
 
 export default UserProfile;

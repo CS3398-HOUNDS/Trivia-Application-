@@ -8,6 +8,7 @@ import Login from './components/Login';
 import CreateGame from './components/CreateGame';
 import UserProfile from './components/UserProfile';
 import Leaderboard from './components/Leaderboard';
+import About from './components/About';
 import {Motion, spring} from "react-motion";
 import Timer from "./components/Timer";
 
@@ -70,6 +71,7 @@ class App extends React.Component {
     getComponent(choice) {
         const compArray = {
             "Splash": Splash,
+            "About": About,
             "Leaderboard": Leaderboard,
             "Profile": UserProfile,
             "Login": Login,
@@ -84,6 +86,8 @@ class App extends React.Component {
         let propss;
         if (selection === "Profile") {
             propss = {token: this.state.userToken, id: this.state.userId, name: this.state.username, email:this.state.userEmail}
+        } else if (selection === "Leaderboard") {
+            propss = {token: this.state.sureToken};
         } else if (selection === "Login") {
             propss = {setToken: this.setUserToken}
         } else if (selection === "TriviaGame") {
@@ -194,6 +198,7 @@ class App extends React.Component {
                 <Navbar bg="dark" variant="dark">
                     <Navbar.Brand onClick={() => this.handleClick("Splash")}>Trivia Knights</Navbar.Brand>
                     <Nav className="mr-auto">
+                        <Nav.Link onClick={() => this.handleClick("About")}>About</Nav.Link>
                         <Nav.Link onClick={() => this.handleClick("Leaderboard")}>Leaderboard</Nav.Link>
                         {this.state.userLoggedIn ?
                             <Nav.Link onClick={() => this.handleClick("Profile")}>Profile</Nav.Link> :

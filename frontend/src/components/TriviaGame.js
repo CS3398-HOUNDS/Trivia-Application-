@@ -138,12 +138,9 @@ class TriviaGame extends Component {
 
     setScore() {
         //this.state.score,this.state.maxScore,this.determineCorrect(this.state.answerChoice, this.getCorrect([this.state.counter]))this.toggleQA()
-        console.log("max Score " + this.state.maxScore);
         let crct = this.determineCorrect(this.state.answerChoice, this.getCorrect([this.state.counter]));
         let maxScore = this.state.maxScore;
         let ptval = this.calcPointValue(this.state.counter);
-
-        console.log(crct, maxScore, ptval);
         if (crct) {
             this.setState({score: this.state.score + ptval, maxScore: maxScore + ptval})
         } else {
@@ -156,9 +153,6 @@ class TriviaGame extends Component {
         let token = this.props.token;
         let requestUrl = "https://klingons.pythonanywhere.com/api/v1/profile/" +
             this.props.id + "/";
-
-        console.log("id: " + this.props.id)
-        console.log("token: " + this.props.token)
         let response = fetch(requestUrl, {
             method: "GET",
             dataType: "JSON",
@@ -168,9 +162,7 @@ class TriviaGame extends Component {
         }).then((resp) => {
             return resp.json();
         }).then((resp) => {
-            console.log(resp.json)
             this.setState({userScoreTotal: resp.score})
-            console.log(this.state)
         }).catch((error) => {
             console.log(error, "Error in getUserInfo()");
         })
@@ -299,10 +291,6 @@ class TriviaGame extends Component {
         let response;
         let token = this.props.token;
         const requestUrl = "https://klingons.pythonanywhere.com/api/v1/profile/" + this.props.id + "/";
-        console.log("s: " + s)
-        console.log("account total: " + accountTotal)
-        console.log("score: " + (s * total));
-        console.log("Total account score: " + accountTotal + (s * total))
 
         if(!this.state.scoresPosted){response = fetch(requestUrl, {
             method: "PATCH",
@@ -319,7 +307,7 @@ class TriviaGame extends Component {
                 return resp.json();
             })
             .then((resp) => {
-                console.log(resp)
+                this.setState({scoresPosted: true})
             })
             .catch((error) => {
                 console.log(error, "catch the hoop")
@@ -396,7 +384,7 @@ class TriviaGame extends Component {
 
                                                 {/*spacer element*/}
                                                 <button style={{visibility: "hidden"}}/>
-                                            
+
 
 
                                             </Col>

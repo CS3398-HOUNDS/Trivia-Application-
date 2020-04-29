@@ -9,7 +9,7 @@ import Timer from "./Timer";
 import Row from "react-bootstrap/Row";
 import ReverseTimer from "./ReverseTimer";
 import ProgressBar from "react-bootstrap/ProgressBar";
-import ProgressLine from "./ProgressLine";
+import DateTimerPercent from "./DateTimerPercent";
 
 
 let QuestionCounterDisplay = (props) => {
@@ -367,26 +367,8 @@ class TriviaGame extends Component {
 
                                             </Col>
                                             <Col>
-
-                                                {/*{this.setState({bigTimer: <DateTimerPercent
-                                                tValue = {this.props.timer}
-                                                resetValue = {this.state.displaying}/>})}
-                                                <ProgressLine
-                                                    label="One visual percentage - changed background"
-                                                    backgroundColor="lightblue"
-                                                    visualParts={[
-                                                        {
-                                                            percentage: this.state.bigTimer,
-                                                            color: "indianred"
-                                                        }
-                                                    ]}
-                                                />*/}
-
                                                 {/*spacer element*/}
                                                 <button style={{visibility: "hidden"}}/>
-
-
-
                                             </Col>
                                         </Row>
                                     </div>

@@ -1,4 +1,4 @@
-import React, {Component, useEffect, useState} from "react";
+import React, {Component, useEffect} from "react";
 import Button from 'react-bootstrap/Button';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Container from 'react-bootstrap/Container';
@@ -9,16 +9,18 @@ import Timer from "./Timer";
 import Row from "react-bootstrap/Row";
 import ReverseTimer from "./ReverseTimer";
 import ProgressBar from "react-bootstrap/ProgressBar";
-import DateTimer from "./DateTimer";
+import ProgressLine from "./ProgressLine";
 
-let QuestionCounterDisplay =(props)=>{
+
+let QuestionCounterDisplay = (props) => {
     return (
         <>
             <h1>Question <b>{props.counter + 1}</b> out
                 of <b>{props.maxQuestions}</b></h1>
-            <h4>score: {props.score > 0 ? props.score : "---" }</h4>
+            <h4>score: {props.score > 0 ? props.score : "---"}</h4>
         </>
-    )};
+    )
+};
 
 function DisplayJumbo(props) {
     return props.currentQuestion
@@ -92,8 +94,11 @@ class TriviaGame extends Component {
             counter: 0,
             answerChoice: "",
             gameOver: false,
-            displaying: -1 //switches between displaying the question (0) and the correct answer (1)
-        };
+            displaying: -1,
+            scoresPosted: false
+
+        }//switches between displaying the question (0) and the correct answer (1)
+        ;
         this.setA = this.setA.bind(this);
         this.setTF = this.setTF.bind(this);
         this.toggleQA = this.toggleQA.bind(this);
@@ -105,6 +110,7 @@ class TriviaGame extends Component {
     async componentDidMount() {
         var self = this;
         //DO NOT REMOVE THIS LINE
+        this.getUserInfo()
 
         let response = fetch(this.props.requestUrl, {
             method: "GET",
@@ -125,7 +131,6 @@ class TriviaGame extends Component {
             .catch((error) => {
                 console.log(error, "catch the hoop")
             });
-        console.log(response);
 
         //Sets the game difficulty multiplier for score (1: 10secs, 1/2: 20secs, 1/60:60secs)
 
@@ -134,11 +139,11 @@ class TriviaGame extends Component {
     setScore() {
         //this.state.score,this.state.maxScore,this.determineCorrect(this.state.answerChoice, this.getCorrect([this.state.counter]))this.toggleQA()
         console.log("max Score " + this.state.maxScore);
-        let crct = this.determineCorrect(this.state.answerChoice, this.getCorrect([this.state.counter]))
-        let maxScore = this.state.maxScore
-        let ptval = this.calcPointValue(this.state.counter)
+        let crct = this.determineCorrect(this.state.answerChoice, this.getCorrect([this.state.counter]));
+        let maxScore = this.state.maxScore;
+        let ptval = this.calcPointValue(this.state.counter);
 
-        console.log(crct, maxScore, ptval)
+        console.log(crct, maxScore, ptval);
         if (crct) {
             this.setState({score: this.state.score + ptval, maxScore: maxScore + ptval})
         } else {
@@ -147,10 +152,33 @@ class TriviaGame extends Component {
         this.toggleQA()
     }
 
+    getUserInfo() {
+        let token = this.props.token;
+        let requestUrl = "https://klingons.pythonanywhere.com/api/v1/profile/" +
+            this.props.id + "/";
+
+        console.log("id: " + this.props.id)
+        console.log("token: " + this.props.token)
+        let response = fetch(requestUrl, {
+            method: "GET",
+            dataType: "JSON",
+            headers: {
+                "Authorization": token,
+            }
+        }).then((resp) => {
+            return resp.json();
+        }).then((resp) => {
+            console.log(resp.json)
+            this.setState({userScoreTotal: resp.score})
+            console.log(this.state)
+        }).catch((error) => {
+            console.log(error, "Error in getUserInfo()");
+        })
+    }
+
     componentDidUpdate(prevProps, prevState) {
         if (prevState.questionBank !== this.state.questionBank) {
             //TF questions don't have incorrect answers to shuffle
-
             if (this.state.type === "multiple") {
                 this.setState({
                     questions: shuffle(this.state.questionBank[this.state.counter].incorrect_answers, this.state.questionBank[this.state.counter].correct_answer),
@@ -180,19 +208,17 @@ class TriviaGame extends Component {
         } else {
             return 1000
         }
-
     }
-
 
     toggleQA() {
         //toggle the question and answer displays
         let currentQuestion = this.state.counter, displaying = this.state.displaying, gameover = false, answers = [];
 
-        if (displaying === -1){                     //display answers
-            if(this.state.counter <= this.state.maxQuestions)
+        if (displaying === -1) {                     //display answers
+            if (this.state.counter <= this.state.maxQuestions)
                 this.setState({displaying: 0})
-        }else if (displaying === 0) {               //display correct answers
-            if(this.state.counter <= this.state.maxQuestions)
+        } else if (displaying === 0) {               //display correct answers
+            if (this.state.counter <= this.state.maxQuestions)
                 this.setState({displaying: 1})
         } else if (displaying === 1) {              //display question
             displaying = -1;
@@ -206,7 +232,13 @@ class TriviaGame extends Component {
             if (this.state.type === "multiple") {
                 answers = shuffle(this.state.questionBank[currentQuestion].incorrect_answers, this.state.questionBank[currentQuestion].correct_answer);
             }
-            this.setState({displaying: displaying, gameOver: gameover, counter: currentQuestion, questions: answers, currentQuestion: decodeURIComponent(this.state.questionBank[currentQuestion].question)});
+            this.setState({
+                displaying: displaying,
+                gameOver: gameover,
+                counter: currentQuestion,
+                questions: answers,
+                currentQuestion: decodeURIComponent(this.state.questionBank[currentQuestion].question)
+            });
         }
     }
 
@@ -236,28 +268,64 @@ class TriviaGame extends Component {
         return p
     }
 
-    DisplayResults(total, max, timer) {
-        const s = this.scoreMultiplier(max, timer);
-        let d;
-        if (timer > 0) {
-            d =
-                <div>
-                    <h1>You scored {total} out of {max}!</h1>
-                    <h3>Timer multiplier: <b>{s * 10}0%</b></h3>
-                    <h1>Total: <b>{s * total} points!</b></h1>
-                    <br/>
-                    <h1>Shorter timers, bigger multipliers!</h1>
-                </div>
-        } else {
-            d =
-                <div>
-                    <h1>You scored {total} out of {max}!</h1>
-                    <h3>Timer multiplier: <b>0%</b></h3>
-                    <h1>Total: <b>{Math.round((s * total))} points!</b></h1>
-                    <h1>Play with timers on to collect points! Shorter timers, bigger multipliers!</h1>
-                </div>
+    loadingResults(waitVar, s, total, accountTotal, timer, max) {
+        if (waitVar === null) {
+            return <h1>Loading Results...</h1>
+        }else if (timer > 0){
+            return<div>
+                <h1>You scored {total} out of {max}!</h1>
+                <h3>Timer multiplier: <b>{s * 10}0%</b></h3>
+                <h1>Total: <b>{s * total} points!</b></h1>
+                <br/>
+                <h1><b>Your account total is : {accountTotal + s * total}</b></h1>
+                <h1>Shorter timers, bigger multipliers!</h1>
+            </div>
+        }else{
+            return<div>
+                <h1>You scored {total} out of {max}!</h1>
+                <h3>Timer multiplier: <b>0%</b></h3>
+                <h1>Total: <b>{Math.round((s * total))} points!</b></h1>
+                <h1>Play with timers on to collect points! Shorter timers, bigger multipliers!</h1>
+            </div>
         }
-        return d
+    }
+
+    DisplayResults(total, max, timer) {
+
+
+        const s = this.scoreMultiplier(max, timer);
+        let accountTotal = this.state.userScoreTotal
+        let d;
+        let response;
+        let token = this.props.token;
+        const requestUrl = "https://klingons.pythonanywhere.com/api/v1/profile/" + this.props.id + "/";
+        console.log("s: " + s)
+        console.log("account total: " + accountTotal)
+        console.log("score: " + (s * total));
+        console.log("Total account score: " + accountTotal + (s * total))
+
+        if(!this.state.scoresPosted){response = fetch(requestUrl, {
+            method: "PATCH",
+            dataType: "JSON",
+            headers: {
+                "Authorization": token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "score": accountTotal + (s * total)
+            })
+        })
+            .then((resp) => {
+                return resp.json();
+            })
+            .then((resp) => {
+                console.log(resp)
+            })
+            .catch((error) => {
+                console.log(error, "catch the hoop")
+            });}
+
+        return this.loadingResults(response, s, total, accountTotal, timer, max)
     }
 
 
@@ -270,7 +338,7 @@ class TriviaGame extends Component {
                         tValue={this.props.timer}
                         display={true}
                         reset={this.state.counter}
-                        show = {this.state.displaying}
+                        show={this.state.displaying}
                         timeEndCallback={this.toggleQA}
                     />
                     :
@@ -280,7 +348,7 @@ class TriviaGame extends Component {
                             <Timer                       // answer timer
                                 display={false}
                                 tValue={4}
-                                show = {this.state.displaying}
+                                show={this.state.displaying}
                                 reset={this.props.displaying}
                                 timeEndCallback={this.setScore}/>
                         </>
@@ -288,7 +356,7 @@ class TriviaGame extends Component {
                         <ReverseTimer                           //readthequestiontimer
                             display={true}
                             tValue={3}
-                            show = {this.state.displaying}
+                            show={this.state.displaying}
                             reset={this.props.displaying}
                             timeEndCallback={this.toggleQA}/>]}
                 <br/>
@@ -304,18 +372,32 @@ class TriviaGame extends Component {
                                             <Col>
 
                                                 <QuestionCounterDisplay
-                                                    counter = {this.state.counter}
+                                                    counter={this.state.counter}
                                                     maxQuestions={this.state.maxQuestions + 1}
-                                                    score = {this.state.score}
+                                                    score={this.state.score}
                                                 />
 
                                             </Col>
                                             <Col>
-                                                <DateTimer
+
+                                                {/*{this.setState({bigTimer: <DateTimerPercent
                                                 tValue = {this.props.timer}
-                                                resetValue = {this.state.displaying}/>
+                                                resetValue = {this.state.displaying}/>})}
+                                                <ProgressLine
+                                                    label="One visual percentage - changed background"
+                                                    backgroundColor="lightblue"
+                                                    visualParts={[
+                                                        {
+                                                            percentage: this.state.bigTimer,
+                                                            color: "indianred"
+                                                        }
+                                                    ]}
+                                                />*/}
+
                                                 {/*spacer element*/}
                                                 <button style={{visibility: "hidden"}}/>
+                                            
+
 
                                             </Col>
                                         </Row>
@@ -326,7 +408,7 @@ class TriviaGame extends Component {
                                         <h2>
                                             {this.state.displaying <= 0 ?
                                                 <DisplayJumbo
-                                                    currentQuestion = {this.state.currentQuestion}
+                                                    currentQuestion={this.state.currentQuestion}
                                                 />
                                                 :
                                                 <DisplayAnswer
@@ -346,11 +428,11 @@ class TriviaGame extends Component {
                                             answerCallback={this.setA}
                                             answerDisplay={this.state.displaying}
                                             correctAnswer={this.getCorrect(this.state.counter)}/>
-                                        :[
+                                        : [
                                             this.state.type === "boolean" && this.state.displaying >= 0 &&
                                             <TFBlock
                                                 counter={this.state.counter}
-                                                answerCallback={this.setTF}/>] }
+                                                answerCallback={this.setTF}/>]}
                                     {/*counter must be passed to TF even though it does not use then, because it resets the selection*/}
                                     <br/>
                                     <Container>

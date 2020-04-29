@@ -1,5 +1,4 @@
 import React from "react";
-import Form from 'react-bootstrap/Form';
 import EditProfile from './EditProfile';
 import Container from 'react-bootstrap/Container';
 import {Row, Col} from 'react-bootstrap';

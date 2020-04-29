@@ -10,7 +10,6 @@ import UserProfile from './components/UserProfile';
 import Leaderboard from './components/Leaderboard';
 import About from './components/About';
 import {Motion, spring} from "react-motion";
-import Timer from "./components/Timer";
 
 
 class App extends React.Component {

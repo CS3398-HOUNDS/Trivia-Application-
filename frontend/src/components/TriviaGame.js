@@ -44,12 +44,15 @@ function DisplayAnswer(props) {
             {usrWasCorrect ? <h3>{goodJob[0]} You earned <b>+{timerScore}</b> points out of {points}!</h3> : <h3>{scold[0]}</h3>}
             {/*On the last page, make a button to go to results*/}
             {questionsLeft === 0 &&
+            <>
+                {props.disableTimer()}
             <Button
                 variant="primary"
                 onClick={() => {
                     props.initNextQuestion()
                 }}
             > Get Results!</Button>
+            </>
             }
         </div>
     )
@@ -79,7 +82,6 @@ function shuffle(incorrect, correct) {
     return array;
 }
 
-
 class TriviaGame extends Component {
     constructor(props) {
         super(props);
@@ -97,18 +99,24 @@ class TriviaGame extends Component {
             gameOver: false,
             displaying: -1,
             scoresPosted: false,
-            timerScore: null
+            timerScore: null,
+            disableTimer: false
 
-        }//switches between displaying the question (0) and the correct answer (1)
+        }
         ;
         this.setA = this.setA.bind(this);
         this.setTF = this.setTF.bind(this);
         this.toggleQA = this.toggleQA.bind(this);
         this.setScore = this.setScore.bind(this);
         this.setTimerScore = this.setTimerScore.bind(this)
+        this.disableTimer = this.disableTimer.bind(this)
     }
 
-    display = null;
+    disableTimer(){
+        console.log("disabled timers")
+        if(!this.state.disableTimer)
+            this.setState({disableTimer: true})
+    }
 
     async componentDidMount() {
         var self = this;
@@ -210,7 +218,8 @@ class TriviaGame extends Component {
         //toggle the question and answer displays
         let currentQuestion = this.state.counter, displaying = this.state.displaying, gameover = false, answers = [];
 
-        if (displaying === -1) {                     //display answers
+        if (displaying === -1) {
+           //display answers
             if (this.state.counter <= this.state.maxQuestions)
                 this.setState({displaying: 0})
         } else if (displaying === 0) {               //display correct answers
@@ -275,6 +284,7 @@ class TriviaGame extends Component {
             p = Math.round(p)
         }
         p /= 100;
+        p= Math.round(p)
         return p
     }
 
@@ -340,7 +350,7 @@ class TriviaGame extends Component {
         return (
             <Container>
                 {this.state.timer > 0 && this.state.displaying === 0 ?
-                    <DateTimerPercent
+                    <DateTimerPercent                                       //question Timer
                         tValue={this.props.timer}
                         display={true}
                         reset={this.state.counter}
@@ -349,32 +359,26 @@ class TriviaGame extends Component {
                         callback = {this.toggleQA}
                         maxPointsForQuestion = {this.calcPointValue(this.state.counter)}
                     />
-
-                    /*<Timer                          // question timer
-                        tValue={this.props.timer}
-                        display={true}
-                        reset={this.state.counter}
-                        show={this.state.displaying}
-                        timeEndCallback={this.toggleQA}
-                    />*/
                     :
-                    [this.state.displaying === 1 && this.state.counter < this.state.maxQuestions ?
+                    [this.state.displaying === 1 && !this.state.disableTimer ?
                         <>
                             <ProgressBar now={0}/>
-                            <Timer                       // answer timer
+                            <Timer                       // reveal answer timer
                                 display={false}
                                 tValue={4}
                                 show={this.state.displaying}
                                 reset={this.props.displaying}
                                 timeEndCallback={this.setScore}/>
                         </>
-                        : this.state.counter <= this.state.maxQuestions &&
+                        : [!this.state.disableTimer ?
                         <ReverseTimer                           //readthequestiontimer
                             display={true}
                             tValue={3}
                             show={this.state.displaying}
                             reset={this.props.displaying}
-                            timeEndCallback={this.toggleQA}/>]}
+                            timeEndCallback={this.toggleQA}/>:
+                            <ProgressBar now={0}/>
+                        ]]}
                 <br/>
                 <center>
                     {this.state.loading || this.state.questionBank === [] ? (
@@ -418,7 +422,10 @@ class TriviaGame extends Component {
                                                     questionsLeft={this.state.maxQuestions - this.state.counter}
                                                     initNextQuestion={this.toggleQA}
                                                     timerScore = {this.state.timerScore}
-                                                    returnScores={this.setScore}/>
+                                                    returnScores={this.setScore}
+                                                    disableTimer = {this.disableTimer}
+                                                />
+
                                             }
                                         </h2>
                                     </Jumbotron>
@@ -443,8 +450,10 @@ class TriviaGame extends Component {
                                                 {this.state.displaying === 0 &&
                                                 <Button
                                                     onClick={() => this.toggleQA()}
+                                                    style={{visibility: "hidden"}}
                                                     variant="secondary">
                                                     Submit
+
                                                 </Button>}
                                             </Col>
                                             <Col>
@@ -453,6 +462,7 @@ class TriviaGame extends Component {
                                                         onClick={() => {
                                                             this.setScore()
                                                         }}
+                                                        style={{visibility: "hidden"}}
                                                         variant="secondary">
                                                         Next
                                                     </Button> : ""}

@@ -60,7 +60,8 @@ class ReverseTimer extends React.Component {
         return(
             <div>
                 {this.props.display &&
-                    <ProgressBar variant={"success"} srOnly
+                    <ProgressBar variant="info"
+                                 label={"Get ready!"}
                                  now={100 - (this.state.percentage)} max={100}/>
                 }
             </div>

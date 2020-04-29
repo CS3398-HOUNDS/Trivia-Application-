@@ -14,6 +14,7 @@ class DateTimerPercent extends React.Component {
             getTimeValue: "",
         }
         let percentValue;
+        let displayPercent;
     }
 
     setTargetDate(x) {
@@ -67,14 +68,21 @@ class DateTimerPercent extends React.Component {
             this.props.callback(this.percentValue)
         }
         {
-            this.state.getTimeValue !== this.props.getTimeValue &&
-            this.returnTime(this.percentValue)
+            this.state.getTimeValue !== this.props.getTimeValue && this.props.getTimeValue !== null &&
+            (this.percentValue === 100 ?
+                    this.returnTime(null)
+                    :
+                this.returnTime(this.percentValue))
         }
+        if(this.percentValue < 75)
+            this.displayPercent = this.percentValue + 25
+        else
+            this.displayPercent = 100
 
         return (
             <>
-                {this.state.display &&
-                <ProgressBar now={this.percentValue}/>}
+                {this.props.display &&
+                <ProgressBar now={this.percentValue} label={(this.displayPercent * this.props.maxPointsForQuestion) / 100}/>}
 
 
             </>)

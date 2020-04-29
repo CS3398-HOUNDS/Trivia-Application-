@@ -30,6 +30,7 @@ function DisplayAnswer(props) {
     //(score, correct, points, questionsLeft, startNextQuestion)
     const usrWasCorrect = props.correct;
     const points = props.points;
+    const timerScore = props.timerScore
     const questionsLeft = props.questionsLeft;
     const grats = ["Nice!", "Correct!", "Bingo!", "Excellent!", "Yahtzee!", "Grats!"]
     const shucks = ["Shucks...", "Darn...", "Breh...", "Bummer...", "Wiff...", "Bust..."]
@@ -40,7 +41,7 @@ function DisplayAnswer(props) {
         <div>
 
             {/*grats on correct answer, harsh scolding on incorrect answer*/}
-            {usrWasCorrect ? <h3>{goodJob[0]} You earned <b>+{points}</b> points!</h3> : <h3>{scold[0]}</h3>}
+            {usrWasCorrect ? <h3>{goodJob[0]} You earned <b>+{timerScore}</b> points out of {points}!</h3> : <h3>{scold[0]}</h3>}
             {/*On the last page, make a button to go to results*/}
             {questionsLeft === 0 &&
             <Button
@@ -95,14 +96,16 @@ class TriviaGame extends Component {
             answerChoice: "",
             gameOver: false,
             displaying: -1,
-            scoresPosted: false
+            scoresPosted: false,
+            timerScore: null
 
         }//switches between displaying the question (0) and the correct answer (1)
         ;
         this.setA = this.setA.bind(this);
         this.setTF = this.setTF.bind(this);
         this.toggleQA = this.toggleQA.bind(this);
-        this.setScore = this.setScore.bind(this)
+        this.setScore = this.setScore.bind(this);
+        this.setTimerScore = this.setTimerScore.bind(this)
     }
 
     display = null;
@@ -140,9 +143,10 @@ class TriviaGame extends Component {
         //this.state.score,this.state.maxScore,this.determineCorrect(this.state.answerChoice, this.getCorrect([this.state.counter]))this.toggleQA()
         let crct = this.determineCorrect(this.state.answerChoice, this.getCorrect([this.state.counter]));
         let maxScore = this.state.maxScore;
+        let timerScore = this.state.timerScore;
         let ptval = this.calcPointValue(this.state.counter);
         if (crct) {
-            this.setState({score: this.state.score + ptval, maxScore: maxScore + ptval})
+            this.setState({score: this.state.score + timerScore, maxScore: maxScore + ptval})
         } else {
             this.setState({score: this.state.score, maxScore: maxScore + ptval})
         }
@@ -229,6 +233,7 @@ class TriviaGame extends Component {
                 gameOver: gameover,
                 counter: currentQuestion,
                 questions: answers,
+                answerChoice: null,
                 currentQuestion: decodeURIComponent(this.state.questionBank[currentQuestion].question)
             });
         }
@@ -242,6 +247,19 @@ class TriviaGame extends Component {
         this.setState({answerChoice: this.state.questions[value]});
 
     };
+
+    setTimerScore(timerScore){
+        let ptval = this.calcPointValue(this.state.counter);
+        let timerScoreA;
+        if(timerScore < 75)
+            timerScoreA = (timerScore + 25)/100;
+        else
+            timerScoreA = 1
+        this.setState({
+
+            timerScore: Math.round(timerScoreA * ptval)
+        })
+    }
 
     scoreMultiplier(max, timer) {
         let p = 0;
@@ -322,13 +340,23 @@ class TriviaGame extends Component {
         return (
             <Container>
                 {this.state.timer > 0 && this.state.displaying === 0 ?
-                    <Timer                          // question timer
+                    <DateTimerPercent
+                        tValue={this.props.timer}
+                        display={true}
+                        reset={this.state.counter}
+                        getTimeValue={this.state.answerChoice}
+                        getTime = {this.setTimerScore}
+                        callback = {this.toggleQA}
+                        maxPointsForQuestion = {this.calcPointValue(this.state.counter)}
+                    />
+
+                    /*<Timer                          // question timer
                         tValue={this.props.timer}
                         display={true}
                         reset={this.state.counter}
                         show={this.state.displaying}
                         timeEndCallback={this.toggleQA}
-                    />
+                    />*/
                     :
                     [this.state.displaying === 1 && this.state.counter < this.state.maxQuestions ?
                         <>
@@ -367,6 +395,8 @@ class TriviaGame extends Component {
 
                                             </Col>
                                             <Col>
+                                                {this.state.displaying !== -1 && this.state.answerChoice !== null &&
+                                                <h1>{this.state.timerScore}</h1>}
                                                 {/*spacer element*/}
                                                 <button style={{visibility: "hidden"}}/>
                                             </Col>
@@ -387,6 +417,7 @@ class TriviaGame extends Component {
                                                     points={this.calcPointValue(this.state.counter)}
                                                     questionsLeft={this.state.maxQuestions - this.state.counter}
                                                     initNextQuestion={this.toggleQA}
+                                                    timerScore = {this.state.timerScore}
                                                     returnScores={this.setScore}/>
                                             }
                                         </h2>

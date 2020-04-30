@@ -21,9 +21,9 @@ class Login extends Component {
         };
 
         //MUST BIND for function to work
-        this.updatePassword = this.updatePassword.bind(this)
-        this.updateUsername = this.updateUsername.bind(this)
-        this.postData = this.postData.bind(this)
+        this.updatePassword = this.updatePassword.bind(this);
+        this.updateUsername = this.updateUsername.bind(this);
+        this.postData = this.postData.bind(this);
         const errorMessage = this.state.errorMessage
     }
 

@@ -59,7 +59,7 @@ class App extends React.Component {
                 this.setState({username: resp.username, userId: resp.id, userEmail: resp.email})
             })
             .then((resp) => {
-                this.handleClick("Splash")
+                this.handleClick("Create")
             })
             .catch((error) => {
                 console.log(error, "catch the hoop")

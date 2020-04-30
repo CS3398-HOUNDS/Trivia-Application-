@@ -176,10 +176,9 @@ class CreateGame extends React.Component {
                 </Formik>
                 <div style={{maxWidth:"400px", textAlign:"center", margin: "0 auto"}}>
                     <ul>
-                        <li>Shorter timers = bigger score multipliers</li>
-                        <li>Multiple choice questions are worth as much as 5x the points of True/False
-                            questions!
-                        </li>
+                        <li>Shorter timers = bigger score multipliers!</li>
+                        <li>Answer quickly to score maximum points!</li>
+                        <li>Multiple choice questions are worth much more than True/False questions!</li>
                     </ul>
                 </div>
             </Container>

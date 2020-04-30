@@ -55,18 +55,7 @@ class CreateGame extends React.Component {
         }
         //set the url
         url = "https://opentdb.com/api.php?amount=" + amount + "&category=" + category + "&type=" + type +"&encode=url3986"
-        console.log(url);
-        /*fetch(url, {
-        method: "GET",
-        dataType: "JSON",
-    })
-        .then((resp) => {
-            return resp.json()
-        })
-        .then((data) => {this.props.callbackGameData(url,type,timer,amount)})
-        .catch((error) => {
-            console.log(error, "catch the hoop")
-        })*/
+
         this.props.callbackGameData(url,type,timer,amount)
         this.props.switchToTrivia("TriviaGame")
     };
@@ -174,7 +163,6 @@ class CreateGame extends React.Component {
                                             <option>10s</option>
                                             <option>20s</option>
                                             <option>60s</option>
-                                            <option>OFF</option>
                                         </Form.Control>
                                     </Col>
                                 </Row>

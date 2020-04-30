@@ -84,7 +84,7 @@ class DateTimerPercent extends React.Component {
                 {this.props.display &&
                 <ProgressBar
                     now={this.percentValue}
-                    label={(this.displayPercent * this.props.maxPointsForQuestion) / 100}/>}
+                    label={Math.round((this.displayPercent * this.props.maxPointsForQuestion) / 100)}/>}
 
 
             </>)

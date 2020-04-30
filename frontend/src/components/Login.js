@@ -4,6 +4,8 @@ import Button from "react-bootstrap/Button";
 import {Formik} from "formik";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
+import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
+import ToggleButton from "react-bootstrap/ToggleButton";
 
 class Login extends Component {
     constructor(props) {
@@ -14,7 +16,8 @@ class Login extends Component {
             email: null,
             buttonAction: '',
             success: false,
-            errorMessage: ''
+            errorMessage: '',
+            lsuState:"Login"
         };
 
         //MUST BIND for function to work
@@ -116,6 +119,10 @@ class Login extends Component {
                     <div style={{"color": "red"}}>{this.state.errorMessage}</div>
                 </Container>
                     <Container style={{width: "300px"}}>
+                        <ToggleButtonGroup type="radio" name="options" defaultValue={1}>
+                            <ToggleButton value={1} onClick={()=>{this.setState({lsuState:"Login"})}}>Login</ToggleButton>
+                            <ToggleButton value={2} onClick={()=>{this.setState({lsuState:"SignUp"})}}>Sign Up</ToggleButton>
+                        </ToggleButtonGroup>
 
                         <Row>
                             <Formik initialValues={{
@@ -156,20 +163,17 @@ class Login extends Component {
                                         </Form.Group>
                                         <Button
                                             type={"submit"}
+                                            style={this.state.lsuState==="SignUp" ? {display:"none"} : {display: "inline"}}
                                             onClick={() => {
                                                 this.setButtonAction("Login")
                                             }}
                                             disabled={isSubmitting}
                                         >Login</Button>
                                         <br/>
-                                        <br/>
-                                        <br/>
-                                        <div style={{"boxShadow": "0px 0px 6px 9px rgba(255,255,255,.8)"}}>New to
-                                            Trivia Knights? Just add your email and press Sign Up.
-                                        </div>
-                                        <br/>
+
                                         <Form.Group controlId="email">
                                             <Form.Control
+                                                style={this.state.lsuState==="Login" ? {display:"none"} : {display: "inline"}}
                                                 type="email"
                                                 placeholder="email"
                                                 name="email"
@@ -179,12 +183,15 @@ class Login extends Component {
                                             />
                                         </Form.Group>
                                         <Button
-                                            type={"submit"}
+                                            style={this.state.lsuState==="Login" ? {display:"none"} : {display: "inline"}}
                                             disabled={isSubmitting}
                                             onClick={() => {
                                                 this.setButtonAction("Create")
                                             }}
-                                        >Sign Up</Button>
+                                        >Sign Up</Button><div style={this.state.lsuState==="SignUp" ? {display:"none"} : {display: "inline"}}>
+                                        <div style={{boxShadow: "0px 0px 5px 5px rgba(255,255,255,.2)"}}>New to
+                                            Trivia Knights? Just hit Signup above and give us a good email to reach you at.
+                                        </div></div>
                                     </Form>)}
                             </Formik>
 

@@ -86,7 +86,7 @@ class MCBlock extends Component {
                                 <Button
                                     className={this.getStyle(1,"B")}
                                     variant={this.getVariant(1,"B")}
-                                    value={1}
+
                                     onClick={()=>this.set(1,"B")}> {decodeURIComponent(this.props.questions[1])}</Button>
                             </td>
 

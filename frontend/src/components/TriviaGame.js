@@ -206,11 +206,20 @@ class TriviaGame extends Component {
 
     calcPointValue(currentQuestion) {
         if (this.state.questionBank[currentQuestion].difficulty === "easy") {
-            return 100
+            if(this.state.type === "multiple")
+                return 100;
+            else
+                return 50;
         } else if (this.state.questionBank[currentQuestion].difficulty === "medium") {
-            return 500
+            if(this.state.type === "multiple")
+                return 500;
+            else
+                return 100;
         } else {
-            return 1000
+            if(this.state.type === "multiple")
+                return 1000;
+            else
+                return 200;
         }
     }
 
@@ -439,7 +448,10 @@ class TriviaGame extends Component {
                                         : [
                                             this.state.type === "boolean" && this.state.displaying >= 0 &&
                                             <TFBlock
+                                                questions={this.state.questions}
+                                                answerDisplay={this.state.displaying}
                                                 counter={this.state.counter}
+                                                correctAnswer={this.getCorrect(this.state.counter)}
                                                 answerCallback={this.setTF}/>]}
                                     {/*counter must be passed to TF even though it does not use then, because it resets the selection*/}
                                     <br/>

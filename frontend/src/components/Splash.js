@@ -24,6 +24,7 @@ class Splash extends React.Component {
                                 className={"letterhead"}
                                 src={require("../imgs/LH4.png")}
                                 alt={require("../imgs/2.png")}/>
+
                         )}
                     </Motion>
                     <Row>

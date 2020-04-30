@@ -55,11 +55,10 @@ class App extends React.Component {
                 return resp.json();
             })
             .then((resp) => {
-                console.log(resp);
+
                 this.setState({username: resp.username, userId: resp.id, userEmail: resp.email})
             })
             .then((resp) => {
-                console.log(this.state);
                 this.handleClick("Splash")
             })
             .catch((error) => {
@@ -197,19 +196,21 @@ class App extends React.Component {
                 <Navbar bg="dark" variant="dark">
                     <Navbar.Brand onClick={() => this.handleClick("Splash")}>Trivia Knights</Navbar.Brand>
                     <Nav className="mr-auto">
-                        <Nav.Link onClick={() => this.handleClick("About")}>About</Nav.Link>
-                        <Nav.Link onClick={() => this.handleClick("Leaderboard")}>Leaderboard</Nav.Link>
+                        {this.state.selectedComponent !== "TriviaGame" &&
+                        <Nav.Link
+                            className="superButton"
+                            style={{backgroundColor: "#0D9469"}}
+                            onClick={() => {this.state.userLoggedIn ?  this.handleClick("Create") : this.handleClick("Login")}}><b>Play</b></Nav.Link>
+                        }
                         {this.state.userLoggedIn ?
                             <Nav.Link onClick={() => this.handleClick("Profile")}>Profile</Nav.Link> :
-                            <Nav.Link onClick={() => this.handleClick("Login")}>Login</Nav.Link>
+                            <Nav.Link onClick={() => this.handleClick("Login")}>Sign Up</Nav.Link>
                         }
+                        <Nav.Link onClick={() => this.handleClick("About")}>About</Nav.Link>
+                        <Nav.Link onClick={() => this.handleClick("Leaderboard")}>Leaderboard</Nav.Link>
+
                         {/*Changes Play to Quit button if in game*/}
-                      {this.state.selectedComponent !== "TriviaGame" && this.state.userLoggedIn &&
-                      <Nav.Link
-                          className="superButton"
-                          style={{backgroundColor: "#0D9469"}}
-                          onClick={() => this.handleClick("Create")}><b>Play</b></Nav.Link>
-                      }
+
                       {this.state.selectedComponent === "TriviaGame" &&
                       <Nav.Link
                                 className="superButton"

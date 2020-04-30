@@ -204,7 +204,7 @@ class App extends React.Component {
                         }
                         {this.state.userLoggedIn ?
                             <Nav.Link onClick={() => this.handleClick("Profile")}>Profile</Nav.Link> :
-                            <Nav.Link onClick={() => this.handleClick("Login")}>Sign Up</Nav.Link>
+                            <Nav.Link onClick={() => this.handleClick("Login")}>Login</Nav.Link>
                         }
                         <Nav.Link onClick={() => this.handleClick("About")}>About</Nav.Link>
                         <Nav.Link onClick={() => this.handleClick("Leaderboard")}>Leaderboard</Nav.Link>

@@ -3,17 +3,15 @@ import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Form from "react-bootstrap/Form";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Row, Col } from 'react-bootstrap';
+import {Row, Col} from 'react-bootstrap';
 import '../style.css';
-import { Formik } from 'formik';
+import {Formik} from 'formik';
 
 
 class CreateGame extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-
-        };
+        this.state = {};
     };
 
 // This is the main logic for submission button. Its so large because it has to set states, calculate URL and handle the
@@ -28,63 +26,56 @@ class CreateGame extends React.Component {
         //This block builds the URL for the api call to make questions
         if (values.qType === "Multiple Choice") {
             type = "multiple"
-        }else{
+        } else {
             type = "boolean"
         }
-        if (values.triviaCategories === "Sports"){
+        if (values.triviaCategories === "Sports") {
             category = 21
-        } else if (values.triviaCategories === "Music"){
-            category = 21
-        } else if (values.triviaCategories === "Politics"){
-            category = 21
+        } else if (values.triviaCategories === "Music") {
+            category = 12
+        } else if (values.triviaCategories === "General Knowledge") {
+            category = 9
         } else if (values.triviaCategories === "History") {
-            category = 21
-        }else{
-            category = 11
+            category = 23
+        } else {
+            category = 11 //movies
         }
-        if (values.timerLength === "15s"){
-            timer = 15
-        } else if (values.timerLength === "30s"){
-            timer = 30
-        } else if (values.timerLength === "60s"){
+        if (values.timerLength === "10s") {
+            timer = 10
+        } else if (values.timerLength === "7s") {
+            timer = 7
+        } else if (values.timerLength === "20s") {
+            timer = 20
+        } else if (values.timerLength === "60s") {
             timer = 60
-        }else{
+        } else {
             timer = 0
         }
         //set the url
-        url = "https://opentdb.com/api.php?amount=" + amount + "&category=" + category + "&difficulty=medium&type=" + type
-        //console.log(url);
-        /*fetch(url, {
-        method: "GET",
-        dataType: "JSON",
-    })
-        .then((resp) => {
-            return resp.json()
-        })
-        .then((data) => {this.props.callbackGameData(url,type,timer,amount)})
-        .catch((error) => {
-            console.log(error, "catch the hoop")
-        })*/
-        this.props.callbackGameData(url,type,timer,amount)
+        url = "https://opentdb.com/api.php?amount=" + amount + "&category=" + category + "&type=" + type + "&encode=url3986"
+
+        this.props.callbackGameData(url, type, timer, amount)
         this.props.switchToTrivia("TriviaGame")
     };
 
     render() {
-        return(
+        return (
             <Container style={{textAlign: "center"}}>
 
-                <img className={"LetterHead"} src={require("../imgs/LH4.png")} style={{width:"350px",
+                <img className={"LetterHead"} src={require("../imgs/LH4.png")} alt={require("../imgs/3.png")} style={{
+                    width: "350px",
                     height: "auto",
                     opacity: "1",
-                    padding:"2",
+                    padding: "2",
                     textAlign: "center"
                 }} alt={require("../imgs/5.png")}/>
 
                 <Formik initialValues={{
-                    triviaCategories: "Movies",
+                    triviaCategories: "General Knowledge",
                     qType: "Multiple Choice",
                     questionCount: 10,
-                    timerLength: "15s"}}
+                    timerLength: "10s"
+                }}
                         onSubmit={(values, {setSubmitting, resetForm}) => {
                             // When button submits form and form is in the process of submitting, submit button is disabled
                             setSubmitting(true);
@@ -103,13 +94,14 @@ class CreateGame extends React.Component {
                         }}
                 >
                     {/* Callback function containing Formik state and helpers that handle common form actions */}
-                    {( {values,
-                           handleChange,
-
-                           handleSubmit,
-                           isSubmitting }) => (
+                    {({
+                          values,
+                          handleChange,
+                          handleSubmit,
+                          isSubmitting
+                      }) => (
                         <Form onSubmit={handleSubmit}>
-                            <br/>
+
                             <Form.Group controlId={"triviaCategories"}>
                                 <Row>
                                     <Form.Label column={"lg"} lg={3}>
@@ -120,19 +112,19 @@ class CreateGame extends React.Component {
                                             as={"select"}
                                             onChange={handleChange}
                                             value={values.triviaCategories}>
+                                            <option>General Knowledge</option>
                                             <option>History</option>
                                             <option>Sports</option>
-                                            <option>Politics</option>
                                             <option>Music</option>
                                             <option>Movies</option>
                                         </Form.Control>
                                     </Col>
                                 </Row>
                             </Form.Group>
-                            <br/>
+
                             <Form.Group controlId={"qType"}>
                                 <Row>
-                                    <Form.Label  column="lg" lg={3}>Question Types:</Form.Label>
+                                    <Form.Label column="lg" lg={3}>Question Types:</Form.Label>
                                     <Col sm={2}>
                                         <Form.Control
                                             as={"select"}
@@ -144,43 +136,51 @@ class CreateGame extends React.Component {
                                     </Col>
                                 </Row>
                             </Form.Group>
-                            <br/>
+
                             <Form.Group controlId={"questionCount"}>
                                 <Row>
-                                    <Form.Label  column="lg" lg={3}>Number of Questions:</Form.Label>
+                                    <Form.Label column="lg" lg={3}>Number of Questions:</Form.Label>
                                     <Col sm={2}>
                                         <Form.Control as={"select"}
                                                       onChange={handleChange}
                                                       value={values.questionCount}>
+                                            <option>5</option>
                                             <option>10</option>
                                             <option>15</option>
-                                            <option>20</option>
+                                            <option>30</option>
                                         </Form.Control>
                                     </Col>
                                 </Row>
                             </Form.Group>
-                            <br/>
+
                             <Form.Group controlId={"timerLength"}>
                                 <Row>
-                                    <Form.Label  column="lg" lg={3}>Question Timer:</Form.Label>
+                                    <Form.Label column="lg" lg={3}>Question Timer:</Form.Label>
                                     <Col sm={2}>
                                         <Form.Control
                                             as={"select"}
                                             onChange={handleChange}
                                             value={values.timerLength}>
-                                            <option>15s</option>
-                                            <option>30s</option>
+                                            <option>7s</option>
+                                            <option>10s</option>
+                                            <option>20s</option>
                                             <option>60s</option>
-                                            <option>OFF</option>
                                         </Form.Control>
                                     </Col>
                                 </Row>
                             </Form.Group>
-                            <br/>
+
                             <Button type={"submit"} disabled={isSubmitting}>Create New Game</Button>
-                            <br/>
+
                         </Form>)}
                 </Formik>
+                <div style={{maxWidth:"400px", textAlign:"center", margin: "0 auto"}}>
+                    <ul>
+                        <li>Shorter timers = bigger score multipliers!</li>
+                        <li>Answer quickly to score maximum points!</li>
+                        <li>Multiple choice questions are worth much more than True/False questions!</li>
+                    </ul>
+                </div>
             </Container>
 
         );

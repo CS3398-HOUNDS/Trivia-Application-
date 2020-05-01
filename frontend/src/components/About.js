@@ -16,7 +16,7 @@ class About extends React.Component {
         <h1>About Trivia Knights</h1>
         <p>
           Trivia Knights is a software engineering project by Team Klingons to
-          provide an environment in which to apply concepts covered in CS3398, a
+          provide an environment in which to apply concepts covered in CS3398,
           a computer science course in Software Engineering at Texas State University.
         </p>
         <br />

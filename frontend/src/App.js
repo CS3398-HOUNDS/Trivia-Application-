@@ -85,7 +85,7 @@ class App extends React.Component {
         if (selection === "Profile") {
             propss = {token: this.state.userToken, id: this.state.userId, name: this.state.username, email:this.state.userEmail}
         } else if (selection === "Leaderboard") {
-            propss = {token: this.state.sureToken};
+            propss = {token: this.state.userToken};
         } else if (selection === "Login") {
             propss = {setToken: this.setUserToken}
         } else if (selection === "TriviaGame") {
@@ -207,7 +207,8 @@ class App extends React.Component {
                             <Nav.Link onClick={() => this.handleClick("Login")}>Login</Nav.Link>
                         }
                         <Nav.Link onClick={() => this.handleClick("About")}>About</Nav.Link>
-                        <Nav.Link onClick={() => this.handleClick("Leaderboard")}>Leaderboard</Nav.Link>
+                        {this.state.userLoggedIn && <Nav.Link onClick={() => this.handleClick("Leaderboard")}>Leaderboard</Nav.Link>}
+                        {this.state.userLoggedIn && <Nav.Link onClick={() => this.setState({userLoggedIn: false, selectedComponent: "Splash"})}>Logout</Nav.Link>}
 
                         {/*Changes Play to Quit button if in game*/}
 

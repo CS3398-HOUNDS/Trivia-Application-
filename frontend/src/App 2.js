@@ -200,7 +200,7 @@ class App extends React.Component {
                         <Nav.Link
                             className="superButton"
                             style={{backgroundColor: "#0D9469"}}
-                            onClick={() => { this.handleClick("Create")}}><b>Play</b></Nav.Link>
+                            onClick={() => {this.state.userLoggedIn ?  this.handleClick("Create") : this.handleClick("Login")}}><b>Play</b></Nav.Link>
                         }
                         {this.state.userLoggedIn ?
                             <Nav.Link onClick={() => this.handleClick("Profile")}>Profile</Nav.Link> :

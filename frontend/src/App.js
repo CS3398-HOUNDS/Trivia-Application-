@@ -93,7 +93,9 @@ class App extends React.Component {
                 requestUrl: this.state.requestUrl,
                 type: this.state.type,
                 timer: this.state.timer,
-                maxQuestions: this.state.maxQuestions
+                maxQuestions: this.state.maxQuestions,
+                token: this.state.userToken,
+                id: this.state.userId
             }
         } else if (selection === "Create") {
             propss = {callbackGameData: this.updateGameData, switchToTrivia: this.handleClick}

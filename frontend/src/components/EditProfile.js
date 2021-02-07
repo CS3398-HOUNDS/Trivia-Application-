@@ -1,10 +1,8 @@
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
 import {Formik} from "formik";
 import React, {Component} from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import UserProfile from "./UserProfile";
 
 class EditProfile extends Component {
     constructor(props) {

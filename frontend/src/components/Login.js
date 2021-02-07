@@ -62,6 +62,7 @@ class Login extends Component {
                 });
         } else if (this.state.buttonAction === "Create") {
             const requestUrl = "https://klingons.pythonanywhere.com/api/auth/users/";
+            console.log("Create called")
             let response = fetch(requestUrl, {
                 method: "POST",
                 dataType: "JSON",
@@ -183,6 +184,7 @@ class Login extends Component {
                                             />
                                         </Form.Group>
                                         <Button
+                                            type={"submit"}
                                             style={this.state.lsuState==="Login" ? {display:"none"} : {display: "inline"}}
                                             disabled={isSubmitting}
                                             onClick={() => {

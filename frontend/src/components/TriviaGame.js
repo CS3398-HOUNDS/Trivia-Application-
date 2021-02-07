@@ -1,4 +1,4 @@
-import React, {Component, useEffect} from "react";
+import React, {Component, useEffect, useState} from "react";
 import Button from 'react-bootstrap/Button';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Container from 'react-bootstrap/Container';
@@ -9,18 +9,16 @@ import Timer from "./Timer";
 import Row from "react-bootstrap/Row";
 import ReverseTimer from "./ReverseTimer";
 import ProgressBar from "react-bootstrap/ProgressBar";
-import ProgressLine from "./ProgressLine";
+import DateTimer from "./DateTimer";
 
-
-let QuestionCounterDisplay = (props) => {
+let QuestionCounterDisplay =(props)=>{
     return (
         <>
             <h1>Question <b>{props.counter + 1}</b> out
                 of <b>{props.maxQuestions}</b></h1>
-            <h4>score: {props.score > 0 ? props.score : "---"}</h4>
+            <h4>score: {props.score > 0 ? props.score : "---" }</h4>
         </>
-    )
-};
+    )};
 
 function DisplayJumbo(props) {
     return props.currentQuestion
@@ -97,6 +95,7 @@ class TriviaGame extends Component {
             counter: 0,
             answerChoice: "",
             gameOver: false,
+<<<<<<< HEAD
             displaying: -1,
             scoresPosted: false,
             timerScore: null,
@@ -104,6 +103,10 @@ class TriviaGame extends Component {
 
         }
         ;
+=======
+            displaying: -1 //switches between displaying the question (0) and the correct answer (1)
+        };
+>>>>>>> parent of cd1f1d3c... Scores now work and post to the server.
         this.setA = this.setA.bind(this);
         this.setTF = this.setTF.bind(this);
         this.toggleQA = this.toggleQA.bind(this);
@@ -121,7 +124,6 @@ class TriviaGame extends Component {
     async componentDidMount() {
         var self = this;
         //DO NOT REMOVE THIS LINE
-        this.getUserInfo()
 
         let response = fetch(this.props.requestUrl, {
             method: "GET",
@@ -142,6 +144,7 @@ class TriviaGame extends Component {
             .catch((error) => {
                 console.log(error, "catch the hoop")
             });
+        console.log(response);
 
         //Sets the game difficulty multiplier for score (1: 10secs, 1/2: 20secs, 1/60:60secs)
 
@@ -149,10 +152,19 @@ class TriviaGame extends Component {
 
     setScore() {
         //this.state.score,this.state.maxScore,this.determineCorrect(this.state.answerChoice, this.getCorrect([this.state.counter]))this.toggleQA()
+<<<<<<< HEAD
         let crct = this.determineCorrect(this.state.answerChoice, this.getCorrect([this.state.counter]));
         let maxScore = this.state.maxScore;
         let timerScore = this.state.timerScore;
         let ptval = this.calcPointValue(this.state.counter);
+=======
+        console.log("max Score " + this.state.maxScore);
+        let crct = this.determineCorrect(this.state.answerChoice, this.getCorrect([this.state.counter]))
+        let maxScore = this.state.maxScore
+        let ptval = this.calcPointValue(this.state.counter)
+
+        console.log(crct, maxScore, ptval)
+>>>>>>> parent of cd1f1d3c... Scores now work and post to the server.
         if (crct) {
             this.setState({score: this.state.score + timerScore, maxScore: maxScore + ptval})
         } else {
@@ -161,6 +173,7 @@ class TriviaGame extends Component {
         this.toggleQA()
     }
 
+<<<<<<< HEAD
     getUserInfo() {
         let token = this.props.token;
         let requestUrl = "https://klingons.pythonanywhere.com/api/v1/profile/" +
@@ -180,9 +193,12 @@ class TriviaGame extends Component {
         })
     }
 
+=======
+>>>>>>> parent of cd1f1d3c... Scores now work and post to the server.
     componentDidUpdate(prevProps, prevState) {
         if (prevState.questionBank !== this.state.questionBank) {
             //TF questions don't have incorrect answers to shuffle
+
             if (this.state.type === "multiple") {
                 this.setState({
                     questions: shuffle(this.state.questionBank[this.state.counter].incorrect_answers, this.state.questionBank[this.state.counter].correct_answer),
@@ -221,18 +237,25 @@ class TriviaGame extends Component {
             else
                 return 200;
         }
+
     }
+
 
     toggleQA() {
         //toggle the question and answer displays
         let currentQuestion = this.state.counter, displaying = this.state.displaying, gameover = false, answers = [];
 
+<<<<<<< HEAD
         if (displaying === -1) {
            //display answers
             if (this.state.counter <= this.state.maxQuestions)
+=======
+        if (displaying === -1){                     //display answers
+            if(this.state.counter <= this.state.maxQuestions)
+>>>>>>> parent of cd1f1d3c... Scores now work and post to the server.
                 this.setState({displaying: 0})
-        } else if (displaying === 0) {               //display correct answers
-            if (this.state.counter <= this.state.maxQuestions)
+        }else if (displaying === 0) {               //display correct answers
+            if(this.state.counter <= this.state.maxQuestions)
                 this.setState({displaying: 1})
         } else if (displaying === 1) {              //display question
             displaying = -1;
@@ -246,6 +269,7 @@ class TriviaGame extends Component {
             if (this.state.type === "multiple") {
                 answers = shuffle(this.state.questionBank[currentQuestion].incorrect_answers, this.state.questionBank[currentQuestion].correct_answer);
             }
+<<<<<<< HEAD
             this.setState({
                 displaying: displaying,
                 gameOver: gameover,
@@ -254,6 +278,9 @@ class TriviaGame extends Component {
                 answerChoice: null,
                 currentQuestion: decodeURIComponent(this.state.questionBank[currentQuestion].question)
             });
+=======
+            this.setState({displaying: displaying, gameOver: gameover, counter: currentQuestion, questions: answers, currentQuestion: decodeURIComponent(this.state.questionBank[currentQuestion].question)});
+>>>>>>> parent of cd1f1d3c... Scores now work and post to the server.
         }
     }
 
@@ -297,34 +324,10 @@ class TriviaGame extends Component {
         return p
     }
 
-    loadingResults(waitVar, s, total, accountTotal, timer, max) {
-        if (waitVar === null) {
-            return <h1>Loading Results...</h1>
-        }else if (timer > 0){
-            return<div>
-                <h1>You scored {total} out of {max}!</h1>
-                <h3>Timer multiplier: <b>{s * 10}0%</b></h3>
-                <h1>Total: <b>{s * total} points!</b></h1>
-                <br/>
-                <h1><b>Your account total is : {accountTotal + s * total}</b></h1>
-                <h1>Shorter timers, bigger multipliers!</h1>
-            </div>
-        }else{
-            return<div>
-                <h1>You scored {total} out of {max}!</h1>
-                <h3>Timer multiplier: <b>0%</b></h3>
-                <h1>Total: <b>{Math.round((s * total))} points!</b></h1>
-                <h1>Play with timers on to collect points! Shorter timers, bigger multipliers!</h1>
-            </div>
-        }
-    }
-
     DisplayResults(total, max, timer) {
-
-
         const s = this.scoreMultiplier(max, timer);
-        let accountTotal = this.state.userScoreTotal
         let d;
+<<<<<<< HEAD
         let response;
         let token = this.props.token;
         const requestUrl = "https://klingons.pythonanywhere.com/api/v1/profile/" + this.props.id + "/";
@@ -351,6 +354,27 @@ class TriviaGame extends Component {
             });}
 
         return this.loadingResults(response, s, total, accountTotal, timer, max)
+=======
+        if (timer > 0) {
+            d =
+                <div>
+                    <h1>You scored {total} out of {max}!</h1>
+                    <h3>Timer multiplier: <b>{s * 10}0%</b></h3>
+                    <h1>Total: <b>{s * total} points!</b></h1>
+                    <br/>
+                    <h1>Shorter timers, bigger multipliers!</h1>
+                </div>
+        } else {
+            d =
+                <div>
+                    <h1>You scored {total} out of {max}!</h1>
+                    <h3>Timer multiplier: <b>0%</b></h3>
+                    <h1>Total: <b>{Math.round((s * total))} points!</b></h1>
+                    <h1>Play with timers on to collect points! Shorter timers, bigger multipliers!</h1>
+                </div>
+        }
+        return d
+>>>>>>> parent of cd1f1d3c... Scores now work and post to the server.
     }
 
 
@@ -363,10 +387,15 @@ class TriviaGame extends Component {
                         tValue={this.props.timer}
                         display={true}
                         reset={this.state.counter}
+<<<<<<< HEAD
                         getTimeValue={this.state.answerChoice}
                         getTime = {this.setTimerScore}
                         callback = {this.toggleQA}
                         maxPointsForQuestion = {this.calcPointValue(this.state.counter)}
+=======
+                        show = {this.state.displaying}
+                        timeEndCallback={this.toggleQA}
+>>>>>>> parent of cd1f1d3c... Scores now work and post to the server.
                     />
                     :
                     [this.state.displaying === 1 && !this.state.disableTimer ?
@@ -375,7 +404,7 @@ class TriviaGame extends Component {
                             <Timer                       // reveal answer timer
                                 display={false}
                                 tValue={4}
-                                show={this.state.displaying}
+                                show = {this.state.displaying}
                                 reset={this.props.displaying}
                                 timeEndCallback={this.setScore}/>
                         </>
@@ -383,7 +412,7 @@ class TriviaGame extends Component {
                         <ReverseTimer                           //readthequestiontimer
                             display={true}
                             tValue={3}
-                            show={this.state.displaying}
+                            show = {this.state.displaying}
                             reset={this.props.displaying}
                             timeEndCallback={this.toggleQA}/>:
                             <ProgressBar now={0}/>
@@ -401,13 +430,14 @@ class TriviaGame extends Component {
                                             <Col>
 
                                                 <QuestionCounterDisplay
-                                                    counter={this.state.counter}
+                                                    counter = {this.state.counter}
                                                     maxQuestions={this.state.maxQuestions + 1}
-                                                    score={this.state.score}
+                                                    score = {this.state.score}
                                                 />
 
                                             </Col>
                                             <Col>
+<<<<<<< HEAD
 <<<<<<< HEAD
                                                 {this.state.displaying !== -1 && this.state.answerChoice !== null &&
                                                 <h1>{this.state.timerScore}</h1>}
@@ -432,6 +462,13 @@ class TriviaGame extends Component {
                                                 <button style={{visibility: "hidden"}}/>
 
 
+=======
+                                                <DateTimer
+                                                tValue = {this.props.timer}
+                                                resetValue = {this.state.displaying}/>
+                                                {/*spacer element*/}
+                                                <button style={{visibility: "hidden"}}/>
+>>>>>>> parent of cd1f1d3c... Scores now work and post to the server.
 
                                             </Col>
                                         </Row>
@@ -442,7 +479,7 @@ class TriviaGame extends Component {
                                         <h2>
                                             {this.state.displaying <= 0 ?
                                                 <DisplayJumbo
-                                                    currentQuestion={this.state.currentQuestion}
+                                                    currentQuestion = {this.state.currentQuestion}
                                                 />
                                                 :
                                                 <DisplayAnswer
@@ -466,14 +503,18 @@ class TriviaGame extends Component {
                                             answerCallback={this.setA}
                                             answerDisplay={this.state.displaying}
                                             correctAnswer={this.getCorrect(this.state.counter)}/>
-                                        : [
+                                        :[
                                             this.state.type === "boolean" && this.state.displaying >= 0 &&
                                             <TFBlock
                                                 questions={this.state.questions}
                                                 answerDisplay={this.state.displaying}
                                                 counter={this.state.counter}
+<<<<<<< HEAD
                                                 correctAnswer={this.getCorrect(this.state.counter)}
                                                 answerCallback={this.setTF}/>]}
+=======
+                                                answerCallback={this.setTF}/>] }
+>>>>>>> parent of cd1f1d3c... Scores now work and post to the server.
                                     {/*counter must be passed to TF even though it does not use then, because it resets the selection*/}
                                     <br/>
                                     <Container>

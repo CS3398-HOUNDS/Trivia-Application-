@@ -43,18 +43,6 @@
     transition: 0.3s;
 }
 
-.progressVisualFull {
-     display: flex;
-     /* change the value if you want different thickness */
-     height: 6px;
-     margin: 20px 0;
- }
-
-.progressVisualPart {
-    /* Number of the seconds for complete animation */
-    transition: width 2s;
-}
-
 
 footer {
   background: black;

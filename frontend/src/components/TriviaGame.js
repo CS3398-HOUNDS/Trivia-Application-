@@ -9,7 +9,7 @@ import Timer from "./Timer";
 import Row from "react-bootstrap/Row";
 import ReverseTimer from "./ReverseTimer";
 import ProgressBar from "react-bootstrap/ProgressBar";
-import DateTimerPercent from "./DateTimerPercent";
+import ProgressLine from "./ProgressLine";
 
 
 let QuestionCounterDisplay = (props) => {
@@ -408,10 +408,31 @@ class TriviaGame extends Component {
 
                                             </Col>
                                             <Col>
+<<<<<<< HEAD
                                                 {this.state.displaying !== -1 && this.state.answerChoice !== null &&
                                                 <h1>{this.state.timerScore}</h1>}
+=======
+
+                                                {/*{this.setState({bigTimer: <DateTimerPercent
+                                                tValue = {this.props.timer}
+                                                resetValue = {this.state.displaying}/>})}
+                                                <ProgressLine
+                                                    label="One visual percentage - changed background"
+                                                    backgroundColor="lightblue"
+                                                    visualParts={[
+                                                        {
+                                                            percentage: this.state.bigTimer,
+                                                            color: "indianred"
+                                                        }
+                                                    ]}
+                                                />*/}
+
+>>>>>>> parent of 0427c7cd... Cleaned code, pushing before major edits for rollback safety
                                                 {/*spacer element*/}
                                                 <button style={{visibility: "hidden"}}/>
+
+
+
                                             </Col>
                                         </Row>
                                     </div>
